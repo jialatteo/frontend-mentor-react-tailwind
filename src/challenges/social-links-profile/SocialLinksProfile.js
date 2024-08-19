@@ -15,8 +15,8 @@ export default function SocialLinksProfile() {
           src="avatar-jessica.jpeg"
           alt="Avatar"
         />
-        <h1 className="mb-1 text-2xl">Jessica Randall</h1>
-        <h2 className="mb-6 text-xs font-semibold text-social-links-profile-green">
+        <h1 className="mb-1 text-2xl font-semibold">Jessica Randall</h1>
+        <h2 className="mb-6 text-sm font-semibold text-social-links-profile-green">
           London, United Kingdom
         </h2>
         <h3 className="text-sm">"Front-end developer and avid reader."</h3>
