@@ -31,6 +31,7 @@ export default function ProductListWithCart() {
             name={dessert.name}
             category={dessert.category}
             price={dessert.price}
+            key={dessert.name}
           />
         ))}
       </div>
