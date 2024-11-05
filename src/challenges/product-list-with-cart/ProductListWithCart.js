@@ -12,7 +12,7 @@ function Dessert({ imageUrl, name, category, price }) {
               src="product-list-with-cart/icon-add-to-cart.svg"
               alt="Add to cart icon"
             />
-            <p className="ml-2 text-sm font-semibold">Add to Cart</p>
+            <p className="ml-2 text-xs font-semibold sm:text-sm">Add to Cart</p>
           </div>
         </button>
       </div>
@@ -29,7 +29,7 @@ function Dessert({ imageUrl, name, category, price }) {
 
 function Order() {
   return (
-    <div className="flex items-center justify-between gap-40">
+    <div className="flex items-center justify-between">
       <div className="my-4 text-sm">
         <p className="mb-2 font-bold text-product-list-with-cart-rose-900">
           Classic Tiramisu
@@ -60,10 +60,10 @@ function Order() {
 export default function ProductListWithCart() {
   return (
     <div className="min-h-screen bg-product-list-with-cart-rose-50 px-28 py-20 font-redHatText text-base text-product-list-with-cart-rose-900">
-      <div className="flex">
+      <div className="block md:flex">
         <div>
           <h1 className="mb-8 text-4xl font-bold">Desserts</h1>
-          <div className="grid max-w-3xl grid-cols-1 gap-6 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid max-w-3xl grid-cols-1 gap-6 gap-y-8 md:grid-cols-2 lg:grid-cols-3">
             {data.map((dessert) => (
               <Dessert
                 imageUrl={dessert.image.desktop}
