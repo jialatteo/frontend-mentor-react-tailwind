@@ -1,22 +1,26 @@
-import data from './data.json'
+import data from "./data.json";
 
 function Dessert({ imageUrl, name, category, price }) {
   return (
     <div>
       <div className="relative mb-8 flex flex-col items-center">
         <img className="w-full rounded-lg" src={imageUrl} alt={name} />
-        <button className="hover:text-product-list-with-cart-red border-product-list-with-cart-rose-400 bg-product-list-with-cart-rose-50 hover:border-product-list-with-cart-red absolute -bottom-6 mx-8 h-12 w-2/3 rounded-3xl border-2">
-          <div className="flex justify-center gap-2">
-            <img src="product-list-with-cart/icon-add-to-cart.svg" alt="Add to cart icon" />
-            <p className="font-semibold">Add to Cart</p>
+        <button className="absolute -bottom-6 mx-8 h-12 w-2/3 rounded-3xl border-2 border-product-list-with-cart-rose-400 bg-product-list-with-cart-rose-50 hover:border-product-list-with-cart-red hover:text-product-list-with-cart-red">
+          <div className="flex items-center justify-center gap-2">
+            <img
+              className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6"
+              src="product-list-with-cart/icon-add-to-cart.svg"
+              alt="Add to cart icon"
+            />
+            <p className="ml-2 text-sm font-semibold">Add to Cart</p>
           </div>
         </button>
       </div>
-      <p className="text-product-list-with-cart-rose-500 text-sm">{category}</p>
-      <p className="text-product-list-with-cart-rose-900 font-semibold">
+      <p className="text-sm text-product-list-with-cart-rose-500">{category}</p>
+      <p className="font-semibold text-product-list-with-cart-rose-900">
         {name}
       </p>
-      <p className="text-product-list-with-cart-red font-semibold">
+      <p className="font-semibold text-product-list-with-cart-red">
         ${price.toFixed(2)}
       </p>
     </div>
@@ -27,20 +31,20 @@ function Order() {
   return (
     <div className="flex items-center justify-between gap-40">
       <div className="my-4 text-sm">
-        <p className="text-product-list-with-cart-rose-900 mb-2 font-bold">
+        <p className="mb-2 font-bold text-product-list-with-cart-rose-900">
           Classic Tiramisu
         </p>
         <div className="flex gap-3">
-          <p className="text-product-list-with-cart-red font-bold">1x</p>
+          <p className="font-bold text-product-list-with-cart-red">1x</p>
           <p className="text-product-list-with-cart-rose-400">@$5.50</p>
-          <p className="text-product-list-with-cart-rose-500 font-semibold">
+          <p className="font-semibold text-product-list-with-cart-rose-500">
             $5.50
           </p>
         </div>
       </div>
-      <button className="border-product-list-with-cart-rose-500 hover:border-product-list-with-cart-rose-900 h-min rounded-full border">
+      <button className="h-min rounded-full border border-product-list-with-cart-rose-500 hover:border-product-list-with-cart-rose-900">
         <svg
-          className="text-product-list-with-cart-rose-500 hover:text-product-list-with-cart-rose-900 fill-current p-0.5"
+          className="fill-current p-0.5 text-product-list-with-cart-rose-500 hover:text-product-list-with-cart-rose-900"
           xmlns="http://www.w3.org/2000/svg"
           width="10"
           height="10"
@@ -55,7 +59,7 @@ function Order() {
 
 export default function ProductListWithCart() {
   return (
-    <div className="bg-product-list-with-cart-rose-50 font-redHatText text-product-list-with-cart-rose-900 min-h-screen px-28 py-20 text-base">
+    <div className="min-h-screen bg-product-list-with-cart-rose-50 px-28 py-20 font-redHatText text-base text-product-list-with-cart-rose-900">
       <div className="flex">
         <div>
           <h1 className="mb-8 text-4xl font-bold">Desserts</h1>
@@ -72,7 +76,7 @@ export default function ProductListWithCart() {
           </div>
         </div>
         <div className="ml-10 h-min flex-none rounded-xl bg-white p-6">
-          <h2 className="text-product-list-with-cart-red mb-4 text-2xl font-bold">
+          <h2 className="mb-4 text-2xl font-bold text-product-list-with-cart-red">
             Your Cart (1)
           </h2>
           <div className="divide-y-2">
@@ -80,13 +84,13 @@ export default function ProductListWithCart() {
             <Order />
             <Order />
             <div className="flex items-center justify-between pt-6">
-              <p className="text-product-list-with-cart-rose-500 text-sm">
+              <p className="text-sm text-product-list-with-cart-rose-500">
                 Order Total:
               </p>
               <p className="text-2xl font-bold">$46.20</p>
             </div>
           </div>
-          <div className="bg-product-list-with-cart-rose-50 my-6 flex items-center justify-center gap-2 py-4">
+          <div className="my-6 flex items-center justify-center gap-2 bg-product-list-with-cart-rose-50 py-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="21"
@@ -108,7 +112,7 @@ export default function ProductListWithCart() {
               delivery
             </p>
           </div>
-          <button className="bg-product-list-with-cart-red w-full rounded-3xl py-3 font-semibold text-white hover:bg-red-800">
+          <button className="w-full rounded-3xl bg-product-list-with-cart-red py-3 font-semibold text-white hover:bg-red-800">
             Confirm Order
           </button>
         </div>
