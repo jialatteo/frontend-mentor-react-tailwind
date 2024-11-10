@@ -111,7 +111,7 @@ export default function ProductListWithCart() {
               delivery
             </p>
           </div>
-          <button className="w-full rounded-3xl bg-product-list-with-cart-red py-3 font-semibold text-white hover:bg-red-800">
+          <button className="w-full rounded-3xl bg-product-list-with-cart-red py-3 text-sm font-semibold text-white hover:bg-red-800">
             Confirm Order
           </button>
         </div>
