@@ -5,14 +5,13 @@ function Dessert({ imageUrl, name, category, price }) {
     <div>
       <div className="relative mb-8 flex flex-col items-center">
         <img className="w-full rounded-lg" src={imageUrl} alt={name} />
-        <button className="absolute -bottom-6 mx-8 h-12 w-2/3 rounded-3xl border-2 border-product-list-with-cart-rose-400 bg-product-list-with-cart-rose-50 hover:border-product-list-with-cart-red hover:text-product-list-with-cart-red">
+        <button className="absolute -bottom-6 mx-8 h-12 w-1/2 rounded-3xl border-2 border-product-list-with-cart-rose-400 bg-product-list-with-cart-rose-50 hover:border-product-list-with-cart-red hover:text-product-list-with-cart-red md:w-2/3">
           <div className="flex items-center justify-center gap-2">
             <img
-              className="h-4 w-4 sm:h-5 sm:w-5 md:h-6 md:w-6"
               src="product-list-with-cart/icon-add-to-cart.svg"
               alt="Add to cart icon"
             />
-            <p className="ml-2 text-xs font-semibold sm:text-sm">Add to Cart</p>
+            <p className="ml-2 font-semibold">Add to Cart</p>
           </div>
         </button>
       </div>
@@ -59,7 +58,7 @@ function Order() {
 
 export default function ProductListWithCart() {
   return (
-    <div className="min-h-screen bg-product-list-with-cart-rose-50 px-28 py-20 font-redHatText text-base text-product-list-with-cart-rose-900">
+    <div className="flex min-h-screen items-center justify-center bg-product-list-with-cart-rose-50 px-6 py-20 font-redHatText text-base text-product-list-with-cart-rose-900">
       <div className="block md:flex">
         <div>
           <h1 className="mb-8 text-4xl font-bold">Desserts</h1>
@@ -75,7 +74,7 @@ export default function ProductListWithCart() {
             ))}
           </div>
         </div>
-        <div className="ml-10 h-min flex-none rounded-xl bg-white p-6">
+        <div className="mt-6 h-min flex-none rounded-xl bg-white p-6 md:ml-10 md:mt-0">
           <h2 className="mb-4 text-2xl font-bold text-product-list-with-cart-red">
             Your Cart (1)
           </h2>

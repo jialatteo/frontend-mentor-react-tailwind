@@ -4,8 +4,8 @@ import RecipePage from "./challenges/recipe-page/RecipePage";
 
 function App() {
   // return <SocialLinksProfile />;
-  // return <ProductListWithCart />;
-  return <RecipePage />;
+  return <ProductListWithCart />;
+  // return <RecipePage />;
 }
 
 export default App;
