@@ -25,6 +25,10 @@ export default function ProductListWithCart() {
                 price={dessert.price}
                 key={dessert.name}
                 setProductsInCart={setProductsInCart}
+                quantity={
+                  productsInCart.find((product) => dessert.name == product.name)
+                    ?.quantity
+                }
               />
             ))}
           </div>
