@@ -6,19 +6,19 @@ export default function Dessert({
   setProductsInCart,
   quantity,
 }) {
-  const addProduct = (productName) =>
+  const addProduct = () =>
     setProductsInCart((prevProductsInCart) =>
       prevProductsInCart.map((product) =>
-        product.name == productName
+        product.name == name
           ? { ...product, quantity: product.quantity + 1 }
           : product,
       ),
     );
 
-  const removeProduct = (productName) =>
+  const removeProduct = () =>
     setProductsInCart((prevProductsInCart) =>
       prevProductsInCart.map((product) =>
-        product.name == productName
+        product.name == name
           ? { ...product, quantity: product.quantity - 1 }
           : product,
       ),
@@ -44,7 +44,7 @@ export default function Dessert({
         ) : (
           <div className="absolute -bottom-6 mx-8 flex h-12 w-1/2 items-center justify-between rounded-3xl bg-product-list-with-cart-red px-4 md:w-2/3">
             <button
-              onClick={() => removeProduct(name)}
+              onClick={removeProduct}
               className="group flex h-6 w-6 items-center justify-center rounded-full border border-white bg-product-list-with-cart-red hover:bg-white"
             >
               {/* prettier-ignore */}
@@ -52,7 +52,7 @@ export default function Dessert({
             </button>
             <p className="ml-2 font-semibold text-white">{quantity}</p>
             <button
-              onClick={() => addProduct(name)}
+              onClick={addProduct}
               className="group flex h-6 w-6 items-center justify-center rounded-full border border-white bg-product-list-with-cart-red hover:bg-white"
             >
               {/* prettier-ignore */}

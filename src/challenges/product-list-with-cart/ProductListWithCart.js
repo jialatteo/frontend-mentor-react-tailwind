@@ -60,6 +60,7 @@ export default function ProductListWithCart() {
                         data.find((dessert) => dessert.name == product.name)
                           ?.price
                       }
+                      setProductsInCart={setProductsInCart}
                     />
                   ))}
               </div>
