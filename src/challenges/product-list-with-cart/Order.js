@@ -1,15 +1,19 @@
-export default function Order() {
+export default function Order({ name, price, quantity }) {
   return (
     <div className="flex items-center justify-between">
       <div className="my-4 text-sm">
         <p className="mb-2 font-bold text-product-list-with-cart-rose-900">
-          Classic Tiramisu
+          {name}
         </p>
         <div className="flex gap-3">
-          <p className="font-bold text-product-list-with-cart-red">1x</p>
-          <p className="text-product-list-with-cart-rose-400">@$5.50</p>
+          <p className="font-bold text-product-list-with-cart-red">
+            {quantity}x
+          </p>
+          <p className="text-product-list-with-cart-rose-400">
+            @{price.toFixed(2)}
+          </p>
           <p className="font-semibold text-product-list-with-cart-rose-500">
-            $5.50
+            ${(price * quantity).toFixed(2)}
           </p>
         </div>
       </div>
