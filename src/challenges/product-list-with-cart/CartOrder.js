@@ -1,4 +1,9 @@
-export default function Order({ name, price, quantity, setProductsInCart }) {
+export default function CartOrder({
+  name,
+  price,
+  quantity,
+  setProductsInCart,
+}) {
   const resetQuantity = () =>
     setProductsInCart((prevProductsInCart) =>
       prevProductsInCart.map((product) =>

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import data from "./data.json";
 import Dessert from "./Dessert";
-import Order from "./Order";
+import OrderConfirmationModal from "./OrderConfirmationModal";
+import CartOrder from "./CartOrder";
 
 export default function ProductListWithCart() {
   const [productsInCart, setProductsInCart] = useState(
@@ -10,6 +11,13 @@ export default function ProductListWithCart() {
       quantity: 0,
     })),
   );
+
+  const cartItemCount = productsInCart.reduce((acc, dessert) => {
+    acc += dessert.quantity;
+    return acc;
+  }, 0);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-product-list-with-cart-rose-50 px-6 py-20 font-redHatText text-base text-product-list-with-cart-rose-900">
@@ -35,12 +43,9 @@ export default function ProductListWithCart() {
         </div>
         <div className="mt-6 h-min flex-none rounded-xl bg-white p-6 md:ml-10 md:mt-0">
           <h2 className="mb-4 text-2xl font-bold text-product-list-with-cart-red">
-            Your Cart (1)
+            Your Cart ({cartItemCount})
           </h2>
-          {productsInCart.reduce((acc, dessert) => {
-            acc += dessert.quantity;
-            return acc;
-          }, 0) == 0 ? (
+          {cartItemCount == 0 ? (
             <div className="flex flex-col items-center justify-center">
               <img src="product-list-with-cart/illustration-empty-cart.svg" />
               <p className="mt-2 text-sm font-semibold text-product-list-with-cart-rose-500">
@@ -52,7 +57,7 @@ export default function ProductListWithCart() {
               {productsInCart
                 .filter((product) => product.quantity != 0)
                 .map((product) => (
-                  <Order
+                  <CartOrder
                     name={product.name}
                     quantity={product.quantity}
                     price={
@@ -82,16 +87,31 @@ export default function ProductListWithCart() {
               </div>
             </div>
           )}
-          <div className="my-6 flex items-center justify-center gap-2 bg-product-list-with-cart-rose-50 py-4">
+          <div className="my-6 flex items-center justify-center gap-2 bg-product-list-with-cart-rose-50 px-6 py-4 lg:px-12">
             <img src="product-list-with-cart/icon-carbon-neutral.svg" />
             <p className="text-sm">
               This is a <span className="font-semibold">carbon-neutral</span>{" "}
               delivery
             </p>
           </div>
-          <button className="w-full rounded-3xl bg-product-list-with-cart-red py-3 text-sm font-semibold text-white hover:bg-red-800">
+          <button
+            disabled={cartItemCount == 0}
+            onClick={() => setIsModalOpen(true)}
+            className={`w-full rounded-3xl py-3 text-sm font-semibold text-white ${
+              cartItemCount == 0
+                ? "cursor-not-allowed bg-gray-200"
+                : "bg-product-list-with-cart-red hover:bg-red-800"
+            }`}
+          >
             Confirm Order
           </button>
+          {isModalOpen && (
+            <OrderConfirmationModal
+              setIsModalOpen={setIsModalOpen}
+              productsInCart={productsInCart || []}
+              setProductsInCart={setProductsInCart}
+            />
+          )}
         </div>
       </div>
     </div>
