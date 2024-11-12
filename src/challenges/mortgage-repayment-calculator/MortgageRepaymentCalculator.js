@@ -47,6 +47,10 @@ export default function MortgageRepaymentCalculator() {
     }
   };
 
+  const formatToMoneyString = (number) => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <div className="bg-mortgage-repayment-calculator-slate-100 font-plusJakartaSans flex min-h-screen items-center justify-center">
       <form
@@ -164,18 +168,47 @@ export default function MortgageRepaymentCalculator() {
             </button>
           </div>
         </div>
-        <div className="bg-mortgage-repayment-calculator-slate-900 flex flex-col items-center justify-center rounded-bl-[48px] p-8">
-          <EmptyResultsSvg />
-          <p className="mb-2 text-xl font-semibold text-white">
-            Results shown here
-          </p>
-          <p className="text-mortgage-repayment-calculator-slate-300 text-center text-sm">
-            Complete the form and click "calculate repayments" to see what your
-            monthly repayments would be.
-          </p>
-          <p>{getMonthlyRepayment()}</p>
-          <p>{getTotalRepayment()}</p>
-        </div>
+        {isNaN(getMonthlyRepayment()) ? (
+          <div className="bg-mortgage-repayment-calculator-slate-900 flex flex-col items-center justify-center rounded-bl-[48px] p-8">
+            <EmptyResultsSvg />
+            <p className="mb-2 text-xl font-semibold text-white">
+              Results shown here
+            </p>
+            <p className="text-mortgage-repayment-calculator-slate-300 text-center text-sm">
+              Complete the form and click "calculate repayments" to see what
+              your monthly repayments would be.
+            </p>
+          </div>
+        ) : (
+          <div className="bg-mortgage-repayment-calculator-slate-900 flex flex-col rounded-bl-[48px] p-8">
+            <p className="mb-2 text-xl font-semibold text-white">
+              Your Results
+            </p>
+            <p className="text-mortgage-repayment-calculator-slate-300 text-sm">
+              Your results are shown below based on the information you
+              provided. To adjust the results, edit the form and click
+              "calculate repayments again".
+            </p>
+            <div className="border-mortgage-repayment-calculator-lime mt-10 divide-y divide-gray-700 rounded-t-md border-t-[3px] bg-[#0E2431] p-6">
+              <div>
+                <p className="text-mortgage-repayment-calculator-slate-300 mb-3 text-sm">
+                  Your monthly repayments
+                </p>
+                <p className="text-mortgage-repayment-calculator-lime mb-6 text-5xl font-bold">
+                  £{formatToMoneyString(getMonthlyRepayment())}
+                </p>
+              </div>
+              <div>
+                <p className="text-mortgage-repayment-calculator-slate-300 mt-6 text-sm">
+                  Total you'll repay over the term
+                </p>
+                <p className="mt-2 text-xl font-bold text-white">
+                  £{formatToMoneyString(getTotalRepayment())}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </form>
     </div>
   );
