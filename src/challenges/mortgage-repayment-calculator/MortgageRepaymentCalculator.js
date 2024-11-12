@@ -8,8 +8,43 @@ export default function MortgageRepaymentCalculator() {
   const [mortgageTerm, setMortgageTerm] = useState("");
   const [interestRate, setInterestRate] = useState("");
 
-  const handleMortgageAmount = (e) => {
-    const value = e.target.valu.replace(/,/g, "");
+  const getMonthlyRepayment = () => {
+    const numberOfMonths = parseInt(mortgageTerm) * 12;
+    const monthlyInterestRate = parseFloat(interestRate) / 100 / 12;
+    const amount = parseInt(mortgageAmount);
+
+    if (mortgageType === "repayment") {
+      return (
+        (amount *
+          monthlyInterestRate *
+          Math.pow(1 + monthlyInterestRate, numberOfMonths)) /
+        (Math.pow(1 + monthlyInterestRate, numberOfMonths) - 1)
+      ).toFixed(2);
+    }
+
+    if (mortgageType == "interestOnly") {
+      return (monthlyInterestRate * amount).toFixed(2);
+    }
+  };
+
+  const getTotalRepayment = () => {
+    const numberOfMonths = parseInt(mortgageTerm) * 12;
+    const monthlyInterestRate = parseFloat(interestRate) / 100 / 12;
+    const amount = parseInt(mortgageAmount);
+
+    if (mortgageType === "repayment") {
+      return (
+        ((amount *
+          monthlyInterestRate *
+          Math.pow(1 + monthlyInterestRate, numberOfMonths)) /
+          (Math.pow(1 + monthlyInterestRate, numberOfMonths) - 1)) *
+        numberOfMonths
+      ).toFixed(2);
+    }
+
+    if (mortgageType == "interestOnly") {
+      return (monthlyInterestRate * amount * numberOfMonths).toFixed(2);
+    }
   };
 
   return (
@@ -40,7 +75,7 @@ export default function MortgageRepaymentCalculator() {
               <input
                 className="w-full rounded-r pl-2 font-bold focus:outline-none"
                 type="text"
-                required
+                onChange={(e) => setMortgageAmount(e.target.value)}
               />
             </div>
           </div>
@@ -53,6 +88,7 @@ export default function MortgageRepaymentCalculator() {
                 <input
                   className="w-full rounded-l pl-2 font-bold focus:outline-none"
                   type="text"
+                  onChange={(e) => setMortgageTerm(e.target.value)}
                 />
                 <div className="bg-mortgage-repayment-calculator-slate-100 group-focus-within:bg-mortgage-repayment-calculator-lime text-mortgage-repayment-calculator-slate-700 flex items-center justify-center rounded-r p-3 font-bold">
                   years
@@ -67,6 +103,7 @@ export default function MortgageRepaymentCalculator() {
                 <input
                   className="w-full rounded-l pl-2 font-bold focus:outline-none"
                   type="text"
+                  onChange={(e) => setInterestRate(e.target.value)}
                 />
                 <div className="bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700 group-focus-within:bg-mortgage-repayment-calculator-lime flex items-center justify-center rounded-r p-3 font-bold">
                   %
@@ -136,6 +173,8 @@ export default function MortgageRepaymentCalculator() {
             Complete the form and click "calculate repayments" to see what your
             monthly repayments would be.
           </p>
+          <p>{getMonthlyRepayment()}</p>
+          <p>{getTotalRepayment()}</p>
         </div>
       </form>
     </div>
