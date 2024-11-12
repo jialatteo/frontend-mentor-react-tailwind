@@ -55,15 +55,15 @@ export default function MortgageRepaymentCalculator() {
     <div className="bg-mortgage-repayment-calculator-slate-100 font-plusJakartaSans flex min-h-screen items-center justify-center">
       <form
         noValidate
-        className="grid max-w-[900px] grid-cols-2 overflow-hidden rounded-xl bg-white"
+        className="grid h-screen max-w-[900px] overflow-hidden overflow-y-auto bg-white sm:mb-0 sm:h-auto sm:grid-cols-2 sm:rounded-xl"
       >
-        <div className="p-6">
-          <div className="mb-8 flex justify-between">
+        <div className="relative p-6">
+          <div className="mb-8 justify-between sm:flex">
             <p className="text-mortgage-repayment-calculator-slate-900 text-2xl font-bold">
               Mortgage Calculator
             </p>
             <button>
-              <p className="text-mortgage-repayment-calculator-slate-700 hover:text-mortgage-repayment-calculator-slate-900 underline">
+              <p className="text-mortgage-repayment-calculator-slate-700 hover:text-mortgage-repayment-calculator-slate-900 mt-2 underline sm:mt-0">
                 Clear All
               </p>
             </button>
@@ -83,7 +83,7 @@ export default function MortgageRepaymentCalculator() {
               />
             </div>
           </div>
-          <div className="mb-6 flex gap-6">
+          <div className="mb-6 gap-6 sm:flex">
             <div className="group">
               <p className="text-mortgage-repayment-calculator-slate-700 mb-2 font-medium">
                 Mortgage Term
@@ -99,7 +99,7 @@ export default function MortgageRepaymentCalculator() {
                 </div>
               </div>
             </div>
-            <div className="group">
+            <div className="group mt-6 sm:mt-0">
               <p className="text-mortgage-repayment-calculator-slate-700 mb-2 font-medium">
                 Interest Rate
               </p>
@@ -169,7 +169,7 @@ export default function MortgageRepaymentCalculator() {
           </div>
         </div>
         {isNaN(getMonthlyRepayment()) ? (
-          <div className="bg-mortgage-repayment-calculator-slate-900 flex flex-col items-center justify-center rounded-bl-[48px] p-8">
+          <div className="bg-mortgage-repayment-calculator-slate-900 flex flex-col items-center justify-center p-8 sm:rounded-bl-[48px]">
             <EmptyResultsSvg />
             <p className="mb-2 text-xl font-semibold text-white">
               Results shown here
@@ -180,7 +180,7 @@ export default function MortgageRepaymentCalculator() {
             </p>
           </div>
         ) : (
-          <div className="bg-mortgage-repayment-calculator-slate-900 flex flex-col rounded-bl-[48px] p-8">
+          <div className="bg-mortgage-repayment-calculator-slate-900 flex flex-col p-8 sm:rounded-bl-[48px]">
             <p className="mb-2 text-xl font-semibold text-white">
               Your Results
             </p>
