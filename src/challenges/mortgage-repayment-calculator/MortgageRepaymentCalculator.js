@@ -36,7 +36,15 @@ export default function MortgageRepaymentCalculator() {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({ resolver: yupResolver(validationSchema) });
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      mortgageType: "repayment",
+      mortgageAmount: null,
+      mortgageTerm: null,
+      interestRate: null,
+    },
+  });
 
   const onSubmit = (data) => {
     console.log(data);
