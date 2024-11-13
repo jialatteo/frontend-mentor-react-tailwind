@@ -35,6 +35,7 @@ export default function MortgageRepaymentCalculator() {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(validationSchema),
@@ -72,9 +73,17 @@ export default function MortgageRepaymentCalculator() {
     }
   };
 
-  const formatToMoneyString = (number) => {
+  const addCommasThousandSeparator = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
+  const removeCommas = (num) => num.toString().replace(/[^0-9]/g, "");
+
+  const addCommas = (num) =>
+    num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  const removeNonNumeric = (num) => num.toString().replace(/[^0-9]/g, "");
+
+  const handleChange = (event) =>
+    setValue("mortgageAmount", addCommas(removeNonNumeric(event.target.value)));
 
   return (
     <div className="bg-mortgage-repayment-calculator-slate-100 font-plusJakartaSans flex min-h-screen items-center justify-center">
@@ -116,7 +125,9 @@ export default function MortgageRepaymentCalculator() {
               <input
                 className="text-mortgage-repayment-calculator-slate-700 w-full rounded-r pl-2 font-bold focus:outline-none"
                 type="text"
-                {...register("mortgageAmount")}
+                {...register("mortgageAmount", {
+                  onChange: (e) => handleChange(e),
+                })}
               />
             </div>
             {errors?.mortgageAmount && (
@@ -246,7 +257,7 @@ export default function MortgageRepaymentCalculator() {
                   Your monthly repayments
                 </p>
                 <p className="text-mortgage-repayment-calculator-lime mb-6 text-5xl font-bold">
-                  £{formatToMoneyString(monthlyRepayment)}
+                  £{addCommasThousandSeparator(monthlyRepayment)}
                 </p>
               </div>
               <div>
@@ -254,7 +265,7 @@ export default function MortgageRepaymentCalculator() {
                   Total you'll repay over the term
                 </p>
                 <p className="mt-2 text-xl font-bold text-white">
-                  £{formatToMoneyString(totalRepayment)}
+                  £{addCommasThousandSeparator(totalRepayment)}
                 </p>
               </div>
             </div>
