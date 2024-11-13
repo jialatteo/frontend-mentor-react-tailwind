@@ -125,13 +125,18 @@ export default function MortgageRepaymentCalculator() {
                 {...register("mortgageAmount")}
               />
             </div>
+            {errors?.mortgageAmount && (
+              <p className="text-mortgage-repayment-calculator-red mt-1 text-sm">
+                {errors?.mortgageAmount?.message}
+              </p>
+            )}
           </div>
           <div className="mb-6 gap-6 sm:flex">
             <div className="group">
               <p className="text-mortgage-repayment-calculator-slate-700 mb-2 font-medium">
                 Mortgage Term
               </p>
-              <div className="border-mortgage-repayment-calculator-slate-500 group-focus-within:border-mortgage-repayment-calculator-lime flex h-12 w-full rounded border">
+              <div className="border-mortgage-repayment-calculator-slate-500 hover:border-mortgage-repayment-calculator-slate-900 group-focus-within:border-mortgage-repayment-calculator-lime flex h-12 w-full rounded border">
                 <input
                   className="w-full rounded-l pl-2 font-bold focus:outline-none"
                   type="text"
@@ -141,12 +146,17 @@ export default function MortgageRepaymentCalculator() {
                   years
                 </div>
               </div>
+              {errors?.mortgageTerm && (
+                <p className="text-mortgage-repayment-calculator-red mt-1 text-sm">
+                  {errors?.mortgageTerm?.message}
+                </p>
+              )}
             </div>
             <div className="group mt-6 sm:mt-0">
               <p className="text-mortgage-repayment-calculator-slate-700 mb-2 font-medium">
                 Interest Rate
               </p>
-              <div className="border-mortgage-repayment-calculator-slate-500 group-focus-within:border-mortgage-repayment-calculator-lime flex h-12 w-full rounded border">
+              <div className="border-mortgage-repayment-calculator-slate-500 hover:border-mortgage-repayment-calculator-slate-900 group-focus-within:border-mortgage-repayment-calculator-lime flex h-12 w-full rounded border">
                 <input
                   className="w-full rounded-l pl-2 font-bold focus:outline-none"
                   type="text"
@@ -156,6 +166,11 @@ export default function MortgageRepaymentCalculator() {
                   %
                 </div>
               </div>
+              {errors?.interestRate && (
+                <p className="text-mortgage-repayment-calculator-red mt-1 text-sm">
+                  {errors?.interestRate?.message}
+                </p>
+              )}
             </div>
           </div>
           <div>
