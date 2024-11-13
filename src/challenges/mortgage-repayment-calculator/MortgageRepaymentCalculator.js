@@ -1,12 +1,54 @@
 import { useState } from "react";
 import EmptyResultsSvg from "./EmptyResultsSvg";
 import CalculatorSvg from "./CalculatorSvg";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+const validationSchema = yup.object().shape({
+  mortgageType: yup
+    .string()
+    .oneOf(["repayment", "interestOnly"], "Invalid mortgage type")
+    .required("Mortgage type is required"),
+  mortgageAmount: yup
+    .number()
+    .typeError("Mortgage amount must be a number")
+    .positive("Mortgage amount must be positive")
+    .required("Mortgage amount is required"),
+  mortgageTerm: yup
+    .number()
+    .typeError("Mortgage term must be a number")
+    .integer("Mortgage term must be a whole number")
+    .min(1, "Mortgage term must be at least 1 year")
+    .required("Mortgage term is required"),
+  interestRate: yup
+    .number()
+    .typeError("Interest rate must be a number")
+    .positive("Interest rate must be positive")
+    .min(0, "Interest rate cannot be negative")
+    .max(100, "Interest rate cannot exceed 100%")
+    .required("Interest rate is required"),
+});
 
 export default function MortgageRepaymentCalculator() {
-  const [mortgageType, setMortgageType] = useState("repayment");
-  const [mortgageAmount, setMortgageAmount] = useState("");
-  const [mortgageTerm, setMortgageTerm] = useState("");
-  const [interestRate, setInterestRate] = useState("");
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(validationSchema) });
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  const mortgageType = watch("mortgageType");
+  const mortgageAmount = watch("mortgageAmount");
+  const mortgageTerm = watch("mortgageTerm");
+  const interestRate = watch("interestRate");
+  const formValues = watch();
+
+  console.log("formValues", formValues);
 
   const getMonthlyRepayment = () => {
     const numberOfMonths = parseInt(mortgageTerm) * 12;
@@ -54,6 +96,7 @@ export default function MortgageRepaymentCalculator() {
   return (
     <div className="bg-mortgage-repayment-calculator-slate-100 font-plusJakartaSans flex min-h-screen items-center justify-center">
       <form
+        onSubmit={handleSubmit(onSubmit)}
         noValidate
         className="grid h-screen max-w-[900px] overflow-hidden overflow-y-auto bg-white sm:mb-0 sm:h-auto sm:grid-cols-2 sm:rounded-xl"
       >
@@ -79,7 +122,7 @@ export default function MortgageRepaymentCalculator() {
               <input
                 className="w-full rounded-r pl-2 font-bold focus:outline-none"
                 type="text"
-                onChange={(e) => setMortgageAmount(e.target.value)}
+                {...register("mortgageAmount")}
               />
             </div>
           </div>
@@ -92,7 +135,7 @@ export default function MortgageRepaymentCalculator() {
                 <input
                   className="w-full rounded-l pl-2 font-bold focus:outline-none"
                   type="text"
-                  onChange={(e) => setMortgageTerm(e.target.value)}
+                  {...register("mortgageTerm")}
                 />
                 <div className="bg-mortgage-repayment-calculator-slate-100 group-focus-within:bg-mortgage-repayment-calculator-lime text-mortgage-repayment-calculator-slate-700 flex items-center justify-center rounded-r p-3 font-bold">
                   years
@@ -107,7 +150,7 @@ export default function MortgageRepaymentCalculator() {
                 <input
                   className="w-full rounded-l pl-2 font-bold focus:outline-none"
                   type="text"
-                  onChange={(e) => setInterestRate(e.target.value)}
+                  {...register("interestRate")}
                 />
                 <div className="bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700 group-focus-within:bg-mortgage-repayment-calculator-lime flex items-center justify-center rounded-r p-3 font-bold">
                   %
@@ -122,15 +165,16 @@ export default function MortgageRepaymentCalculator() {
             <label
               htmlFor="repayment"
               className="hover:border-mortgage-repayment-calculator-lime has-[:checked]:bg-mortgage-repayment-calculator-lime border-mortgage-repayment-calculator-slate-500 has-[:checked]:border-mortgage-repayment-calculator-lime mt-2 flex h-12 w-full cursor-pointer items-center rounded border px-3 has-[:checked]:bg-opacity-25"
-              onClick={() => setMortgageType("repayment")}
             >
               <div className="flex items-center justify-center">
                 <input
                   name="mortgageType"
                   type="radio"
+                  value="repayment"
                   id="repayment"
                   defaultChecked
                   className="border-mortgage-repayment-calculator-slate-900 checked:border-mortgage-repayment-calculator-lime peer h-4 w-4 appearance-none rounded-full border-[1.5px]"
+                  {...register("mortgageType")}
                 />
                 <div className="peer-checked:bg-mortgage-repayment-calculator-lime absolute h-2 w-2 rounded-full" />
               </div>
@@ -141,14 +185,15 @@ export default function MortgageRepaymentCalculator() {
             <label
               htmlFor="interestOnly"
               className="hover:border-mortgage-repayment-calculator-lime has-[:checked]:bg-mortgage-repayment-calculator-lime border-mortgage-repayment-calculator-slate-500 has-[:checked]:border-mortgage-repayment-calculator-lime mt-2 flex h-12 w-full cursor-pointer items-center rounded border px-3 has-[:checked]:bg-opacity-25"
-              onClick={() => setMortgageType("interestOnly")}
             >
               <div className="flex items-center justify-center">
                 <input
                   name="mortgageType"
                   type="radio"
+                  value="interestOnly"
                   id="interestOnly"
                   className="border-mortgage-repayment-calculator-slate-900 checked:border-mortgage-repayment-calculator-lime peer h-4 w-4 appearance-none rounded-full border-[1.5px]"
+                  {...register("mortgageType")}
                 />
                 <div className="peer-checked:bg-mortgage-repayment-calculator-lime absolute h-2 w-2 rounded-full" />
               </div>
