@@ -70,7 +70,6 @@ export default function MortgageRepaymentCalculator() {
       setMonthlyRepayment(monthlyRepayment.toFixed(2));
       setTotalRepayment((monthlyRepayment * numberOfMonths).toFixed(2));
     }
-    console.log(data);
   };
 
   const formatToMoneyString = (number) => {
@@ -106,12 +105,16 @@ export default function MortgageRepaymentCalculator() {
             <p className="text-mortgage-repayment-calculator-slate-700 mb-2 font-medium">
               Mortgage Amount
             </p>
-            <div className="border-mortgage-repayment-calculator-slate-500 hover:border-mortgage-repayment-calculator-slate-900 group-focus-within:border-mortgage-repayment-calculator-lime flex h-12 w-full rounded border">
-              <div className="group-focus-within:bg-mortgage-repayment-calculator-lime bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700 flex items-center justify-center rounded-l p-3 px-4 font-bold">
+            <div
+              className={`${errors?.mortgageAmount ? "border-mortgage-repayment-calculator-red" : "border-mortgage-repayment-calculator-slate-500 group-focus-within:border-mortgage-repayment-calculator-lime hover:border-mortgage-repayment-calculator-slate-900"} flex h-12 w-full rounded border`}
+            >
+              <div
+                className={`${errors?.mortgageAmount ? "bg-mortgage-repayment-calculator-red text-white" : "group-focus-within:bg-mortgage-repayment-calculator-lime bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700"} flex items-center justify-center rounded-l p-3 px-4 font-bold`}
+              >
                 £
               </div>
               <input
-                className="w-full rounded-r pl-2 font-bold focus:outline-none"
+                className="text-mortgage-repayment-calculator-slate-700 w-full rounded-r pl-2 font-bold focus:outline-none"
                 type="text"
                 {...register("mortgageAmount")}
               />
@@ -127,13 +130,17 @@ export default function MortgageRepaymentCalculator() {
               <p className="text-mortgage-repayment-calculator-slate-700 mb-2 font-medium">
                 Mortgage Term
               </p>
-              <div className="border-mortgage-repayment-calculator-slate-500 hover:border-mortgage-repayment-calculator-slate-900 group-focus-within:border-mortgage-repayment-calculator-lime flex h-12 w-full rounded border">
+              <div
+                className={`${errors?.mortgageTerm ? "border-mortgage-repayment-calculator-red" : "border-mortgage-repayment-calculator-slate-500 hover:border-mortgage-repayment-calculator-slate-900 group-focus-within:border-mortgage-repayment-calculator-lime"} flex h-12 w-full rounded border`}
+              >
                 <input
                   className="w-full rounded-l pl-2 font-bold focus:outline-none"
                   type="text"
                   {...register("mortgageTerm")}
                 />
-                <div className="bg-mortgage-repayment-calculator-slate-100 group-focus-within:bg-mortgage-repayment-calculator-lime text-mortgage-repayment-calculator-slate-700 flex items-center justify-center rounded-r p-3 font-bold">
+                <div
+                  className={`${errors?.mortgageTerm ? "bg-mortgage-repayment-calculator-red text-white" : "group-focus-within:bg-mortgage-repayment-calculator-lime bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700"} flex items-center justify-center rounded-l p-3 px-4 font-bold`}
+                >
                   years
                 </div>
               </div>
@@ -147,13 +154,17 @@ export default function MortgageRepaymentCalculator() {
               <p className="text-mortgage-repayment-calculator-slate-700 mb-2 font-medium">
                 Interest Rate
               </p>
-              <div className="border-mortgage-repayment-calculator-slate-500 hover:border-mortgage-repayment-calculator-slate-900 group-focus-within:border-mortgage-repayment-calculator-lime flex h-12 w-full rounded border">
+              <div
+                className={`${errors?.interestRate ? "border-mortgage-repayment-calculator-red" : "border-mortgage-repayment-calculator-slate-500 group-focus-within:border-mortgage-repayment-calculator-lime hover:border-mortgage-repayment-calculator-slate-900"} flex h-12 w-full rounded border`}
+              >
                 <input
                   className="w-full rounded-l pl-2 font-bold focus:outline-none"
                   type="text"
                   {...register("interestRate")}
                 />
-                <div className="bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700 group-focus-within:bg-mortgage-repayment-calculator-lime flex items-center justify-center rounded-r p-3 font-bold">
+                <div
+                  className={`${errors?.interestRate ? "bg-mortgage-repayment-calculator-red text-white" : "group-focus-within:bg-mortgage-repayment-calculator-lime bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700"} flex items-center justify-center rounded-l p-3 px-4 font-bold`}
+                >
                   %
                 </div>
               </div>
