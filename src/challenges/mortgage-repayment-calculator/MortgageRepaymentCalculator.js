@@ -20,7 +20,7 @@ const validationSchema = yup.object().shape({
     .typeError("Mortgage term must be a number")
     .integer("Mortgage term must be a whole number")
     .min(1, "Mortgage term must be at least 1 year")
-    .min(50, "Mortgage term cannot exceed 50 years")
+    .max(50, "Mortgage term cannot exceed 50 years")
     .required("Mortgage term is required"),
   interestRate: yup
     .number()
