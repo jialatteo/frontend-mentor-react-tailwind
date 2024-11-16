@@ -23,6 +23,13 @@ module.exports = {
         "mortgage-repayment-calculator-slate-900": "hsl(202, 55%, 16%)",
         "mortgage-repayment-calculator-lime": "hsl(61, 70%, 52%)",
         "mortgage-repayment-calculator-red": "hsl(4, 69%, 50%)",
+        "url-shortener-cyan": "hsl(180, 66%, 49%)",
+        "url-shortener-dark-violet": "hsl(257, 27%, 26%)",
+        "url-shortener-red": "hsl(0, 87%, 67%)",
+        "url-shortener-gray": "hsl(0, 0%, 75%)",
+        "url-shortener-grayish-violet": "hsl(257, 7%, 63%)",
+        "url-shortener-very-dark-blue": "hsl(255, 11%, 22%)",
+        "url-shortener-very-dark-violet": "hsl(260, 8%, 14%)",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
