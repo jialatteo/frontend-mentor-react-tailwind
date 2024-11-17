@@ -35,6 +35,7 @@ module.exports = {
         inter: ["Inter", "sans-serif"],
         redHatText: ["Red Hat Text", "sans-serif"],
         plusJakartaSans: ["Plus Jakarta Sans", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
     },
   },
