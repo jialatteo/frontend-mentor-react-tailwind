@@ -7,14 +7,15 @@ import LogoSvg from "./images/LogoSvg";
 import { useState } from "react";
 
 export default function UrlShortener() {
-  const [urlToShorten, setUrlToShorten] = useState("");
+  const [inputLink, setInputLink] = useState("");
+  const [shortenedLinks, setShortenedLinks] = useState([]);
 
   const shortenUrl = async () => {
     try {
       const response = await fetch("http://localhost:5000/shorten-url", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: urlToShorten }),
+        body: JSON.stringify({ url: inputLink }),
       });
 
       if (!response.ok) {
@@ -22,7 +23,11 @@ export default function UrlShortener() {
       }
 
       const data = await response.json();
-      console.log("Shortened URL:", data.result_url);
+      const shortenedLink = data.result_url;
+      setShortenedLinks((prevLinkList) => [
+        ...prevLinkList,
+        { original: inputLink, shortened: shortenedLink },
+      ]);
     } catch (error) {
       console.error("Error:", error.message);
     }
@@ -81,7 +86,7 @@ export default function UrlShortener() {
               type="text"
               className="ml-12 mr-6 h-14 w-full rounded-lg px-4 text-xl"
               placeholder="Shorten a link here..."
-              onChange={(e) => setUrlToShorten(e.target.value)}
+              onChange={(e) => setInputLink(e.target.value)}
             />
             <button
               onClick={shortenUrl}
@@ -90,6 +95,15 @@ export default function UrlShortener() {
               Shorten It!
             </button>
           </div>
+          <p>
+            {shortenedLinks.map((link) => (
+              <div>
+                <p> {link.original} </p>
+                <p>{link.shortened}</p>
+                <div className="h-1 bg-red-600"></div>
+              </div>
+            ))}
+          </p>
         </div>
         <p className="my-4 mt-10 text-4xl font-bold">Advanced Statistics</p>
         <p className="mb-16 max-w-[480px] text-center font-medium leading-relaxed text-url-shortener-grayish-violet">
