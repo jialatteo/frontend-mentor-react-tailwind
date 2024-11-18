@@ -4,8 +4,30 @@ import BgShortenDesktopSvg from "./images/BgShortenDesktopSvg";
 import IconTwitterSvg from "./images/IconTwitterSvg";
 import IllustrationWorkingSvg from "./images/IllustrationWorkingSvg";
 import LogoSvg from "./images/LogoSvg";
+import { useState } from "react";
 
 export default function UrlShortener() {
+  const [urlToShorten, setUrlToShorten] = useState("");
+
+  const shortenUrl = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/shorten-url", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: urlToShorten }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Shortened URL:", data.result_url);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+
   return (
     <div className="font-poppins mx-auto max-w-[1440px]">
       <div className="flex w-full justify-between px-32 py-10 text-lg">
@@ -59,8 +81,12 @@ export default function UrlShortener() {
               type="text"
               className="ml-12 mr-6 h-14 w-full rounded-lg px-4 text-xl"
               placeholder="Shorten a link here..."
+              onChange={(e) => setUrlToShorten(e.target.value)}
             />
-            <button className="mr-12 w-48 rounded-lg bg-url-shortener-cyan px-6 py-[15px] text-lg font-semibold text-white hover:bg-[#99E3E2] hover:text-opacity-95">
+            <button
+              onClick={shortenUrl}
+              className="mr-12 w-48 rounded-lg bg-url-shortener-cyan px-6 py-[15px] text-lg font-semibold text-white hover:bg-[#99E3E2] hover:text-opacity-95"
+            >
               Shorten It!
             </button>
           </div>
@@ -92,7 +118,7 @@ export default function UrlShortener() {
             </div>
             <p className="mb-6 mt-10 text-xl font-bold">Detailed Records</p>
             <p className="text-sm leading-relaxed text-url-shortener-grayish-violet">
-              Gain instights into who is clicking your links. Knowing when and
+              Gain insights into who is clicking your links. Knowing when and
               where people engage with your content helpes inform better
               decisions.
             </p>
