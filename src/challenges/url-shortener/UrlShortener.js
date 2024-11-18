@@ -46,24 +46,24 @@ export default function UrlShortener() {
         </div>
         <IllustrationWorkingSvg />
       </div>
-      <div className="mx-32 h-36 max-w-full rounded-lg bg-[#3A3053]">
-        <div
-          className="flex h-full w-full items-center justify-center rounded-lg bg-right-bottom"
-          style={{
-            backgroundImage: "url('/url-shortener/bg-boost-desktop.svg')",
-          }}
-        >
-          <input
-            type="text"
-            className="ml-12 mr-6 h-14 w-full rounded-lg px-4 text-xl"
-            placeholder="Shorten a link here..."
-          />
-          <button className="mr-12 w-48 rounded-lg bg-url-shortener-cyan px-6 py-[15px] text-lg font-semibold text-white hover:bg-[#99E3E2] hover:text-opacity-95">
-            Shorten It!
-          </button>
-        </div>
-      </div>
       <div className="flex flex-col items-center bg-[#F0F1F6]">
+        <div className="relative bottom-16 mx-32 h-36 w-[calc(100%-16rem)] rounded-lg bg-[#3A3053]">
+          <div
+            className="flex h-full w-full items-center justify-center rounded-lg bg-right-bottom"
+            style={{
+              backgroundImage: "url('/url-shortener/bg-boost-desktop.svg')",
+            }}
+          >
+            <input
+              type="text"
+              className="ml-12 mr-6 h-14 w-full rounded-lg px-4 text-xl"
+              placeholder="Shorten a link here..."
+            />
+            <button className="mr-12 w-48 rounded-lg bg-url-shortener-cyan px-6 py-[15px] text-lg font-semibold text-white hover:bg-[#99E3E2] hover:text-opacity-95">
+              Shorten It!
+            </button>
+          </div>
+        </div>
         <p className="my-4 text-4xl font-bold">Advanced Statistics</p>
         <p className="mb-16 max-w-[480px] text-center font-medium leading-relaxed text-url-shortener-grayish-violet">
           Track how your links are peforming across the web with our advanced
