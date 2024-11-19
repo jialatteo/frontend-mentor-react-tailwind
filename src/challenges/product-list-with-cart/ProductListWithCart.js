@@ -20,7 +20,7 @@ export default function ProductListWithCart() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-product-list-with-cart-rose-50 px-6 py-20 font-redHatText text-base text-product-list-with-cart-rose-900">
+    <div className="flex min-h-screen justify-center bg-product-list-with-cart-rose-50 px-6 py-20 font-redHatText text-base text-product-list-with-cart-rose-900">
       <div className="block md:flex">
         <div>
           <h1 className="mb-8 text-4xl font-bold">Desserts</h1>
