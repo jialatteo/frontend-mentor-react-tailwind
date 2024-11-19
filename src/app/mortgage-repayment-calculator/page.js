@@ -1,9 +1,16 @@
+"use client";
+
 import { useState } from "react";
 import EmptyResultsSvg from "./EmptyResultsSvg";
 import CalculatorSvg from "./CalculatorSvg";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Plus_Jakarta_Sans } from "next/font/google";
+
+const plusJakartaSans = Plus_Jakarta_Sans({
+  weight: ["500", "700"],
+});
 
 const validationSchema = yup.object().shape({
   mortgageType: yup
@@ -78,7 +85,9 @@ export default function MortgageRepaymentCalculator() {
   };
 
   return (
-    <div className="bg-mortgage-repayment-calculator-slate-100 font-plusJakartaSans flex min-h-screen items-center justify-center">
+    <div
+      className={`flex min-h-screen items-center justify-center bg-mortgage-repayment-calculator-slate-100 ${plusJakartaSans.className}`}
+    >
       <form
         onSubmit={handleSubmit(onSubmit)}
         noValidate
@@ -86,7 +95,7 @@ export default function MortgageRepaymentCalculator() {
       >
         <div className="relative p-6">
           <div className="mb-8 justify-between sm:flex">
-            <p className="text-mortgage-repayment-calculator-slate-900 text-2xl font-bold">
+            <p className="text-2xl font-bold text-mortgage-repayment-calculator-slate-900">
               Mortgage Calculator
             </p>
             <button
@@ -97,38 +106,38 @@ export default function MortgageRepaymentCalculator() {
                 setTotalRepayment(null);
               }}
             >
-              <p className="text-mortgage-repayment-calculator-slate-700 hover:text-mortgage-repayment-calculator-slate-900 mt-2 underline sm:mt-0">
+              <p className="mt-2 text-mortgage-repayment-calculator-slate-700 underline hover:text-mortgage-repayment-calculator-slate-900 sm:mt-0">
                 Clear All
               </p>
             </button>
           </div>
           <div className="group mb-6">
-            <p className="text-mortgage-repayment-calculator-slate-700 mb-2 font-medium">
+            <p className="mb-2 font-medium text-mortgage-repayment-calculator-slate-700">
               Mortgage Amount
             </p>
             <div
-              className={`${errors?.mortgageAmount ? "border-mortgage-repayment-calculator-red" : "border-mortgage-repayment-calculator-slate-500 group-focus-within:border-mortgage-repayment-calculator-lime hover:border-mortgage-repayment-calculator-slate-900"} flex h-12 w-full overflow-hidden rounded border`}
+              className={`${errors?.mortgageAmount ? "border-mortgage-repayment-calculator-red" : "border-mortgage-repayment-calculator-slate-500 hover:border-mortgage-repayment-calculator-slate-900 group-focus-within:border-mortgage-repayment-calculator-lime"} flex h-12 w-full overflow-hidden rounded border`}
             >
               <div
-                className={`${errors?.mortgageAmount ? "bg-mortgage-repayment-calculator-red border-mortgage-repayment-calculator-slate-500 text-white" : "group-focus-within:bg-mortgage-repayment-calculator-lime bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700"} flex items-center justify-center p-3 px-4 font-bold`}
+                className={`${errors?.mortgageAmount ? "border-mortgage-repayment-calculator-slate-500 bg-mortgage-repayment-calculator-red text-white" : "bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700 group-focus-within:bg-mortgage-repayment-calculator-lime"} flex items-center justify-center p-3 px-4 font-bold`}
               >
                 £
               </div>
               <input
-                className="text-mortgage-repayment-calculator-slate-700 w-full rounded-r pl-2 font-bold focus:outline-none"
+                className="w-full rounded-r pl-2 font-bold text-mortgage-repayment-calculator-slate-700 focus:outline-none"
                 type="text"
                 {...register("mortgageAmount")}
               />
             </div>
             {errors?.mortgageAmount && (
-              <p className="text-mortgage-repayment-calculator-red mt-1 text-sm">
+              <p className="mt-1 text-sm text-mortgage-repayment-calculator-red">
                 {errors?.mortgageAmount?.message}
               </p>
             )}
           </div>
           <div className="mb-6 gap-6 sm:flex">
             <div className="group">
-              <p className="text-mortgage-repayment-calculator-slate-700 mb-2 font-medium">
+              <p className="mb-2 font-medium text-mortgage-repayment-calculator-slate-700">
                 Mortgage Term
               </p>
               <div
@@ -140,23 +149,23 @@ export default function MortgageRepaymentCalculator() {
                   {...register("mortgageTerm")}
                 />
                 <div
-                  className={`${errors?.mortgageTerm ? "bg-mortgage-repayment-calculator-red text-white" : "group-focus-within:bg-mortgage-repayment-calculator-lime bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700"} flex items-center justify-center p-3 px-4 font-bold`}
+                  className={`${errors?.mortgageTerm ? "bg-mortgage-repayment-calculator-red text-white" : "bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700 group-focus-within:bg-mortgage-repayment-calculator-lime"} flex items-center justify-center p-3 px-4 font-bold`}
                 >
                   years
                 </div>
               </div>
               {errors?.mortgageTerm && (
-                <p className="text-mortgage-repayment-calculator-red mt-1 text-sm">
+                <p className="mt-1 text-sm text-mortgage-repayment-calculator-red">
                   {errors?.mortgageTerm?.message}
                 </p>
               )}
             </div>
             <div className="group mt-6 sm:mt-0">
-              <p className="text-mortgage-repayment-calculator-slate-700 mb-2 font-medium">
+              <p className="mb-2 font-medium text-mortgage-repayment-calculator-slate-700">
                 Interest Rate
               </p>
               <div
-                className={`${errors?.interestRate ? "border-mortgage-repayment-calculator-red" : "border-mortgage-repayment-calculator-slate-500 group-focus-within:border-mortgage-repayment-calculator-lime hover:border-mortgage-repayment-calculator-slate-900"} flex h-12 w-full overflow-hidden rounded border`}
+                className={`${errors?.interestRate ? "border-mortgage-repayment-calculator-red" : "border-mortgage-repayment-calculator-slate-500 hover:border-mortgage-repayment-calculator-slate-900 group-focus-within:border-mortgage-repayment-calculator-lime"} flex h-12 w-full overflow-hidden rounded border`}
               >
                 <input
                   className="w-full rounded-l pl-2 font-bold focus:outline-none"
@@ -164,25 +173,25 @@ export default function MortgageRepaymentCalculator() {
                   {...register("interestRate")}
                 />
                 <div
-                  className={`${errors?.interestRate ? "bg-mortgage-repayment-calculator-red text-white" : "group-focus-within:bg-mortgage-repayment-calculator-lime bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700"} flex items-center justify-center p-3 px-4 font-bold`}
+                  className={`${errors?.interestRate ? "bg-mortgage-repayment-calculator-red text-white" : "bg-mortgage-repayment-calculator-slate-100 text-mortgage-repayment-calculator-slate-700 group-focus-within:bg-mortgage-repayment-calculator-lime"} flex items-center justify-center p-3 px-4 font-bold`}
                 >
                   %
                 </div>
               </div>
               {errors?.interestRate && (
-                <p className="text-mortgage-repayment-calculator-red mt-1 text-sm">
+                <p className="mt-1 text-sm text-mortgage-repayment-calculator-red">
                   {errors?.interestRate?.message}
                 </p>
               )}
             </div>
           </div>
           <div>
-            <p className="text-mortgage-repayment-calculator-slate-700 mb-2 font-medium">
+            <p className="mb-2 font-medium text-mortgage-repayment-calculator-slate-700">
               Mortgage Type
             </p>
             <label
               htmlFor="repayment"
-              className="hover:border-mortgage-repayment-calculator-lime has-[:checked]:bg-mortgage-repayment-calculator-lime border-mortgage-repayment-calculator-slate-500 has-[:checked]:border-mortgage-repayment-calculator-lime mt-2 flex h-12 w-full cursor-pointer items-center rounded border px-3 has-[:checked]:bg-opacity-25"
+              className="mt-2 flex h-12 w-full cursor-pointer items-center rounded border border-mortgage-repayment-calculator-slate-500 px-3 hover:border-mortgage-repayment-calculator-lime has-[:checked]:border-mortgage-repayment-calculator-lime has-[:checked]:bg-mortgage-repayment-calculator-lime has-[:checked]:bg-opacity-25"
             >
               <div className="flex items-center justify-center">
                 <input
@@ -190,18 +199,18 @@ export default function MortgageRepaymentCalculator() {
                   type="radio"
                   value="repayment"
                   id="repayment"
-                  className="border-mortgage-repayment-calculator-slate-900 checked:border-mortgage-repayment-calculator-lime peer h-4 w-4 appearance-none rounded-full border-[1.5px]"
+                  className="peer h-4 w-4 appearance-none rounded-full border-[1.5px] border-mortgage-repayment-calculator-slate-900 checked:border-mortgage-repayment-calculator-lime"
                   {...register("mortgageType")}
                 />
-                <div className="peer-checked:bg-mortgage-repayment-calculator-lime absolute h-2 w-2 rounded-full" />
+                <div className="absolute h-2 w-2 rounded-full peer-checked:bg-mortgage-repayment-calculator-lime" />
               </div>
-              <p className="text-mortgage-repayment-calculator-slate-900 ml-3 font-bold">
+              <p className="ml-3 font-bold text-mortgage-repayment-calculator-slate-900">
                 Repayment
               </p>
             </label>
             <label
               htmlFor="interestOnly"
-              className="hover:border-mortgage-repayment-calculator-lime has-[:checked]:bg-mortgage-repayment-calculator-lime border-mortgage-repayment-calculator-slate-500 has-[:checked]:border-mortgage-repayment-calculator-lime mt-2 flex h-12 w-full cursor-pointer items-center rounded border px-3 has-[:checked]:bg-opacity-25"
+              className="mt-2 flex h-12 w-full cursor-pointer items-center rounded border border-mortgage-repayment-calculator-slate-500 px-3 hover:border-mortgage-repayment-calculator-lime has-[:checked]:border-mortgage-repayment-calculator-lime has-[:checked]:bg-mortgage-repayment-calculator-lime has-[:checked]:bg-opacity-25"
             >
               <div className="flex items-center justify-center">
                 <input
@@ -209,48 +218,48 @@ export default function MortgageRepaymentCalculator() {
                   type="radio"
                   value="interestOnly"
                   id="interestOnly"
-                  className="border-mortgage-repayment-calculator-slate-900 checked:border-mortgage-repayment-calculator-lime peer h-4 w-4 appearance-none rounded-full border-[1.5px]"
+                  className="peer h-4 w-4 appearance-none rounded-full border-[1.5px] border-mortgage-repayment-calculator-slate-900 checked:border-mortgage-repayment-calculator-lime"
                   {...register("mortgageType")}
                 />
-                <div className="peer-checked:bg-mortgage-repayment-calculator-lime absolute h-2 w-2 rounded-full" />
+                <div className="absolute h-2 w-2 rounded-full peer-checked:bg-mortgage-repayment-calculator-lime" />
               </div>
-              <p className="text-mortgage-repayment-calculator-slate-900 ml-3 font-bold">
+              <p className="ml-3 font-bold text-mortgage-repayment-calculator-slate-900">
                 Interest Only
               </p>
             </label>
 
             <button
               type="submit"
-              className="bg-mortgage-repayment-calculator-lime hover:bg-mortgage-repayment-calculator-lime mt-6 flex items-center justify-center rounded-3xl px-8 py-3 hover:bg-opacity-30"
+              className="mt-6 flex items-center justify-center rounded-3xl bg-mortgage-repayment-calculator-lime px-8 py-3 hover:bg-mortgage-repayment-calculator-lime hover:bg-opacity-30"
             >
               <CalculatorSvg />
-              <p className="text-mortgage-repayment-calculator-slate-900 ml-3 text-lg font-bold">
+              <p className="ml-3 text-lg font-bold text-mortgage-repayment-calculator-slate-900">
                 Calculate Repayments
               </p>
             </button>
           </div>
         </div>
         {monthlyRepayment ? (
-          <div className="bg-mortgage-repayment-calculator-slate-900 flex flex-col p-8 sm:rounded-bl-[48px]">
+          <div className="flex flex-col bg-mortgage-repayment-calculator-slate-900 p-8 sm:rounded-bl-[48px]">
             <p className="mb-2 text-xl font-semibold text-white">
               Your Results
             </p>
-            <p className="text-mortgage-repayment-calculator-slate-300 text-sm">
+            <p className="text-sm text-mortgage-repayment-calculator-slate-300">
               Your results are shown below based on the information you
               provided. To adjust the results, edit the form and click
               "calculate repayments again".
             </p>
-            <div className="border-mortgage-repayment-calculator-lime mt-10 divide-y divide-gray-700 rounded-t-md border-t-[3px] bg-[#0E2431] p-6">
+            <div className="mt-10 divide-y divide-gray-700 rounded-t-md border-t-[3px] border-mortgage-repayment-calculator-lime bg-[#0E2431] p-6">
               <div>
-                <p className="text-mortgage-repayment-calculator-slate-300 mb-3 text-sm">
+                <p className="mb-3 text-sm text-mortgage-repayment-calculator-slate-300">
                   Your monthly repayments
                 </p>
-                <p className="text-mortgage-repayment-calculator-lime mb-6 text-5xl font-bold">
+                <p className="mb-6 text-5xl font-bold text-mortgage-repayment-calculator-lime">
                   £{addCommasThousandSeparator(monthlyRepayment)}
                 </p>
               </div>
               <div>
-                <p className="text-mortgage-repayment-calculator-slate-300 mt-6 text-sm">
+                <p className="mt-6 text-sm text-mortgage-repayment-calculator-slate-300">
                   Total you'll repay over the term
                 </p>
                 <p className="mt-2 text-xl font-bold text-white">
@@ -260,12 +269,12 @@ export default function MortgageRepaymentCalculator() {
             </div>
           </div>
         ) : (
-          <div className="bg-mortgage-repayment-calculator-slate-900 flex flex-col items-center justify-center p-8 sm:rounded-bl-[48px]">
+          <div className="flex flex-col items-center justify-center bg-mortgage-repayment-calculator-slate-900 p-8 sm:rounded-bl-[48px]">
             <EmptyResultsSvg />
             <p className="mb-2 text-xl font-semibold text-white">
               Results shown here
             </p>
-            <p className="text-mortgage-repayment-calculator-slate-300 text-center text-sm">
+            <p className="text-center text-sm text-mortgage-repayment-calculator-slate-300">
               Complete the form and click "calculate repayments" to see what
               your monthly repayments would be.
             </p>

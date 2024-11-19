@@ -31,12 +31,6 @@ module.exports = {
         "url-shortener-very-dark-blue": "hsl(255, 11%, 22%)",
         "url-shortener-very-dark-violet": "hsl(260, 8%, 14%)",
       },
-      fontFamily: {
-        inter: ["Inter", "sans-serif"],
-        redHatText: ["Red Hat Text", "sans-serif"],
-        plusJakartaSans: ["Plus Jakarta Sans", "sans-serif"],
-        poppins: ["Poppins", "sans-serif"],
-      },
     },
   },
   plugins: [],

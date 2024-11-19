@@ -1,8 +1,15 @@
+"use client";
+
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Dropdown from "./Dropdown";
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  weight: ["500", "700"],
+});
 
 const schema = Yup.object({
   inputLink: Yup.string()
@@ -69,7 +76,7 @@ export default function UrlShortener() {
   return (
     <div
       onClick={() => setIsDropdownOpen(false)}
-      className="font-poppins max-w-[1440px] sm:mx-auto"
+      className={`max-w-[1440px] ${poppins.className} sm:mx-auto`}
     >
       <div className="flex w-full items-center justify-between px-6 py-10 text-lg lg:px-32">
         {/* prettier-ignore */}
