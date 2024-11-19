@@ -90,7 +90,7 @@ export default function UrlShortener() {
         </div>
       </div>
       <div className="my-16 ml-6 flex flex-col-reverse items-center justify-between sm:flex-row lg:ml-32">
-        <div className="mr-6 flex w-[560px] flex-col items-center sm:mr-0 sm:items-start">
+        <div className="mr-6 flex flex-col items-center sm:mr-0 sm:w-[560px] sm:items-start">
           <p className="text-center text-7xl font-bold leading-[1.15] sm:text-start">
             More than just shorter links
           </p>
@@ -98,7 +98,7 @@ export default function UrlShortener() {
             Build your brand's recognition and get detailed insights on how your
             links are performing.
           </p>
-          <button className="rounded-3xl bg-url-shortener-cyan px-8 py-3 text-xl font-semibold text-white hover:bg-opacity-50 hover:text-opacity-95">
+          <button className="rounded-[40px] bg-url-shortener-cyan px-12 py-5 text-2xl font-semibold text-white hover:bg-opacity-50 hover:text-opacity-95 sm:rounded-3xl sm:px-8 sm:py-3 sm:text-xl">
             Get Started
           </button>
         </div>
@@ -109,26 +109,26 @@ export default function UrlShortener() {
         onSubmit={handleSubmit(onSubmit)}
         className="relative mt-32 flex flex-col items-center bg-[#F0F1F6]"
       >
-        <div className="absolute -top-20 h-36 w-[calc(100%-3rem)] rounded-lg bg-[#3A3053] lg:w-[calc(100%-16rem)]">
+        <div className="absolute -top-20 h-52 w-[calc(100%-3rem)] rounded-lg bg-[#3A3053] sm:h-36 lg:w-[calc(100%-16rem)]">
           <div
-            className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-right-bottom sm:flex-row"
+            className="flex h-full w-full flex-col items-center justify-center rounded-lg bg-right-bottom px-6 sm:flex-row sm:p-0"
             style={{
               backgroundImage: "url('/url-shortener/bg-boost-desktop.svg')",
             }}
           >
             <input
               type="text"
-              className={`ml-12 mr-6 h-14 w-full rounded-lg px-4 text-xl ${errors.inputLink ? "border-[3px] border-red-500 placeholder:text-red-500 focus:outline-red-500" : ""}`}
+              className={`mb-10 h-14 w-full rounded-lg px-4 text-xl sm:mb-0 sm:ml-12 sm:mr-6 ${errors.inputLink ? "border-[3px] border-red-500 placeholder:text-red-500 focus:outline-red-500" : ""}`}
               placeholder="Shorten a link here..."
               {...register("inputLink")}
             />
             {errors.inputLink && (
-              <p className="absolute bottom-3 left-12 mt-1 italic text-red-500">
+              <p className="absolute bottom-24 left-6 mt-1 italic text-red-500 sm:bottom-3 sm:left-12">
                 {errors.inputLink.message}
               </p>
             )}
             <button
-              className={` ${isLoading ? "hover:bg-url-shortener-cyan" : ""} mr-12 flex w-48 items-center justify-center rounded-lg bg-url-shortener-cyan px-6 py-[15px] text-lg font-semibold text-white hover:bg-[#99E3E2] hover:text-opacity-95`}
+              className={` ${isLoading ? "hover:bg-url-shortener-cyan" : ""} flex h-14 w-full items-center justify-center rounded-lg bg-url-shortener-cyan px-6 py-[15px] text-2xl font-semibold text-white hover:bg-[#99E3E2] hover:text-opacity-95 sm:mr-12 sm:w-48 sm:text-lg`}
               disabled={isLoading}
             >
               {isLoading ? (
@@ -141,7 +141,7 @@ export default function UrlShortener() {
           </div>
         </div>
 
-        <div className="mt-20"></div>
+        <div className="mt-40 sm:mt-20"></div>
         {shortenedLinks.map((link) => (
           <div className="mb-3 flex w-[calc(100%-16rem)] flex-col items-center justify-between rounded-lg bg-white p-4 pl-8 sm:flex-row">
             <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xl font-medium">
