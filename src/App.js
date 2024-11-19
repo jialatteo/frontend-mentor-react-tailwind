@@ -3,9 +3,9 @@ import MortgageRepaymentCalculator from "./challenges/mortgage-repayment-calcula
 import UrlShortener from "./challenges/url-shortener/UrlShortener";
 
 function App() {
-  return <ProductListWithCart />;
+  // return <ProductListWithCart />;
   // return <MortgageRepaymentCalculator />;
-  // return <UrlShortener />;
+  return <UrlShortener />;
 }
 
 export default App;
