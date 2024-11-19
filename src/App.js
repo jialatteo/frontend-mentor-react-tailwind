@@ -5,11 +5,11 @@ import MortgageRepaymentCalculator from "./challenges/mortgage-repayment-calcula
 import UrlShortener from "./challenges/url-shortener/UrlShortener";
 
 function App() {
-  // return <SocialLinksProfile />;
+  return <SocialLinksProfile />;
   // return <ProductListWithCart />;
   // return <RecipePage />;
   // return <MortgageRepaymentCalculator />;
-  return <UrlShortener />;
+  // return <UrlShortener />;
 }
 
 export default App;
