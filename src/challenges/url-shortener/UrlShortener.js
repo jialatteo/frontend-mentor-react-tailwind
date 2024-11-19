@@ -143,18 +143,19 @@ export default function UrlShortener() {
 
         <div className="mt-40 sm:mt-20"></div>
         {shortenedLinks.map((link) => (
-          <div className="mb-3 flex w-[calc(100%-16rem)] flex-col items-center justify-between rounded-lg bg-white p-4 pl-8 sm:flex-row">
-            <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xl font-medium">
+          <div className="mb-3 flex w-[calc(100%-3rem)] flex-col justify-between rounded-lg bg-white sm:flex-row sm:items-center sm:p-4 sm:pl-8 lg:w-[calc(100%-16rem)]">
+            <p className="items-start overflow-hidden text-ellipsis whitespace-nowrap p-4 text-xl font-medium sm:items-center sm:p-0">
               {link.original}
             </p>
-            <div className="flex flex-col items-center justify-center sm:flex-row">
-              <p className="text-xl font-medium text-url-shortener-cyan">
+            <div className="h-[3px] w-full bg-url-shortener-gray opacity-40 sm:hidden"></div>
+            <div className="flex flex-col items-start justify-center p-4 sm:flex-row sm:items-center sm:p-0">
+              <p className="text-xl font-medium text-url-shortener-cyan sm:mt-0">
                 {link.shortened}
               </p>
               <button
                 type="button"
                 onClick={() => handleCopy(link)}
-                className={`ml-4 w-28 flex-shrink-0 rounded-md ${link.copied ? "bg-url-shortener-very-dark-blue" : "bg-url-shortener-cyan hover:bg-[#99E3E2]"} py-2 font-semibold text-white`}
+                className={`mt-4 w-full flex-shrink-0 rounded-md sm:ml-4 sm:mt-0 sm:w-28 ${link.copied ? "bg-url-shortener-very-dark-blue" : "bg-url-shortener-cyan hover:bg-[#99E3E2]"} py-2 text-xl font-semibold text-white sm:text-base`}
               >
                 {link.copied ? "Copied!" : "Copy"}
               </button>
