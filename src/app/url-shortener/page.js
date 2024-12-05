@@ -233,12 +233,7 @@ export default function UrlShortener() {
         </div>
       </form>
       <div className="h-56 w-full bg-[#3A3053]">
-        <div
-          className="flex h-full w-full flex-col items-center justify-center gap-6 bg-right-bottom"
-          style={{
-            backgroundImage: "url('/url-shortener/bg-boost-desktop.svg')",
-          }}
-        >
+        <div className="flex h-full w-full flex-col items-center justify-center gap-6 bg-[url('/url-shortener/bg-boost-desktop.svg')] bg-right-bottom">
           <p className="text-4xl font-bold text-white">
             Boost your links today
           </p>

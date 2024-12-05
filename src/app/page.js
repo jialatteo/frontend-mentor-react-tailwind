@@ -44,7 +44,7 @@ export default function Home() {
             src="/job-listings/active-states.jpg"
             alt=""
           />
-          URL Shortener
+          Job Listings
         </a>
       </div>
     </div>
