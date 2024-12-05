@@ -9,7 +9,7 @@ export default function Home() {
           <img
             className="h-40 w-40"
             src="/product-list-with-cart/active-states.jpg"
-            alt=""
+            alt="product-list-with-cart"
           />
           Product List with Cart
         </a>
@@ -20,7 +20,7 @@ export default function Home() {
           <img
             className="h-40 w-40"
             src="/mortgage-repayment-calculator/active-states.jpg"
-            alt=""
+            alt="mortgage-repayment-calculator"
           />
           Mortgage Repayment Calculator
         </a>
@@ -31,7 +31,7 @@ export default function Home() {
           <img
             className="h-40 w-40"
             src="/url-shortener/desktop-active-states.jpg"
-            alt=""
+            alt="url-shortener"
           />
           URL Shortener
         </a>
@@ -42,7 +42,18 @@ export default function Home() {
           <img
             className="h-40 w-40"
             src="/job-listings/active-states.jpg"
-            alt=""
+            alt="job-listings"
+          />
+          Job Listings
+        </a>
+        <a
+          className="w-40 border border-blue-200 text-center text-xl hover:border-blue-600 hover:text-blue-600 hover:underline"
+          href="/ecommerce-product-page"
+        >
+          <img
+            className="h-40 w-40"
+            src="/ecommerce-product-page/active-states-basket-filled.jpg"
+            alt="ecommerce-product-page"
           />
           Job Listings
         </a>
