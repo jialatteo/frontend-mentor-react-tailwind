@@ -19,8 +19,8 @@ export default function JobListings() {
     >
       <div className="relative h-[156px] bg-[#5DA5A4] bg-[url('/job-listings/bg-header-desktop.svg')]">
         {jobFilters?.length > 0 && (
-          <div className="absolute -bottom-7 left-28 right-28 flex h-14 items-center justify-between rounded bg-white px-6 py-2">
-            <div className="flex gap-2">
+          <div className="absolute -bottom-7 left-28 right-28 flex h-auto items-center justify-between rounded bg-white px-6 py-4">
+            <div className="flex flex-wrap gap-2">
               {jobFilters.map((jobFilter) => (
                 <div
                   className="group flex cursor-pointer items-center"
@@ -52,13 +52,26 @@ export default function JobListings() {
         )}
       </div>
       <div className="flex flex-col gap-6 px-28 py-16">
-        {data.map((jobData) => (
-          <JobListing
-            key={jobData.id}
-            jobData={jobData}
-            setJobFilters={setJobFilters}
-          />
-        ))}
+        {data
+          .filter((jobData) => {
+            return jobFilters.length > 0
+              ? jobFilters.every((filter) =>
+                  [
+                    jobData.role,
+                    jobData.level,
+                    ...jobData.languages,
+                    ...jobData.tools,
+                  ].includes(filter),
+                )
+              : true;
+          })
+          .map((jobData) => (
+            <JobListing
+              key={jobData.id}
+              jobData={jobData}
+              setJobFilters={setJobFilters}
+            />
+          ))}
       </div>
     </div>
   );
