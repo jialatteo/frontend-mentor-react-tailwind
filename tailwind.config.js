@@ -34,6 +34,7 @@ module.exports = {
         "job-listings-light-grayish-cyan-filter-tablets": "hsl(180, 31%, 95%)",
         "job-listings-dark-grayish-cyan": "hsl(180, 8%, 52%)",
         "job-listings-very-dark-grayish-cyan": "hsl(180, 14%, 20%)",
+        "job-listings-desaturated-dark-cyan": "hsl(180, 29%, 50%)",
       },
     },
   },
