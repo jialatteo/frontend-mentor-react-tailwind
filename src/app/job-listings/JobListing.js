@@ -1,7 +1,15 @@
 export default function JobListing({ jobData }) {
-  console.log("jobData", jobData);
+  const filterTablets = [
+    jobData.role,
+    jobData.level,
+    ...jobData.languages,
+    ...jobData.tools,
+  ];
   return (
-    <div className="border-job-listings-desaturated-dark-cyan flex items-center justify-between rounded border-l-4 bg-white p-6 px-8 shadow-xl">
+    <div
+      key={jobData.id}
+      className={`border-job-listings-desaturated-dark-cyan flex items-center justify-between rounded ${jobData.featured ? "border-l-4" : ""} bg-white p-6 px-8 shadow-xl`}
+    >
       <div className="flex gap-4">
         <img src={jobData.logo} alt={jobData.company} />
         <div className="flex flex-col justify-between">
@@ -30,19 +38,15 @@ export default function JobListing({ jobData }) {
           </div>
         </div>
       </div>
-      <div className="flex gap-2">
-        <div className="bg-job-listings-light-grayish-cyan-background text-job-listings-desaturated-dark-cyan p-1 font-bold">
-          Lorem ipsum
-        </div>
-        <div className="bg-job-listings-light-grayish-cyan-background text-job-listings-desaturated-dark-cyan p-1 font-bold">
-          Lorem ipsum
-        </div>
-        <div className="bg-job-listings-light-grayish-cyan-background text-job-listings-desaturated-dark-cyan p-1 font-bold">
-          Lorem ipsum
-        </div>
-        <div className="bg-job-listings-light-grayish-cyan-background text-job-listings-desaturated-dark-cyan p-1 font-bold">
-          Lorem ipsum
-        </div>
+      <div className="flex gap-4">
+        {filterTablets.map((filterTablet) => (
+          <div
+            key={filterTablet}
+            className="bg-job-listings-light-grayish-cyan-background text-job-listings-desaturated-dark-cyan p-1 font-bold"
+          >
+            {filterTablet}
+          </div>
+        ))}
       </div>
     </div>
   );

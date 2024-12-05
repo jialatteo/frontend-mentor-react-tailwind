@@ -7,7 +7,6 @@ const leagueSpartan = League_Spartan({
 });
 
 export default function JobListings() {
-  console.log("data", data);
   return (
     <div
       className={`bg-job-listings-light-grayish-cyan-background min-h-screen ${leagueSpartan.className}`}
@@ -20,7 +19,7 @@ export default function JobListings() {
       />
       <div className="flex flex-col gap-6 px-28 py-16">
         {data.map((jobData) => (
-          <JobListing jobData={jobData} />
+          <JobListing key={jobData.id} jobData={jobData} />
         ))}
       </div>
     </div>
