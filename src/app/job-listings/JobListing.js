@@ -8,13 +8,17 @@ export default function JobListing({ jobData, setJobFilters }) {
   return (
     <div
       key={jobData.id}
-      className={`border-job-listings-desaturated-dark-cyan flex items-center justify-between rounded ${jobData.featured ? "border-l-4" : ""} bg-white p-6 px-8 shadow-xl`}
+      className={`border-job-listings-desaturated-dark-cyan flex flex-col justify-between divide-y-2 rounded md:flex-row md:items-center md:divide-y-0 ${jobData.featured ? "border-l-4" : ""} bg-white p-6 px-8 shadow-xl`}
     >
-      <div className="flex gap-4">
-        <img src={jobData.logo} alt={jobData.company} />
-        <div className="flex flex-col justify-between">
+      <div className="relative flex flex-col pb-4 md:flex-row md:gap-4 md:pb-0">
+        <img
+          className="absolute -top-12 h-16 w-16 md:relative md:top-0 md:h-28 md:w-28"
+          src={jobData.logo}
+          alt={jobData.company}
+        />
+        <div className="mt-6 flex flex-col justify-between gap-2 md:mt-0 md:gap-0">
           <div className="flex">
-            <p className="text-job-listings-desaturated-dark-cyan mr-4 font-bold">
+            <p className="text-job-listings-desaturated-dark-cyan mr-4 text-lg font-bold">
               {jobData.company}
             </p>
             {jobData.new && (
@@ -30,7 +34,7 @@ export default function JobListing({ jobData, setJobFilters }) {
           </div>
           <p className="text-xl font-bold">{jobData.position}</p>
           <div className="text-job-listings-dark-grayish-cyan flex gap-4">
-            <p>{jobData.postedAt} ago</p>
+            <p> {jobData.postedAt} </p>
             <p> • </p>
             <p> {jobData.contract} </p>
             <p> • </p>
@@ -38,7 +42,7 @@ export default function JobListing({ jobData, setJobFilters }) {
           </div>
         </div>
       </div>
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-4 pt-4 md:pt-0">
         {filterTablets.map((filterTablet) => (
           <div
             key={filterTablet}
