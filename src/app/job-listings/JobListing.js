@@ -1,4 +1,4 @@
-export default function JobListing({ jobData }) {
+export default function JobListing({ jobData, setJobFilters }) {
   const filterTablets = [
     jobData.role,
     jobData.level,
@@ -18,12 +18,12 @@ export default function JobListing({ jobData }) {
               {jobData.company}
             </p>
             {jobData.new && (
-              <div className="bg-job-listings-desaturated-dark-cyan mr-2 flex items-center rounded-2xl px-2 text-xs text-white">
+              <div className="bg-job-listings-desaturated-dark-cyan mr-2 flex items-center rounded-2xl px-2 pt-[2px] text-xs text-white">
                 NEW!
               </div>
             )}
             {jobData.featured && (
-              <div className="bg-job-listings-very-dark-grayish-cyan flex items-center rounded-2xl px-2 text-xs text-white">
+              <div className="bg-job-listings-very-dark-grayish-cyan flex items-center rounded-2xl px-2 pt-[2px] text-xs text-white">
                 FEATURED
               </div>
             )}
@@ -42,7 +42,14 @@ export default function JobListing({ jobData }) {
         {filterTablets.map((filterTablet) => (
           <div
             key={filterTablet}
-            className="bg-job-listings-light-grayish-cyan-background text-job-listings-desaturated-dark-cyan p-1 font-bold"
+            className="bg-job-listings-light-grayish-cyan-background hover:bg-job-listings-desaturated-dark-cyan text-job-listings-desaturated-dark-cyan cursor-pointer rounded p-1 font-bold hover:text-white"
+            onClick={() =>
+              setJobFilters((prevJobFilters) =>
+                prevJobFilters.includes(filterTablet)
+                  ? [...prevJobFilters]
+                  : [...prevJobFilters, filterTablet],
+              )
+            }
           >
             {filterTablet}
           </div>
