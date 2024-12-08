@@ -2,6 +2,7 @@
 
 import { Kumbh_Sans } from "next/font/google";
 import { useState } from "react";
+import ImageCarousel from "./ImageCarousel";
 
 const KumbhSans = Kumbh_Sans({
   weight: ["400", "700"],
@@ -89,19 +90,7 @@ export default function EcommerceProductPage() {
           />
         </div>
       </div>
-      <div className="bg-orange-300">
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officiis odio
-        repellendus asperiores illum accusantium est earum provident, obcaecati
-        deleniti modi in iusto rerum blanditiis! Enim officia, odit cum
-        inventore sint maxime corrupti? Nisi similique nemo explicabo placeat
-        doloremque ab magni molestiae dolorem molestias. Eos blanditiis dolores
-        libero neque nobis, totam eaque aliquid accusamus mollitia quod
-        voluptatem consequatur sed ut, maxime adipisci error similique iure hic
-        fuga soluta repudiandae dolore vero tenetur beatae? Est nesciunt
-        molestiae maxime, similique ad vitae temporibus vero dolore laboriosam
-        atque incidunt. Totam laboriosam quia voluptas sed consequuntur aut
-        atque quas cum id sequi, quae molestiae optio.
-      </div>
+      <ImageCarousel />
       <div className="p-4 pb-14">
         <p className="text-ecommerce-product-page-dark-grayish-blue mb-2 text-xs font-bold tracking-widest">
           SNEAKER COMPANY
