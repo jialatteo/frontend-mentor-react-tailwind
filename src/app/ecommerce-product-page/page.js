@@ -17,7 +17,9 @@ export default function EcommerceProductPage() {
   const [cartCount, setCartCount] = useState(0);
 
   return (
-    <div className={`${KumbhSans.className} mx-auto max-w-[1440px]`}>
+    <div
+      className={`${KumbhSans.className} mx-auto max-w-[1440px] sm:px-6 md:px-12`}
+    >
       {isDropdownOpen && (
         <div>
           <div className="absolute left-0 z-20 h-full w-48 bg-white p-4">
@@ -170,60 +172,66 @@ export default function EcommerceProductPage() {
         </div>
       </div>
       <div className="my-2 mb-16 hidden h-[1px] w-full bg-ecommerce-product-page-light-grayish-blue sm:block" />
-      <ImageCarousel />
-      <div className="p-4 pb-14">
-        <p className="mb-2 text-xs font-bold tracking-widest text-ecommerce-product-page-dark-grayish-blue">
-          SNEAKER COMPANY
-        </p>
-        <p className="mb-3 text-3xl font-bold">Fall Limited Edition Sneakers</p>
-        <p className="text-sm leading-relaxed text-ecommerce-product-page-dark-grayish-blue">
-          These low-profile sneakers are your perfect casual wear companion.
-          Featuring a durable rubber outer sole, they'll withstand everything
-          the weather can offer.
-        </p>
-        <div className="my-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <p className="text-2xl font-bold">${SNEAKER_PRICE.toFixed(2)}</p>
-            <div className="rounded-md bg-black px-2 py-[2px] text-sm font-bold text-white">
-              50%
-            </div>
-          </div>
-          <p className="font-bold text-ecommerce-product-page-dark-grayish-blue line-through">
-            $250.00
+      <div className="sm:flex sm:gap-6 sm:pb-32 md:gap-14">
+        <ImageCarousel />
+        <div className="p-4 pb-14">
+          <p className="mb-2 text-xs font-bold tracking-widest text-ecommerce-product-page-dark-grayish-blue sm:mb-4">
+            SNEAKER COMPANY
           </p>
-        </div>
-        <div className="w-full rounded-lg bg-ecommerce-product-page-light-grayish-blue">
-          <div className="flex items-center justify-between py-1">
+          <p className="mb-3 text-3xl font-bold sm:mb-10">
+            Fall Limited Edition Sneakers
+          </p>
+          <p className="text-sm leading-relaxed text-ecommerce-product-page-dark-grayish-blue">
+            These low-profile sneakers are your perfect casual wear companion.
+            Featuring a durable rubber outer sole, they'll withstand everything
+            the weather can offer.
+          </p>
+          <div className="my-4 flex items-center justify-between sm:flex-col sm:items-start">
+            <div className="flex items-center gap-3">
+              <p className="text-2xl font-bold">${SNEAKER_PRICE.toFixed(2)}</p>
+              <div className="rounded-md bg-black px-2 py-[2px] text-sm font-bold text-white">
+                50%
+              </div>
+            </div>
+            <p className="font-bold text-ecommerce-product-page-dark-grayish-blue line-through sm:mt-2">
+              $250.00
+            </p>
+          </div>
+          <div className="sm:flex sm:gap-4">
+            <div className="w-full rounded-lg bg-ecommerce-product-page-light-grayish-blue sm:max-w-40">
+              <div className="flex items-center justify-between py-1">
+                <button
+                  onClick={() => {
+                    if (addCount >= 1) setAddCount(addCount - 1);
+                  }}
+                  className="group cursor-pointer p-4"
+                >
+                  {/* prettier-ignore */}
+                  <svg id="icon-minus" className="fill-ecommerce-product-page-orange group-hover:opacity-40"  width="12" height="4" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><defs><path d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z" id="a"/></defs><use fill-rule="nonzero" xlinkHref="#a"/></svg>
+                </button>
+                <p className="font-bold">{addCount}</p>
+                <button
+                  onClick={() => setAddCount(addCount + 1)}
+                  className="group cursor-pointer p-4"
+                >
+                  {/* prettier-ignore */}
+                  <svg id="icon-plus" className="fill-ecommerce-product-page-orange group-hover:opacity-40" width="12" height="12" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><defs><path d="M12 7.023V4.977a.641.641 0 0 0-.643-.643h-3.69V.643A.641.641 0 0 0 7.022 0H4.977a.641.641 0 0 0-.643.643v3.69H.643A.641.641 0 0 0 0 4.978v2.046c0 .356.287.643.643.643h3.69v3.691c0 .356.288.643.644.643h2.046a.641.641 0 0 0 .643-.643v-3.69h3.691A.641.641 0 0 0 12 7.022Z" id="b"/></defs><use fill-rule="nonzero" xlinkHref="#b"/></svg>
+                </button>
+              </div>
+            </div>
             <button
               onClick={() => {
-                if (addCount >= 1) setAddCount(addCount - 1);
+                setCartCount(cartCount + addCount);
+                setAddCount(0);
               }}
-              className="group cursor-pointer p-4"
+              className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-ecommerce-product-page-orange p-4 shadow-xl shadow-ecommerce-product-page-orange/20 hover:bg-opacity-40 sm:mt-0"
             >
               {/* prettier-ignore */}
-              <svg id="icon-minus" className="fill-ecommerce-product-page-orange group-hover:opacity-40"  width="12" height="4" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><defs><path d="M11.357 3.332A.641.641 0 0 0 12 2.69V.643A.641.641 0 0 0 11.357 0H.643A.641.641 0 0 0 0 .643v2.046c0 .357.287.643.643.643h10.714Z" id="a"/></defs><use fill-rule="nonzero" xlinkHref="#a"/></svg>
-            </button>
-            <p className="font-bold">{addCount}</p>
-            <button
-              onClick={() => setAddCount(addCount + 1)}
-              className="group cursor-pointer p-4"
-            >
-              {/* prettier-ignore */}
-              <svg id="icon-plus" className="fill-ecommerce-product-page-orange group-hover:opacity-40" width="12" height="12" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><defs><path d="M12 7.023V4.977a.641.641 0 0 0-.643-.643h-3.69V.643A.641.641 0 0 0 7.022 0H4.977a.641.641 0 0 0-.643.643v3.69H.643A.641.641 0 0 0 0 4.978v2.046c0 .356.287.643.643.643h3.69v3.691c0 .356.288.643.644.643h2.046a.641.641 0 0 0 .643-.643v-3.69h3.691A.641.641 0 0 0 12 7.022Z" id="b"/></defs><use fill-rule="nonzero" xlinkHref="#b"/></svg>
+              <svg id="icon-cart" height="14" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"  fill-rule="nonzero"/></svg>
+              <p className="text-sm font-bold">Add to cart</p>
             </button>
           </div>
         </div>
-        <button
-          onClick={() => {
-            setCartCount(cartCount + addCount);
-            setAddCount(0);
-          }}
-          className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-ecommerce-product-page-orange p-4 shadow-xl shadow-ecommerce-product-page-orange/20 hover:bg-opacity-40"
-        >
-          {/* prettier-ignore */}
-          <svg id="icon-cart" height="14" viewBox="0 0 22 20" xmlns="http://www.w3.org/2000/svg"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z"  fill-rule="nonzero"/></svg>
-          <p className="text-sm font-bold">Add to cart</p>
-        </button>
       </div>
     </div>
   );
