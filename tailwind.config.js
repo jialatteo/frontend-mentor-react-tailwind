@@ -37,7 +37,7 @@ module.exports = {
         "job-listings-desaturated-dark-cyan": "hsl(180, 29%, 50%)",
         "ecommerce-product-page-orange": "hsl(26, 100%, 55%)",
         "ecommerce-product-page-pale-orange": "hsl(25, 100%, 94%)",
-        "ecommerce-product-page-very-dark blue": "hsl(220, 13%, 13%)",
+        "ecommerce-product-page-very-dark-blue": "hsl(220, 13%, 13%)",
         "ecommerce-product-page-dark-grayish-blue": "hsl(219, 9%, 45%)",
         "ecommerce-product-page-grayish-blue": "hsl(220, 14%, 75%)",
         "ecommerce-product-page-light-grayish-blue": "hsl(223, 64%, 98%)",

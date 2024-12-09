@@ -8,6 +8,8 @@ const KumbhSans = Kumbh_Sans({
   weight: ["400", "700"],
 });
 
+const SNEAKER_PRICE = 125;
+
 export default function EcommerceProductPage() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
@@ -75,13 +77,50 @@ export default function EcommerceProductPage() {
           />
           {isCartModalOpen && (
             <div>
-              <div className="absolute left-2 right-2 top-16 z-20 flex h-52 flex-col divide-y-2 rounded-md bg-white">
+              <div className="absolute left-2 right-2 top-16 z-20 flex min-h-52 flex-col divide-y-2 rounded-md bg-white">
                 <p className="ml-4 mt-3 pb-3 text-sm font-bold">Cart</p>
-                <div className="flex flex-1 items-center justify-center">
-                  <p className="text-center text-sm font-bold text-ecommerce-product-page-dark-grayish-blue">
-                    Your cart is empty.
-                  </p>
-                </div>
+                {cartCount <= 0 ? (
+                  <div className="flex flex-1 items-center justify-center">
+                    <p className="text-center text-sm font-bold text-ecommerce-product-page-dark-grayish-blue">
+                      Your cart is empty.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="p-4 pt-4">
+                    <div className="flex justify-between gap-3">
+                      <div className="flex">
+                        <img
+                          className="mr-4 w-12 rounded"
+                          src="ecommerce-product-page/image-product-1-thumbnail.jpg"
+                          alt=""
+                        />
+                        <div className="text-ecommerce-product-page-dark-grayish-blue">
+                          <p>Fall Limited Edition Sneakers</p>
+                          <p>
+                            ${SNEAKER_PRICE.toFixed(2)} x {cartCount}{" "}
+                            <span className="text-ecommerce-product-page-very-dark-blue font-bold">
+                              ${(cartCount * SNEAKER_PRICE).toFixed(2)}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                      <button onClick={() => setCartCount(0)}>
+                        {/* prettier-ignore */}
+                        <svg id="icon-delete" className="hover:fill-ecommerce-product-page-very-dark-blue fill-[#C3CAD9]" width="14" height="16" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink"><defs><path d="M0 2.625V1.75C0 1.334.334 1 .75 1h3.5l.294-.584A.741.741 0 0 1 5.213 0h3.571a.75.75 0 0 1 .672.416L9.75 1h3.5c.416 0 .75.334.75.75v.875a.376.376 0 0 1-.375.375H.375A.376.376 0 0 1 0 2.625Zm13 1.75V14.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 1 14.5V4.375C1 4.169 1.169 4 1.375 4h11.25c.206 0 .375.169.375.375ZM4.5 6.5c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Zm3 0c0-.275-.225-.5-.5-.5s-.5.225-.5.5v7c0 .275.225.5.5.5s.5-.225.5-.5v-7Z" id="a"/></defs><use  fill-rule="nonzero" xlinkHref="#a"/></svg>
+                      </button>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setCartCount(0);
+                        setAddCount(0);
+                        setIsCartModalOpen(false);
+                      }}
+                      className="mt-4 w-full rounded-lg bg-ecommerce-product-page-orange py-3 font-bold hover:bg-opacity-40"
+                    >
+                      Checkout
+                    </button>
+                  </div>
+                )}
               </div>
               <div
                 onClick={() => {
@@ -106,7 +145,7 @@ export default function EcommerceProductPage() {
         </p>
         <div className="my-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <p className="text-2xl font-bold">$125.00</p>
+            <p className="text-2xl font-bold">${SNEAKER_PRICE.toFixed(2)}</p>
             <div className="rounded-md bg-black px-2 py-[2px] text-sm font-bold text-white">
               50%
             </div>
