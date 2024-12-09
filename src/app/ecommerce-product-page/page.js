@@ -116,7 +116,7 @@ export default function EcommerceProductPage() {
           />
           {isCartModalOpen && (
             <div>
-              <div className="absolute left-2 right-2 top-16 z-20 flex min-h-52 flex-col divide-y-2 rounded-md bg-white sm:-left-[300px] sm:-right-2 sm:top-12">
+              <div className="absolute left-2 right-2 top-16 z-20 flex min-h-52 flex-col divide-y-2 rounded-md bg-white shadow-xl sm:-left-[300px] sm:-right-2 sm:top-12">
                 <p className="ml-4 mt-3 pb-3 text-sm font-bold">Cart</p>
                 {cartCount <= 0 ? (
                   <div className="flex flex-1 items-center justify-center">
@@ -165,7 +165,7 @@ export default function EcommerceProductPage() {
                 onClick={() => {
                   setIsCartModalOpen(false);
                 }}
-                className="fixed inset-0 z-10 bg-black bg-opacity-40"
+                className="fixed inset-0 z-10"
               />
             </div>
           )}
