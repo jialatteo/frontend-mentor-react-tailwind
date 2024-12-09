@@ -8,9 +8,9 @@ export default function ImageCarousel() {
     "ecommerce-product-page/image-product-4.jpg",
   ];
 
-  const [imageIndex, setImageIndex] = useState(3);
+  const [imageIndex, setImageIndex] = useState(0);
   return (
-    <div className="relative flex items-center justify-center bg-black">
+    <div className="relative flex items-center justify-center bg-black sm:hidden">
       <button
         onClick={() => {
           if (imageIndex - 1 >= 0) setImageIndex(imageIndex - 1);
