@@ -57,6 +57,17 @@ export default function Home() {
           />
           Job Listings
         </a>
+        <a
+          className="w-40 border border-blue-200 text-center text-xl hover:border-blue-600 hover:text-blue-600 hover:underline"
+          href="/interactive-comments-section"
+        >
+          <img
+            className="h-40 w-40"
+            src="/interactive-comments-section/active-states.jpg"
+            alt="interactive-comments-section"
+          />
+          Interactive comments section
+        </a>
       </div>
     </div>
   );
