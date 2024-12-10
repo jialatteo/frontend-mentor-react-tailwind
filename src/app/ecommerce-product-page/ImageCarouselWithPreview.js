@@ -43,7 +43,7 @@ export default function ImageCarouselWithPreview() {
             if (imageIndex - 1 >= 0) setImageIndex(imageIndex - 1);
           }}
           disabled={imageIndex === 0}
-          className={`group absolute top-1/2 -translate-y-1/2 transform sm:hidden ${
+          className={`group absolute top-1/2 -translate-y-1/2 sm:hidden ${
             imageIndex === 0
               ? "opacity-50"
               : "hover:border-ecommerce-product-page-orange"
@@ -56,7 +56,7 @@ export default function ImageCarouselWithPreview() {
           onClick={() => {
             if (imageIndex + 1 < images.length) setImageIndex(imageIndex + 1);
           }}
-          className={`group absolute top-1/2 -translate-y-1/2 transform sm:hidden ${
+          className={`group absolute top-1/2 -translate-y-1/2 sm:hidden ${
             imageIndex >= images.length - 1
               ? "opacity-50"
               : "hover:border-ecommerce-product-page-orange"

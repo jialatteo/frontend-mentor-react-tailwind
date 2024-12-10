@@ -45,7 +45,7 @@ module.exports = {
         "ecommerce-product-page-black-lightbox-background": "hsl(0, 0%, 0%)",
         "interactive-comments-section-moderate-blue": "hsl(238, 40%, 52%)",
         "interactive-comments-section-soft-red": "hsl(358, 79%, 66%)",
-        "interactive-comments-section-light-grayish blue": "hsl(239, 57%, 85%)",
+        "interactive-comments-section-light-grayish-blue": "hsl(239, 57%, 85%)",
         "interactive-comments-section-pale-red": "hsl(357, 100%, 86%)",
         "interactive-comments-section-dark-blue": "hsl(212, 24%, 26%)",
         "interactive-comments-section-grayish-blue": "hsl(211, 10%, 45%)",

@@ -55,7 +55,7 @@ export default function Home() {
             src="/ecommerce-product-page/active-states-basket-filled.jpg"
             alt="ecommerce-product-page"
           />
-          Job Listings
+          Ecommerce Product Page
         </a>
         <a
           className="w-40 border border-blue-200 text-center text-xl hover:border-blue-600 hover:text-blue-600 hover:underline"
