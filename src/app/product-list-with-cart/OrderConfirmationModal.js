@@ -30,7 +30,6 @@ export default function OrderConfirmationModal({
           {productsInCart
             ?.filter((product) => product.quantity != 0)
             ?.map((product) => {
-              console.log("product", product);
               return (
                 <div>
                   <ConfirmedOrder
