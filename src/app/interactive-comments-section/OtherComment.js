@@ -1,9 +1,7 @@
-import OtherReply from "./OtherReply";
-
 export default function OtherComment({ comment }) {
   return (
     <div>
-      <div className="mb-3 rounded-lg bg-white p-4">
+      <div className="rounded-lg bg-white p-4">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-5">
             <img
@@ -45,14 +43,16 @@ export default function OtherComment({ comment }) {
           </button>
         </div>
       </div>
-      <div className="mb-3 flex">
-        <div className="bg-interactive-comments-section-light-gray mr-4 w-1 self-stretch" />
-        <div className="flex flex-col gap-3">
-          {comment?.replies?.map((reply) => (
-            <OtherReply reply={reply} />
-          ))}
+      {comment?.replies?.length > 0 && (
+        <div className="mt-3 flex">
+          <div className="bg-interactive-comments-section-light-gray mr-4 w-1 self-stretch" />
+          <div className="flex flex-col gap-3">
+            {comment?.replies?.map((reply) => (
+              <OtherComment key={reply.id} comment={reply} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

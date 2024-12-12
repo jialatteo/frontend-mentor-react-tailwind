@@ -113,7 +113,7 @@ export default function InteractiveCommentsSection() {
   };
   return (
     <div
-      className={`bg-interactive-comments-section-very-light-gray flex min-h-screen flex-col items-center px-4 py-8 ${rubik.className}`}
+      className={`bg-interactive-comments-section-very-light-gray flex min-h-screen flex-col items-center gap-3 px-4 py-8 ${rubik.className}`}
     >
       <SelfComment comment={selfComment} />
       <OtherComment comment={otherComment} />
