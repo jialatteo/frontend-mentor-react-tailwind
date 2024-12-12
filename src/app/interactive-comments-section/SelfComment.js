@@ -6,7 +6,7 @@ export default function SelfComment({ comment }) {
   const [updatedContent, setUpdatedContent] = useState(comment?.content);
 
   return (
-    <div>
+    <div className="w-full max-w-[1600px]">
       <div className="rounded-lg bg-white p-4">
         <div className="flex">
           <div className="hidden flex-col justify-start sm:flex">
@@ -179,9 +179,9 @@ export default function SelfComment({ comment }) {
         </div>
       </div>
       {comment?.replies?.length > 0 && (
-        <div className="mt-3 flex">
+        <div className="mt-3 flex max-w-[1600px]">
           <div className="bg-interactive-comments-section-light-gray mr-4 w-1 self-stretch" />
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-1 flex-col items-center gap-3">
             {comment?.replies?.map((reply) => (
               <SelfComment key={reply.id} comment={reply} />
             ))}

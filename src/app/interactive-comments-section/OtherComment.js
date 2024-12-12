@@ -5,7 +5,7 @@ export default function OtherComment({ comment }) {
   const [replyContent, setReplyContent] = useState("");
 
   return (
-    <div>
+    <div className="w-full max-w-[1600px]">
       <div className="rounded-lg bg-white p-4">
         <div className="flex">
           <div className="hidden flex-col justify-start sm:flex">
@@ -23,7 +23,7 @@ export default function OtherComment({ comment }) {
               </button>
             </div>
           </div>
-          <div>
+          <div className="flex-1">
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-5">
                 <img
@@ -97,11 +97,7 @@ export default function OtherComment({ comment }) {
           <textarea
             onChange={(e) => setReplyContent(e.target.value)}
             className="focus:outline-interactive-comments-section-moderate-blue border-interactive-comments-section-light-gray mb-2 h-28 w-full rounded-lg border px-4 py-2"
-          >
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque
-            voluptatibus iusto tempore tenetur fuga omnis modi odio quod illo
-            nostrum?
-          </textarea>
+          ></textarea>
           <div className="flex justify-end gap-3">
             <button
               onClick={() => {
@@ -127,9 +123,9 @@ export default function OtherComment({ comment }) {
         </div>
       )}
       {comment?.replies?.length > 0 && (
-        <div className="mt-3 flex">
+        <div className="mt-3 flex max-w-[1600px]">
           <div className="bg-interactive-comments-section-light-gray mr-4 w-1 self-stretch" />
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-1 flex-col gap-3">
             {comment?.replies?.map((reply) => (
               <OtherComment key={reply.id} comment={reply} />
             ))}

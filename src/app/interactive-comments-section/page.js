@@ -21,8 +21,7 @@ export default function InteractiveCommentsSection() {
 
   const selfComment = {
     id: 2,
-    content:
-      "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
+    content: "Woah",
     createdAt: "2 weeks ago",
     score: 5,
     user: {
@@ -35,8 +34,7 @@ export default function InteractiveCommentsSection() {
     replies: [
       {
         id: 3,
-        content:
-          "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
+        content: "woah 1",
         createdAt: "1 week ago",
         score: 4,
         replyingTo: "maxblagun",
@@ -50,8 +48,7 @@ export default function InteractiveCommentsSection() {
         replies: [
           {
             id: 3,
-            content:
-              "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
+            content: "woah 2",
             createdAt: "1 week ago",
             score: 4,
             replyingTo: "maxblagun",
@@ -68,8 +65,7 @@ export default function InteractiveCommentsSection() {
       },
       {
         id: 4,
-        content:
-          "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
+        content: "woah 3",
         createdAt: "2 days ago",
         score: 2,
         replyingTo: "ramsesmiron",
@@ -85,8 +81,7 @@ export default function InteractiveCommentsSection() {
   };
   const otherComment = {
     id: 2,
-    content:
-      "Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!",
+    content: "Woah",
     createdAt: "2 weeks ago",
     score: 5,
     user: {
@@ -99,8 +94,7 @@ export default function InteractiveCommentsSection() {
     replies: [
       {
         id: 3,
-        content:
-          "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
+        content: "woah 2",
         createdAt: "1 week ago",
         score: 4,
         replyingTo: "maxblagun",
@@ -114,8 +108,7 @@ export default function InteractiveCommentsSection() {
       },
       {
         id: 4,
-        content:
-          "I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.",
+        content: "woah 3",
         createdAt: "2 days ago",
         score: 2,
         replyingTo: "ramsesmiron",
@@ -135,7 +128,7 @@ export default function InteractiveCommentsSection() {
     >
       <SelfComment comment={selfComment} />
       <OtherComment comment={otherComment} />
-      <div className="w-full rounded-lg bg-white p-4">
+      <div className="w-full max-w-[1600px] rounded-lg bg-white p-4">
         <textarea
           className="focus:outline-interactive-comments-section-moderate-blue border-interactive-comments-section-light-gray mb-2 h-28 w-full rounded-lg border px-4 py-2"
           name="Comment"
