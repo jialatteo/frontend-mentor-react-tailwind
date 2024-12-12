@@ -35,6 +35,11 @@ export default function SelfComment({ comment }) {
           </textarea>
         ) : (
           <p className="text-interactive-comments-section-grayish-blue mb-4">
+            {comment.replyingTo && (
+              <span className="text-interactive-comments-section-moderate-blue mr-1 font-bold">
+                @{comment.replyingTo}
+              </span>
+            )}
             {comment.content}
           </p>
         )}
