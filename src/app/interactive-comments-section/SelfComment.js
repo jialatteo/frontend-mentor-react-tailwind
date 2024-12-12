@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function SelfComment({ comment }) {
   const [isDeleteModalOpen, setIsDeletModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
+  const [updatedContent, setUpdatedContent] = useState(comment?.content);
 
   return (
     <div>
@@ -25,9 +26,18 @@ export default function SelfComment({ comment }) {
             </p>
           </div>
         </div>
-        <p className="text-interactive-comments-section-grayish-blue mb-4">
-          {comment.content}
-        </p>
+        {isEditing ? (
+          <textarea
+            onChange={(e) => setUpdatedContent(e.target.value)}
+            className="focus:outline-interactive-comments-section-moderate-blue border-interactive-comments-section-light-gray mb-2 h-28 w-full rounded-lg border px-4 py-2"
+          >
+            {updatedContent}
+          </textarea>
+        ) : (
+          <p className="text-interactive-comments-section-grayish-blue mb-4">
+            {comment.content}
+          </p>
+        )}
         <div className="flex items-center justify-between">
           <div className="bg-interactive-comments-section-very-light-gray flex items-center gap-3 rounded-md px-3 py-[6px]">
             <button className="group py-1">
@@ -42,25 +52,54 @@ export default function SelfComment({ comment }) {
               <svg id="icon-minus" className="group-hover:fill-interactive-comments-section-moderate-blue fill-interactive-comments-section-light-grayish-blue" width="11" height="3" xmlns="http://www.w3.org/2000/svg"><path d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"/></svg>
             </button>
           </div>
-          <div className="flex items-center gap-6">
-            <button
-              onClick={() => setIsDeletModalOpen(true)}
-              className="group flex items-center gap-[6px]"
-            >
-              {/* prettier-ignore */}
-              <svg id="icon-delete" className="group-hover:opacity-50" width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" fill="#ED6368"/></svg>
-              <p className="text-interactive-comments-section-soft-red font-bold group-hover:opacity-50">
-                Delete
-              </p>
-            </button>
-            <button className="group flex items-center gap-[6px]">
-              {/* prettier-ignore */}
-              <svg id="icon-edit" className="group-hover:opacity-50" width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z" fill="#5357B6"/></svg>
-              <p className="text-interactive-comments-section-moderate-blue font-bold group-hover:opacity-50">
-                Edit
-              </p>
-            </button>
-          </div>
+          {isEditing ? (
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setUpdatedContent(comment?.content);
+                  setIsEditing(false);
+                }}
+                className="bg-interactive-comments-section-grayish-blue rounded-md px-4 py-3 hover:opacity-50"
+              >
+                <p className="font-medium text-white group-hover:opacity-50">
+                  CANCEL
+                </p>
+              </button>
+              <button
+                onClick={() => {
+                  setIsEditing(false);
+                }}
+                className="bg-interactive-comments-section-moderate-blue rounded-md px-4 py-3 hover:opacity-50"
+              >
+                <p className="font-medium text-white group-hover:opacity-50">
+                  UPDATE
+                </p>
+              </button>
+            </div>
+          ) : (
+            <div className="flex items-center gap-6">
+              <button
+                onClick={() => setIsDeletModalOpen(true)}
+                className="group flex items-center gap-[6px]"
+              >
+                {/* prettier-ignore */}
+                <svg id="icon-delete" className="group-hover:opacity-50" width="12" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M1.167 12.448c0 .854.7 1.552 1.555 1.552h6.222c.856 0 1.556-.698 1.556-1.552V3.5H1.167v8.948Zm10.5-11.281H8.75L7.773 0h-3.88l-.976 1.167H0v1.166h11.667V1.167Z" fill="#ED6368"/></svg>
+                <p className="text-interactive-comments-section-soft-red font-bold group-hover:opacity-50">
+                  Delete
+                </p>
+              </button>
+              <button
+                onClick={() => setIsEditing(true)}
+                className="group flex items-center gap-[6px]"
+              >
+                {/* prettier-ignore */}
+                <svg id="icon-edit" className="group-hover:opacity-50" width="14" height="14" xmlns="http://www.w3.org/2000/svg"><path d="M13.479 2.872 11.08.474a1.75 1.75 0 0 0-2.327-.06L.879 8.287a1.75 1.75 0 0 0-.5 1.06l-.375 3.648a.875.875 0 0 0 .875.954h.078l3.65-.333c.399-.04.773-.216 1.058-.499l7.875-7.875a1.68 1.68 0 0 0-.061-2.371Zm-2.975 2.923L8.159 3.449 9.865 1.7l2.389 2.39-1.75 1.706Z" fill="#5357B6"/></svg>
+                <p className="text-interactive-comments-section-moderate-blue font-bold group-hover:opacity-50">
+                  Edit
+                </p>
+              </button>
+            </div>
+          )}
         </div>
         {isDeleteModalOpen && (
           <div className="fixed inset-0">
