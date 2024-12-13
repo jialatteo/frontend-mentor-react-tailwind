@@ -15,7 +15,7 @@ export default function InteractiveCommentsSection() {
 
   return (
     <div
-      className={`bg-interactive-comments-section-very-light-gray flex min-h-screen flex-col items-center gap-3 px-4 py-8 ${rubik.className}`}
+      className={`flex min-h-screen flex-col items-center gap-3 bg-interactive-comments-section-very-light-gray px-4 py-8 ${rubik.className}`}
     >
       {data?.comments?.map((comment) =>
         currentUsername === comment?.user?.username ? (
@@ -26,7 +26,7 @@ export default function InteractiveCommentsSection() {
       )}
       <div className="w-full max-w-[1600px] rounded-lg bg-white p-4">
         <textarea
-          className="focus:outline-interactive-comments-section-moderate-blue border-interactive-comments-section-light-gray mb-2 h-28 w-full rounded-lg border px-4 py-2"
+          className="mb-2 h-28 w-full rounded-lg border border-interactive-comments-section-light-gray px-4 py-2 focus:outline-interactive-comments-section-moderate-blue"
           name="Comment"
           placeholder="Add a comment..."
         ></textarea>
@@ -36,7 +36,7 @@ export default function InteractiveCommentsSection() {
             src={data?.currentUser?.image?.png}
             alt="current-user-image"
           />
-          <button className="bg-interactive-comments-section-moderate-blue rounded-md px-8 py-3 hover:opacity-50">
+          <button className="rounded-md bg-interactive-comments-section-moderate-blue px-8 py-3 hover:opacity-50">
             <p className="font-medium text-white group-hover:opacity-50">
               SEND
             </p>
