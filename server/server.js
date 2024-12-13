@@ -10,6 +10,19 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
+app.get("/comments", async (req, res) => {
+  try {
+    const { default: Database } = await import("better-sqlite3"); // Destructure the default export from dynamic import
+    const db = new Database("prod.db"); // Now you can use Database as a constructor
+
+    const rows = db.prepare("SELECT * FROM comments").all();
+    res.json(rows);
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: "Failed to fetch comments" });
+  }
+});
+
 app.post("/shorten-url", async (req, res) => {
   const { url } = req.body;
 
