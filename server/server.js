@@ -80,6 +80,56 @@ app.get("/replies/:commentId", (req, res) => {
     res.status(500).json({ error: "Failed to fetch replies" });
   }
 });
+
+app.post("/comments", (req, res) => {
+  try {
+    const { content, username, replying_to } = req.body;
+
+    if (!content || !username) {
+      return res
+        .status(400)
+        .json({ error: "Content and username are required" });
+    }
+
+    const result = db
+      .prepare(
+        `
+        INSERT INTO comments (content, created_at, score, username, replying_to)
+        VALUES (?, datetime('now', '+8 hours'), 0, ?, ?);
+      `,
+      )
+      .run(content, username, replying_to || null);
+
+    // Retrieve the full comment including user details
+    const newComment = db
+      .prepare(
+        `
+        SELECT 
+            c.id, 
+            c.content, 
+            c.created_at, 
+            c.score, 
+            c.username, 
+            u.image_png, 
+            u.image_webp, 
+            c.replying_to
+        FROM 
+            comments c
+        JOIN 
+            users u ON u.username = c.username
+        WHERE 
+            c.id = ?;
+      `,
+      )
+      .get(result.lastInsertRowid);
+
+    res.status(201).json(newComment);
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: "Failed to add comment" });
+  }
+});
+
 app.post("/shorten-url", async (req, res) => {
   const { url } = req.body;
 

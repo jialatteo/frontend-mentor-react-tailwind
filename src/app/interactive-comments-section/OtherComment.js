@@ -46,6 +46,35 @@ export default function OtherComment({ currentUsername, comment }) {
       .then((data) => setReplies(data));
   }, []);
 
+  const postReply = (replying_to, content, username) => {
+    const payload = {
+      content,
+      username,
+      replying_to,
+    };
+
+    fetch(`http://localhost:5000/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to post reply");
+        }
+
+        return response.json();
+      })
+      .then((responseJson) => {
+        setReplies((prevReplies) => [...prevReplies, responseJson]);
+      })
+      .catch((error) => {
+        console.error("Error posting reply:", error);
+      });
+  };
+
   return (
     <div className="w-full max-w-[1600px]">
       <div className="rounded-lg bg-white p-4">
@@ -153,6 +182,7 @@ export default function OtherComment({ currentUsername, comment }) {
             </button>
             <button
               onClick={() => {
+                postReply(comment.id, replyContent, currentUsername);
                 setIsReplying(false);
               }}
               className="rounded-md bg-interactive-comments-section-moderate-blue px-4 py-3 hover:opacity-50"
