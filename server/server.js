@@ -10,12 +10,35 @@ const port = 5000;
 app.use(cors());
 app.use(express.json());
 
-app.get("/comments", async (req, res) => {
+app.get("/top-level-comments", async (req, res) => {
   try {
-    const { default: Database } = await import("better-sqlite3"); // Destructure the default export from dynamic import
-    const db = new Database("prod.db"); // Now you can use Database as a constructor
+    const { default: Database } = await import("better-sqlite3");
+    const db = new Database("prod.db");
 
-    const rows = db.prepare("SELECT * FROM comments").all();
+    const rows = db
+      .prepare(
+        ` 
+  SELECT 
+      c.id, 
+      c.content, 
+      c.created_at, 
+      c.score, 
+      c.username, 
+      u.image_png, 
+      u.image_webp, 
+      c.replying_to, 
+      r.username AS replying_to_username
+  FROM 
+      comments c
+  JOIN 
+      users u ON u.username = c.username
+  LEFT JOIN 
+      comments r ON r.id = c.replying_to
+  WHERE 
+      c.replying_to IS NULL;
+`,
+      )
+      .all();
     res.json(rows);
   } catch (error) {
     console.error("Database error:", error);

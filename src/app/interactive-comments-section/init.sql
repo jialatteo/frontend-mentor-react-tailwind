@@ -12,7 +12,9 @@ CREATE TABLE comments (
     created_at TEXT NOT NULL,
     score INTEGER NOT NULL,
     username TEXT NOT NULL,
-    replying_to INTEGER
+    replying_to INTEGER,
+    FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE,
+    FOREIGN KEY (replying_to) REFERENCES comments(id) ON DELETE CASCADE
 );
 
 -- Insert user data

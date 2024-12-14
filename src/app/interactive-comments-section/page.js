@@ -43,7 +43,7 @@ export default function InteractiveCommentsSection() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/comments")
+    fetch("http://localhost:5000/top-level-comments")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
