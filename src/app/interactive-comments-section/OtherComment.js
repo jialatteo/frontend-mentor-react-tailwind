@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SelfComment from "./SelfComment";
 
 export default function OtherComment({ currentUsername, comment }) {
   const [isReplying, setIsReplying] = useState(false);
   const [replyContent, setReplyContent] = useState("");
+  const [replies, setReplies] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/replies/${comment.id}`)
+      .then((response) => response.json())
+      .then((data) => setReplies(data));
+  }, []);
 
   return (
     <div className="w-full max-w-[1600px]">
@@ -123,11 +130,11 @@ export default function OtherComment({ currentUsername, comment }) {
           </div>
         </div>
       )}
-      {comment?.replies?.length > 0 && (
+      {replies?.length > 0 && (
         <div className="mt-3 flex max-w-[1600px]">
           <div className="mr-4 w-1 self-stretch bg-interactive-comments-section-light-gray" />
           <div className="flex flex-1 flex-col gap-3">
-            {comment?.replies?.map((reply) =>
+            {replies?.map((reply) =>
               currentUsername === reply?.username ? (
                 <SelfComment
                   currentUsername={currentUsername}

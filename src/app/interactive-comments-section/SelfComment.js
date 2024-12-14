@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OtherComment from "./OtherComment";
 
 export default function SelfComment({ currentUsername, comment }) {
   const [isDeleteModalOpen, setIsDeletModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedContent, setUpdatedContent] = useState(comment?.content);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/replies/${comment.id}`)
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []);
 
   return (
     <div className="w-full max-w-[1600px]">
@@ -180,7 +187,7 @@ export default function SelfComment({ currentUsername, comment }) {
           </div>
         </div>
       </div>
-      {/* {comment?.replies?.length > 0 && (
+      {comment?.replies?.length > 0 && (
         <div className="mt-3 flex max-w-[1600px]">
           <div className="mr-4 w-1 self-stretch bg-interactive-comments-section-light-gray" />
           <div className="flex flex-1 flex-col items-center gap-3">
@@ -199,7 +206,7 @@ export default function SelfComment({ currentUsername, comment }) {
             )}
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 }

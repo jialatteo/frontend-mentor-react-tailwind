@@ -40,21 +40,19 @@ const getTimeAgoString = (timeCreatedISOString) => {
 export default function InteractiveCommentsSection() {
   // const currentUsername = data?.currentUser.username;
   const currentUsername = "juliusomo";
-  const [data, setData] = useState([]);
+  const [topLevelComments, setTopLevelComments] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5000/top-level-comments")
       .then((response) => response.json())
-      .then((data) => setData(data));
+      .then((data) => setTopLevelComments(data));
   }, []);
-
-  console.log("data", data);
 
   return (
     <div
       className={`flex min-h-screen flex-col items-center gap-3 bg-interactive-comments-section-very-light-gray px-4 py-8 ${rubik.className}`}
     >
-      {data?.map((comment) =>
+      {topLevelComments?.map((comment) =>
         currentUsername === comment?.username ? (
           <SelfComment currentUsername={currentUsername} comment={comment} />
         ) : (
@@ -70,7 +68,7 @@ export default function InteractiveCommentsSection() {
         <div className="flex items-center justify-between">
           <img
             className="w-10"
-            src={data?.currentUser?.image?.png}
+            src={topLevelComments?.currentUser?.image?.png}
             alt="current-user-image"
           />
           <button className="rounded-md bg-interactive-comments-section-moderate-blue px-8 py-3 hover:opacity-50">

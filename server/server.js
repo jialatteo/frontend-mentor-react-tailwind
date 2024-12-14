@@ -5,16 +5,15 @@ import cors from "cors"; // Import cors
 
 const app = express();
 const port = 5000;
+const { default: Database } = await import("better-sqlite3");
+const db = new Database("prod.db");
 
 // Middleware to parse JSON bodies
 app.use(cors());
 app.use(express.json());
 
-app.get("/top-level-comments", async (req, res) => {
+app.get("/top-level-comments", (req, res) => {
   try {
-    const { default: Database } = await import("better-sqlite3");
-    const db = new Database("prod.db");
-
     const rows = db
       .prepare(
         ` 
@@ -46,6 +45,41 @@ app.get("/top-level-comments", async (req, res) => {
   }
 });
 
+app.get("/replies/:commentId", (req, res) => {
+  try {
+    const commentId = req.params.commentId;
+
+    const rows = db
+      .prepare(
+        ` 
+        SELECT 
+            c.id, 
+            c.content, 
+            c.created_at, 
+            c.score, 
+            c.username, 
+            u.image_png, 
+            u.image_webp, 
+            c.replying_to, 
+            r.username AS replying_to_username
+        FROM 
+            comments c
+        JOIN 
+            users u ON u.username = c.username
+        LEFT JOIN 
+            comments r ON r.id = c.replying_to
+        WHERE 
+            c.replying_to = ?;
+      `,
+      )
+      .all(commentId);
+
+    res.json(rows);
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: "Failed to fetch replies" });
+  }
+});
 app.post("/shorten-url", async (req, res) => {
   const { url } = req.body;
 
