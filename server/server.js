@@ -133,7 +133,6 @@ app.post("/comments", (req, res) => {
 app.delete("/comments/:commentId", (req, res) => {
   try {
     const { commentId } = req.params;
-    console.log("commentId", commentId);
 
     const comment = db
       .prepare(`SELECT * FROM comments WHERE id = ?`)
