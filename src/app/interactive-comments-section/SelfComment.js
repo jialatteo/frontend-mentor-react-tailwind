@@ -291,24 +291,24 @@ export default function SelfComment({
           </div>
         </div>
       </div>
-      {comment?.replies?.length > 0 && (
+      {replies?.length > 0 && (
         <div className="mt-3 flex max-w-[1600px]">
           <div className="mr-4 w-1 self-stretch bg-interactive-comments-section-light-gray" />
           <div className="flex flex-1 flex-col items-center gap-3">
-            {comment?.replies?.map((comment) =>
-              currentUsername === comment?.user?.username ? (
+            {replies?.map((reply) =>
+              currentUsername === reply?.username ? (
                 <SelfComment
                   deleteCommentId={deleteReplyId}
                   editCommentId={editReplyId}
                   currentUsername={currentUsername}
-                  comment={comment}
+                  comment={reply}
                 />
               ) : (
                 <OtherComment
                   deleteCommentId={deleteReplyId}
                   editCommentId={editReplyId}
                   currentUsername={currentUsername}
-                  comment={comment}
+                  comment={reply}
                 />
               ),
             )}

@@ -9,7 +9,27 @@ const rubik = Rubik({
 });
 
 export default function InteractiveCommentsSection() {
-  const currentUsername = "juliusomo";
+  const users = [
+    {
+      username: "juliusomo",
+      image: "interactive-comments-section/avatars/image-juliusomo.png",
+    },
+    {
+      username: "amyrobson",
+      image: "interactive-comments-section/avatars/image-amyrobson.png",
+    },
+    {
+      username: "maxblagun",
+      image: "interactive-comments-section/avatars/image-maxblagun.png",
+    },
+    {
+      username: "ramsesmiron",
+      image: "interactive-comments-section/avatars/image-ramsesmiron.png",
+    },
+  ];
+
+  const [currentUsername, setCurrentUsername] = useState(users[0].username);
+  const [currentUserImage, setCurrentUserImage] = useState(users[0].image);
   const [topLevelComments, setTopLevelComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
 
@@ -60,6 +80,34 @@ export default function InteractiveCommentsSection() {
       });
   };
 
+  const resetDatabase = () => {
+    fetch("http://localhost:5000/comments/reset", {
+      method: "POST",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to post reply");
+        }
+        return response.json();
+      })
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error resetting datatbase:", error);
+      });
+  };
+
+  const handleUserChange = (e) => {
+    const selectedUsername = e.target.value;
+    setCurrentUsername(selectedUsername);
+
+    const selectedUser = users.find(
+      (user) => user.username === selectedUsername,
+    );
+    setCurrentUserImage(selectedUser.image);
+  };
+
   useEffect(() => {
     fetch("http://localhost:5000/top-level-comments")
       .then((response) => response.json())
@@ -70,6 +118,27 @@ export default function InteractiveCommentsSection() {
     <div
       className={`flex min-h-screen flex-col items-center gap-3 bg-interactive-comments-section-very-light-gray px-4 py-8 ${rubik.className}`}
     >
+      <button
+        className="rounded-lg bg-interactive-comments-section-moderate-blue p-4 text-white hover:opacity-50"
+        onClick={() => resetDatabase()}
+      >
+        Reset to initial database
+      </button>
+      <div className="flex items-center gap-2">
+        <p>Logged in as:</p>
+        <select
+          value={currentUsername}
+          onChange={handleUserChange}
+          className="rounded-md border p-2"
+        >
+          {users.map((user) => (
+            <option key={user.username} value={user.username}>
+              {user.username}
+            </option>
+          ))}
+        </select>
+      </div>
+
       {topLevelComments?.map((comment) =>
         currentUsername === comment?.username ? (
           <SelfComment
@@ -98,7 +167,7 @@ export default function InteractiveCommentsSection() {
         <div className="flex items-center justify-between">
           <img
             className="w-10"
-            src="interactive-comments-section/avatars/image-juliusomo.png"
+            src={currentUserImage}
             alt="current-user-image"
           />
           <button
