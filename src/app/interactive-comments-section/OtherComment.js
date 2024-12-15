@@ -35,10 +35,18 @@ const getTimeAgoString = (timeCreatedISOString) => {
   return timeDifference;
 };
 
-export default function OtherComment({ currentUsername, comment }) {
+export default function OtherComment({
+  currentUsername,
+  deleteCommentId,
+  comment,
+}) {
   const [isReplying, setIsReplying] = useState(false);
   const [replyContent, setReplyContent] = useState("");
   const [replies, setReplies] = useState([]);
+
+  const deleteReplyId = (replyId) => {
+    setReplies(replies.filter((reply) => reply.id !== replyId));
+  };
 
   useEffect(() => {
     fetch(`http://localhost:5000/replies/${comment.id}`)
@@ -201,11 +209,13 @@ export default function OtherComment({ currentUsername, comment }) {
             {replies?.map((reply) =>
               currentUsername === reply?.username ? (
                 <SelfComment
+                  deleteCommentId={deleteReplyId}
                   currentUsername={currentUsername}
                   comment={reply}
                 />
               ) : (
                 <OtherComment
+                  deleteCommentId={deleteReplyId}
                   currentUsername={currentUsername}
                   comment={reply}
                 />

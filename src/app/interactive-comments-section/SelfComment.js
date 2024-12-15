@@ -35,17 +35,47 @@ const getTimeAgoString = (timeCreatedISOString) => {
   return timeDifference;
 };
 
-export default function SelfComment({ currentUsername, comment }) {
-  const [isDeleteModalOpen, setIsDeletModalOpen] = useState(false);
+export default function SelfComment({
+  deleteCommentId,
+  currentUsername,
+  comment,
+}) {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedContent, setUpdatedContent] = useState(comment?.content);
-  const [data, setData] = useState([]);
+  const [replies, setReplies] = useState([]);
+
+  const deleteReplyId = (replyId) => {
+    setReplies(replies.filter((reply) => reply.id !== replyId));
+  };
 
   useEffect(() => {
     fetch(`http://localhost:5000/replies/${comment.id}`)
       .then((response) => response.json())
-      .then((data) => setData(data));
+      .then((data) => setReplies(data));
   }, []);
+
+  const deleteComment = (commentId) => {
+    fetch(`http://localhost:5000/comments/${commentId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+            throw new Error(errorData.error);
+          });
+        }
+        return response.json();
+      })
+      .then(() => deleteCommentId(commentId))
+      .catch((error) => {
+        console.error("Failed to delete comment:", error);
+        alert("Error deleting comment: " + error.message);
+      });
+  };
 
   return (
     <div className="w-full max-w-[1600px]">
@@ -88,7 +118,7 @@ export default function SelfComment({ currentUsername, comment }) {
               {!isEditing && (
                 <div className="hidden items-center gap-6 sm:flex">
                   <button
-                    onClick={() => setIsDeletModalOpen(true)}
+                    onClick={() => setIsDeleteModalOpen(true)}
                     className="group flex items-center gap-[6px]"
                   >
                     {/* prettier-ignore */}
@@ -168,7 +198,7 @@ export default function SelfComment({ currentUsername, comment }) {
               ) : (
                 <div className="flex items-center gap-6 sm:hidden">
                   <button
-                    onClick={() => setIsDeletModalOpen(true)}
+                    onClick={() => setIsDeleteModalOpen(true)}
                     className="group flex items-center gap-[6px]"
                   >
                     {/* prettier-ignore */}
@@ -193,7 +223,7 @@ export default function SelfComment({ currentUsername, comment }) {
             {isDeleteModalOpen && (
               <div className="fixed inset-0">
                 <div
-                  onClick={() => setIsDeletModalOpen(false)}
+                  onClick={() => setIsDeleteModalOpen(false)}
                   className="fixed inset-0 bg-black opacity-50"
                 ></div>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-4">
@@ -206,12 +236,18 @@ export default function SelfComment({ currentUsername, comment }) {
                   </p>
                   <div className="flex justify-center gap-3 text-white">
                     <button
-                      onClick={() => setIsDeletModalOpen(false)}
+                      onClick={() => setIsDeleteModalOpen(false)}
                       className="rounded-md bg-interactive-comments-section-grayish-blue px-4 py-2 hover:opacity-50"
                     >
                       <p>NO, CANCEL</p>
                     </button>
-                    <button className="rounded-md bg-interactive-comments-section-soft-red px-4 py-2 hover:opacity-50">
+                    <button
+                      onClick={() => {
+                        deleteComment(comment.id);
+                        setIsDeleteModalOpen(false);
+                      }}
+                      className="rounded-md bg-interactive-comments-section-soft-red px-4 py-2 hover:opacity-50"
+                    >
                       <p>YES, DELETE</p>
                     </button>
                   </div>
@@ -228,11 +264,13 @@ export default function SelfComment({ currentUsername, comment }) {
             {comment?.replies?.map((comment) =>
               currentUsername === comment?.user?.username ? (
                 <SelfComment
+                  deleteCommentId={deleteReplyId}
                   currentUsername={currentUsername}
                   comment={comment}
                 />
               ) : (
                 <OtherComment
+                  deleteCommentId={deleteReplyId}
                   currentUsername={currentUsername}
                   comment={comment}
                 />

@@ -13,6 +13,11 @@ export default function InteractiveCommentsSection() {
   const [topLevelComments, setTopLevelComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
 
+  const deleteCommentId = (commentId) =>
+    setTopLevelComments(
+      topLevelComments.filter((comment) => comment.id !== commentId),
+    );
+
   const postComment = (content, username) => {
     const payload = {
       content,
@@ -56,9 +61,17 @@ export default function InteractiveCommentsSection() {
     >
       {topLevelComments?.map((comment) =>
         currentUsername === comment?.username ? (
-          <SelfComment currentUsername={currentUsername} comment={comment} />
+          <SelfComment
+            deleteCommentId={deleteCommentId}
+            currentUsername={currentUsername}
+            comment={comment}
+          />
         ) : (
-          <OtherComment currentUsername={currentUsername} comment={comment} />
+          <OtherComment
+            deleteCommentId={deleteCommentId}
+            currentUsername={currentUsername}
+            comment={comment}
+          />
         ),
       )}
       <div className="w-full max-w-[1600px] rounded-lg bg-white p-4">
