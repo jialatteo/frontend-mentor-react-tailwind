@@ -151,6 +151,31 @@ app.delete("/comments/:commentId", (req, res) => {
   }
 });
 
+app.put("/comments/:commentId", (req, res) => {
+  try {
+    const { commentId } = req.params;
+    const { content } = req.body;
+
+    const comment = db
+      .prepare(`SELECT * FROM comments WHERE id = ?`)
+      .get(commentId);
+
+    if (!comment) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+
+    db.prepare(`UPDATE comments SET content = ? WHERE id = ?`).run(
+      content,
+      commentId,
+    );
+
+    res.status(200).json({ message: "Comment updated successfully" });
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: "Failed to delete comment" });
+  }
+});
+
 app.post("/shorten-url", async (req, res) => {
   const { url } = req.body;
 

@@ -18,6 +18,17 @@ export default function InteractiveCommentsSection() {
       topLevelComments.filter((comment) => comment.id !== commentId),
     );
 
+  const editCommentId = (commentId, updatedContent) =>
+    setTopLevelComments((prevTopLevelComments) =>
+      prevTopLevelComments.map((comment) => {
+        if (comment.id !== commentId) {
+          return comment;
+        }
+
+        return { ...comment, content: updatedContent };
+      }),
+    );
+
   const postComment = (content, username) => {
     const payload = {
       content,
@@ -63,12 +74,14 @@ export default function InteractiveCommentsSection() {
         currentUsername === comment?.username ? (
           <SelfComment
             deleteCommentId={deleteCommentId}
+            editCommentId={editCommentId}
             currentUsername={currentUsername}
             comment={comment}
           />
         ) : (
           <OtherComment
             deleteCommentId={deleteCommentId}
+            editCommentId={editCommentId}
             currentUsername={currentUsername}
             comment={comment}
           />

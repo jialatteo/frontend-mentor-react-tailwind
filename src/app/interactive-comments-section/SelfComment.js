@@ -39,6 +39,7 @@ export default function SelfComment({
   deleteCommentId,
   currentUsername,
   comment,
+  editCommentId,
 }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -48,6 +49,17 @@ export default function SelfComment({
   const deleteReplyId = (replyId) => {
     setReplies(replies.filter((reply) => reply.id !== replyId));
   };
+
+  const editReplyId = (commentId, updatedContent) =>
+    setReplies((prevReplies) =>
+      prevReplies.map((comment) => {
+        if (comment.id !== commentId) {
+          return comment;
+        }
+
+        return { ...comment, content: updatedContent };
+      }),
+    );
 
   useEffect(() => {
     fetch(`http://localhost:5000/replies/${comment.id}`)
@@ -74,6 +86,26 @@ export default function SelfComment({
       .catch((error) => {
         console.error("Failed to delete comment:", error);
         alert("Error deleting comment: " + error.message);
+      });
+  };
+
+  const updateComment = (commentId) => {
+    fetch(`http://localhost:5000/comments/${commentId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ content: updatedContent }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+            throw new Error(errorData.error);
+          });
+        }
+      })
+      .catch((error) => {
+        console.error;
       });
   };
 
@@ -186,6 +218,8 @@ export default function SelfComment({
                   </button>
                   <button
                     onClick={() => {
+                      updateComment(comment?.id);
+                      editCommentId(comment?.id, updatedContent);
                       setIsEditing(false);
                     }}
                     className="rounded-md bg-interactive-comments-section-moderate-blue px-4 py-3 hover:opacity-50"
@@ -265,12 +299,14 @@ export default function SelfComment({
               currentUsername === comment?.user?.username ? (
                 <SelfComment
                   deleteCommentId={deleteReplyId}
+                  editCommentId={editReplyId}
                   currentUsername={currentUsername}
                   comment={comment}
                 />
               ) : (
                 <OtherComment
                   deleteCommentId={deleteReplyId}
+                  editCommentId={editReplyId}
                   currentUsername={currentUsername}
                   comment={comment}
                 />

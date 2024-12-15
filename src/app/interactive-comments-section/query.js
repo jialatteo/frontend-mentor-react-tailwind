@@ -35,8 +35,5 @@ const getTimeAgoString = (timeCreatedISOString) => {
   return timeDifference;
 };
 
-// console.log("timeAgoString", getTimeAgoString(timeCreated));
-console.log("rows", rows);
-
 // Close the database connection
 db.close();
