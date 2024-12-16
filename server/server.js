@@ -17,22 +17,35 @@ app.get("/top-level-comments", (req, res) => {
     const rows = db
       .prepare(
         ` 
-  SELECT 
-      c.id, 
-      c.content, 
-      c.created_at, 
-      c.score, 
-      c.username, 
-      u.image_png, 
-      u.image_webp, 
-      c.replying_to, 
+  WITH comment_scores AS (
+      SELECT
+          comments.id AS comment_id,
+          COALESCE(SUM(votes.vote_value), 0) AS score
+      FROM
+          comments
+      LEFT JOIN
+          votes ON comments.id = votes.comment_id
+      GROUP BY
+          comments.id
+  )
+  SELECT
+      c.id,
+      c.content,
+      c.created_at,
+      cs.score, -- Calculated score
+      c.username,
+      u.image_png,
+      u.image_webp,
+      c.replying_to,
       r.username AS replying_to_username
-  FROM 
+  FROM
       comments c
-  JOIN 
+  JOIN
       users u ON u.username = c.username
-  LEFT JOIN 
+  LEFT JOIN
       comments r ON r.id = c.replying_to
+  LEFT JOIN
+      comment_scores cs ON c.id = cs.comment_id
   WHERE 
       c.replying_to IS NULL;
 `,
@@ -52,24 +65,37 @@ app.get("/replies/:commentId", (req, res) => {
     const rows = db
       .prepare(
         ` 
-        SELECT 
-            c.id, 
-            c.content, 
-            c.created_at, 
-            c.score, 
-            c.username, 
-            u.image_png, 
-            u.image_webp, 
-            c.replying_to, 
-            r.username AS replying_to_username
-        FROM 
-            comments c
-        JOIN 
-            users u ON u.username = c.username
-        LEFT JOIN 
-            comments r ON r.id = c.replying_to
-        WHERE 
-            c.replying_to = ?;
+  WITH comment_scores AS (
+      SELECT
+          comments.id AS comment_id,
+          COALESCE(SUM(votes.vote_value), 0) AS score
+      FROM
+          comments
+      LEFT JOIN
+          votes ON comments.id = votes.comment_id
+      GROUP BY
+          comments.id
+  )
+  SELECT
+      c.id,
+      c.content,
+      c.created_at,
+      cs.score, -- Calculated score
+      c.username,
+      u.image_png,
+      u.image_webp,
+      c.replying_to,
+      r.username AS replying_to_username
+  FROM
+      comments c
+  JOIN
+      users u ON u.username = c.username
+  LEFT JOIN
+      comments r ON r.id = c.replying_to
+  LEFT JOIN
+      comment_scores cs ON c.id = cs.comment_id
+  WHERE 
+      c.replying_to = ?;
       `,
       )
       .all(commentId);
@@ -94,8 +120,8 @@ app.post("/comments", (req, res) => {
     const result = db
       .prepare(
         `
-        INSERT INTO comments (content, created_at, score, username, replying_to)
-        VALUES (?, datetime('now', '+8 hours'), 0, ?, ?);
+        INSERT INTO comments (content, created_at, username, replying_to)
+        VALUES (?, datetime('now', '+8 hours'), ?, ?);
       `,
       )
       .run(content, username, replying_to || null);
@@ -104,21 +130,24 @@ app.post("/comments", (req, res) => {
     const newComment = db
       .prepare(
         `
-        SELECT 
-            c.id, 
-            c.content, 
-            c.created_at, 
-            c.score, 
-            c.username, 
-            u.image_png, 
-            u.image_webp, 
-            c.replying_to
-        FROM 
-            comments c
-        JOIN 
-            users u ON u.username = c.username
-        WHERE 
-            c.id = ?;
+      SELECT
+          c.id,
+          c.content,
+          c.created_at,
+          0 as score,
+          c.username,
+          u.image_png,
+          u.image_webp,
+          c.replying_to,
+          r.username AS replying_to_username
+      FROM
+          comments c
+      JOIN
+          users u ON u.username = c.username
+      LEFT JOIN
+          comments r ON r.id = c.replying_to
+      WHERE 
+          c.id = ?;
       `,
       )
       .get(result.lastInsertRowid);
@@ -181,11 +210,21 @@ app.post("/comments/reset", (req, res) => {
     db.exec(`
   BEGIN TRANSACTION;
   DELETE FROM comments;
-  INSERT INTO comments (id, content, created_at, score, username, replying_to) VALUES
-      (1, 'Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You''ve nailed the design and the responsiveness at various breakpoints works really well.', '2023-11-20 10:00:00', 12, 'amyrobson', NULL),
-      (2, 'Woah, your project looks awesome! How long have you been coding for? I''m still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!', '2023-12-01 14:30:00', 5, 'maxblagun', NULL),
-      (3, 'If you''re still new, I''d recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It''s very tempting to jump ahead but lay a solid foundation first.', '2023-12-05 09:15:00', 4, 'ramsesmiron', 2),
-      (4, 'I couldn''t agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.', '2023-12-10 17:45:00', 2, 'juliusomo', 3);
+  DELETE FROM votes;
+  INSERT INTO comments (id, content, created_at, username, replying_to) VALUES
+      (1, 'Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You''ve nailed the design and the responsiveness at various breakpoints works really well.', '2023-11-20 10:00:00', 'amyrobson', NULL),
+      (2, 'Woah, your project looks awesome! How long have you been coding for? I''m still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can learn React? Thanks!', '2023-12-01 14:30:00', 'maxblagun', NULL),
+      (3, 'If you''re still new, I''d recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It''s very tempting to jump ahead but lay a solid foundation first.', '2023-12-05 09:15:00', 'ramsesmiron', 2),
+      (4, 'I couldn''t agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework. But the fundamentals are what stay constant.', '2023-12-10 17:45:00', 'juliusomo', 3);
+
+  INSERT INTO votes (username, comment_id, vote_value) VALUES
+      ('amyrobson', 2, 1),
+      ('amyrobson', 4, -1),
+      ('maxblagun', 3, 1),
+      ('ramsesmiron', 4, 1),
+      ('juliusomo', 3, 1),
+      ('juliusomo', 2, -1);
+
   COMMIT;
 `);
 
