@@ -38,14 +38,18 @@ export default function InteractiveCommentsSection() {
       topLevelComments.filter((comment) => comment.id !== commentId),
     );
 
-  const editCommentId = (commentId, updatedContent) =>
+  const editCommentId = (commentId, scoreChange, updatedContent) =>
     setTopLevelComments((prevTopLevelComments) =>
       prevTopLevelComments.map((comment) => {
         if (comment.id !== commentId) {
           return comment;
         }
 
-        return { ...comment, content: updatedContent };
+        return {
+          ...comment,
+          score: comment.score + scoreChange,
+          content: updatedContent,
+        };
       }),
     );
 

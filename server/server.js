@@ -183,7 +183,10 @@ app.delete("/comments/:commentId", (req, res) => {
 app.put("/comments/:commentId", (req, res) => {
   try {
     const { commentId } = req.params;
-    const { content } = req.body;
+    const { content, username, voteValue } = req.body;
+    console.log("commentId", commentId);
+    console.log("voteValue", voteValue);
+    console.log("username", username);
 
     const comment = db
       .prepare(`SELECT * FROM comments WHERE id = ?`)
@@ -197,6 +200,28 @@ app.put("/comments/:commentId", (req, res) => {
       content,
       commentId,
     );
+
+    const hasExistingVote = db
+      .prepare(
+        `
+    SELECT 1 FROM votes 
+    WHERE username = ? AND comment_id = ?
+  `,
+      )
+      .get(username, commentId);
+
+    if (hasExistingVote) {
+      db.prepare(
+        `UPDATE votes SET vote_value = ? WHERE comment_id = ? AND username = ?`,
+      ).run(voteValue, commentId, username);
+    } else {
+      db.prepare(
+        `
+      INSERT INTO votes (username, comment_id, vote_value)
+      VALUES (?, ?, ?)
+      `,
+      ).run(username, commentId, voteValue);
+    }
 
     res.status(200).json({ message: "Comment updated successfully" });
   } catch (error) {

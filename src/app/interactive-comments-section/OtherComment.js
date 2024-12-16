@@ -35,23 +35,32 @@ const getTimeAgoString = (timeCreatedISOString) => {
   return timeDifference;
 };
 
-export default function OtherComment({ currentUsername, comment }) {
+export default function OtherComment({
+  currentUsername,
+  comment,
+  editCommentId,
+}) {
   const [isReplying, setIsReplying] = useState(false);
   const [replyContent, setReplyContent] = useState("");
   const [replies, setReplies] = useState([]);
+  const [score, setScore] = useState(comment?.score);
 
   const deleteReplyId = (replyId) => {
     setReplies(replies.filter((reply) => reply.id !== replyId));
   };
 
-  const editReplyId = (commentId, updatedContent) =>
+  const editReplyId = (commentId, scoreChange, updatedContent) =>
     setReplies((prevReplies) =>
       prevReplies.map((comment) => {
         if (comment.id !== commentId) {
           return comment;
         }
 
-        return { ...comment, content: updatedContent };
+        return {
+          ...comment,
+          score: comment.score + scoreChange,
+          content: updatedContent,
+        };
       }),
     );
 
@@ -87,6 +96,30 @@ export default function OtherComment({ currentUsername, comment }) {
       })
       .catch((error) => {
         console.error("Error posting reply:", error);
+      });
+  };
+
+  const updateComment = (commentId, voteValue) => {
+    fetch(`http://localhost:5000/comments/${commentId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content: comment.content,
+        username: currentUsername,
+        voteValue,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+            throw new Error(errorData.error);
+          });
+        }
+      })
+      .catch((error) => {
+        console.error;
       });
   };
 
@@ -224,6 +257,7 @@ export default function OtherComment({ currentUsername, comment }) {
               ) : (
                 <OtherComment
                   currentUsername={currentUsername}
+                  editCommentId={editReplyId}
                   comment={reply}
                 />
               ),
