@@ -137,7 +137,7 @@ export default function EcommerceProductPage() {
                           <p>Fall Limited Edition Sneakers</p>
                           <p>
                             ${SNEAKER_PRICE.toFixed(2)} x {cartCount}{" "}
-                            <span className="text-ecommerce-product-page-very-dark-blue font-bold">
+                            <span className="font-bold text-ecommerce-product-page-very-dark-blue">
                               ${(cartCount * SNEAKER_PRICE).toFixed(2)}
                             </span>
                           </p>
@@ -173,6 +173,7 @@ export default function EcommerceProductPage() {
       </div>
       <div className="my-2 mb-16 hidden h-[1px] w-full bg-ecommerce-product-page-light-grayish-blue sm:block" />
       <div className="sm:flex sm:gap-6 sm:pb-32 md:gap-14">
+        <ImageCarouselWithPreview />
         <ImageCarouselWithPreview />
         <div className="p-4 pb-14">
           <p className="mb-2 text-xs font-bold tracking-widest text-ecommerce-product-page-dark-grayish-blue sm:mb-4">
