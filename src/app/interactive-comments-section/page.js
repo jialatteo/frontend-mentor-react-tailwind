@@ -72,7 +72,6 @@ export default function InteractiveCommentsSection() {
       body: JSON.stringify({
         content: updatedContent,
         username: currentUsername,
-        voteValue,
       }),
     })
       .then((response) => {
@@ -184,17 +183,12 @@ export default function InteractiveCommentsSection() {
         currentUsername === comment?.username ? (
           <SelfComment
             deleteComment={deleteComment}
-            editCommentId={editCommentContent}
+            editCommentContent={editCommentContent}
             currentUsername={currentUsername}
             comment={comment}
           />
         ) : (
-          <OtherComment
-            deleteComment={deleteComment}
-            editCommentId={editCommentContent}
-            currentUsername={currentUsername}
-            comment={comment}
-          />
+          <OtherComment currentUsername={currentUsername} comment={comment} />
         ),
       )}
       <div className="w-full max-w-[1600px] rounded-lg bg-white p-4">

@@ -2,18 +2,14 @@ import { useEffect, useState } from "react";
 import SelfComment from "./SelfComment";
 import { getTimeAgoString } from "./helper";
 
-export default function OtherComment({
-  currentUsername,
-  comment,
-  editCommentId,
-}) {
+export default function OtherComment({ currentUsername, comment }) {
   const [isReplying, setIsReplying] = useState(false);
   const [replyContent, setReplyContent] = useState("");
   const [replies, setReplies] = useState([]);
-  const [score, setScore] = useState(comment?.score);
+  console.log("rendering", comment?.username);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/replies/${comment.id}`)
+    fetch(`http://localhost:5000/replies/${comment?.id}`)
       .then((response) => response.json())
       .then((data) => setReplies(data));
   }, []);
@@ -40,20 +36,40 @@ export default function OtherComment({
       });
   };
 
-  const editReplyId = (commentId, scoreChange, updatedContent) =>
-    setReplies((prevReplies) =>
-      prevReplies.map((comment) => {
-        if (comment.id !== commentId) {
-          return comment;
-        }
-
-        return {
-          ...comment,
-          score: comment.score + scoreChange,
-          content: updatedContent,
-        };
+  const editReplyContent = (commentId, updatedContent) => {
+    fetch(`http://localhost:5000/comments/${commentId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content: updatedContent,
       }),
-    );
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+            throw new Error(errorData.error);
+          });
+        }
+        console.log("i am setting", commentId);
+        console.log("replies before", replies);
+        setReplies((prevReplies) =>
+          prevReplies.map((comment) =>
+            comment?.id === commentId
+              ? {
+                  ...comment,
+                  content: updatedContent,
+                }
+              : comment,
+          ),
+        );
+        console.log("replies after", replies);
+      })
+      .catch((error) => {
+        console.error;
+      });
+  };
 
   const postReply = (replying_to, content, username) => {
     const payload = {
@@ -84,30 +100,6 @@ export default function OtherComment({
       });
   };
 
-  const updateComment = (commentId, voteValue) => {
-    fetch(`http://localhost:5000/comments/${commentId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        content: comment.content,
-        username: currentUsername,
-        voteValue,
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((errorData) => {
-            throw new Error(errorData.error);
-          });
-        }
-      })
-      .catch((error) => {
-        console.error;
-      });
-  };
-
   return (
     <div className="w-full max-w-[1600px]">
       <div className="rounded-lg bg-white p-4">
@@ -119,7 +111,7 @@ export default function OtherComment({
                 <svg id="icon-plus" className="group-hover:fill-interactive-comments-section-moderate-blue fill-interactive-comments-section-light-grayish-blue" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z"/></svg>
               </button>
               <p className="font-medium text-interactive-comments-section-moderate-blue">
-                {comment.score}
+                {comment?.score}
               </p>
               <button className="group pb-3">
                 {/* prettier-ignore */}
@@ -132,14 +124,14 @@ export default function OtherComment({
               <div className="flex items-center gap-5">
                 <img
                   className="w-10"
-                  src={comment.image_png}
+                  src={comment?.image_png}
                   alt="user-image"
                 />
                 <div className="flex items-center gap-2">
-                  <p className="font-bold">{comment.username}</p>
+                  <p className="font-bold">{comment?.username}</p>
                 </div>
                 <p className="text-interactive-comments-section-grayish-blue">
-                  {getTimeAgoString(comment.created_at)}
+                  {getTimeAgoString(comment?.created_at)}
                 </p>
               </div>
               <button
@@ -157,12 +149,12 @@ export default function OtherComment({
               </button>
             </div>
             <p className="mb-4 text-interactive-comments-section-grayish-blue">
-              {comment.replying_to_username && (
+              {comment?.replying_to_username && (
                 <span className="mr-1 font-bold text-interactive-comments-section-moderate-blue">
-                  @{comment.replying_to_username}
+                  @{comment?.replying_to_username}
                 </span>
               )}
-              {comment.content}
+              {comment?.content}
             </p>
             <div className="flex items-center justify-between sm:hidden">
               <div className="flex items-center gap-3 rounded-md bg-interactive-comments-section-very-light-gray px-3 py-[6px]">
@@ -171,7 +163,7 @@ export default function OtherComment({
                   <svg id="icon-minus" className="group-hover:fill-interactive-comments-section-moderate-blue fill-interactive-comments-section-light-grayish-blue" width="11" height="3" xmlns="http://www.w3.org/2000/svg"><path d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"/></svg>
                 </button>
                 <p className="font-medium text-interactive-comments-section-moderate-blue">
-                  {comment.score}
+                  0
                 </p>
 
                 <button className="group py-1">
@@ -215,7 +207,7 @@ export default function OtherComment({
             </button>
             <button
               onClick={() => {
-                postReply(comment.id, replyContent, currentUsername);
+                postReply(comment?.id, replyContent, currentUsername);
                 setIsReplying(false);
               }}
               className="rounded-md bg-interactive-comments-section-moderate-blue px-4 py-3 hover:opacity-50"
@@ -235,14 +227,13 @@ export default function OtherComment({
               currentUsername === reply?.username ? (
                 <SelfComment
                   deleteComment={deleteReply}
-                  editCommentId={editReplyId}
+                  editCommentContent={editReplyContent}
                   currentUsername={currentUsername}
                   comment={reply}
                 />
               ) : (
                 <OtherComment
                   currentUsername={currentUsername}
-                  editCommentId={editReplyId}
                   comment={reply}
                 />
               ),

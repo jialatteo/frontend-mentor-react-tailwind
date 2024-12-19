@@ -6,34 +6,19 @@ export default function SelfComment({
   deleteComment,
   currentUsername,
   comment,
-  editCommentId,
+  editCommentContent,
 }) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [updatedContent, setUpdatedContent] = useState(comment?.content);
   const [replies, setReplies] = useState([]);
-  const [score, setScore] = useState(comment?.score);
+  console.log("rendering", comment.username);
 
   useEffect(() => {
     fetch(`http://localhost:5000/replies/${comment.id}`)
       .then((response) => response.json())
       .then((data) => setReplies(data));
   }, []);
-
-  const editReplyId = (commentId, scoreChange, updatedContent) =>
-    setReplies((prevReplies) =>
-      prevReplies.map((comment) => {
-        if (comment.id !== commentId) {
-          return comment;
-        }
-
-        return {
-          ...comment,
-          score: comment.score + scoreChange,
-          content: updatedContent,
-        };
-      }),
-    );
 
   const deleteReply = (commentId) => {
     fetch(`http://localhost:5000/comments/${commentId}`, {
@@ -57,7 +42,7 @@ export default function SelfComment({
       });
   };
 
-  const updateComment = (commentId, voteValue) => {
+  const editReplyContent = (commentId, updatedContent) => {
     fetch(`http://localhost:5000/comments/${commentId}`, {
       method: "PUT",
       headers: {
@@ -65,8 +50,6 @@ export default function SelfComment({
       },
       body: JSON.stringify({
         content: updatedContent,
-        username: currentUsername,
-        voteValue,
       }),
     })
       .then((response) => {
@@ -75,6 +58,16 @@ export default function SelfComment({
             throw new Error(errorData.error);
           });
         }
+        setReplies((prevReplies) =>
+          prevReplies.map((comment) =>
+            comment.id === commentId
+              ? {
+                  ...comment,
+                  content: updatedContent,
+                }
+              : comment,
+          ),
+        );
       })
       .catch((error) => {
         console.error;
@@ -89,9 +82,7 @@ export default function SelfComment({
             <div className="mr-4 flex min-w-12 flex-col items-center justify-center gap-4 rounded-md bg-interactive-comments-section-very-light-gray py-4 pb-2 pt-4">
               <button
                 onClick={() => {
-                  editCommentId(comment.id, 1, comment.content);
-                  updateComment(comment.id, 1);
-                  setScore(score + 1);
+                  // editCommentContent(comment.id, comment.content);
                 }}
                 className="group"
               >
@@ -99,13 +90,11 @@ export default function SelfComment({
                 <svg id="icon-plus" className="group-hover:fill-interactive-comments-section-moderate-blue fill-interactive-comments-section-light-grayish-blue" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z"/></svg>
               </button>
               <p className="font-medium text-interactive-comments-section-moderate-blue">
-                {score}
+                {comment?.score}
               </p>
               <button
                 onClick={() => {
-                  editCommentId(comment.id, -1, comment.content);
-                  updateComment(comment.id, -1);
-                  setScore(score - 1);
+                  // editCommentContent(comment.id, updatedContent);
                 }}
                 className="group pb-3"
               >
@@ -177,28 +166,14 @@ export default function SelfComment({
             )}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3 rounded-md bg-interactive-comments-section-very-light-gray px-3 py-[6px] sm:hidden">
-                <button
-                  onClick={() => {
-                    editCommentId(comment.id, -1, comment.content);
-                    updateComment(comment?.id, 1);
-                    setScore(score - 1);
-                  }}
-                  className="group py-2"
-                >
+                <button onClick={() => {}} className="group py-2">
                   {/* prettier-ignore */}
                   <svg id="icon-minus" className="group-hover:fill-interactive-comments-section-moderate-blue fill-interactive-comments-section-light-grayish-blue" width="11" height="3" xmlns="http://www.w3.org/2000/svg"><path d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"/></svg>
                 </button>
                 <p className="font-medium text-interactive-comments-section-moderate-blue">
-                  {score}
+                  0
                 </p>
-                <button
-                  onClick={() => {
-                    editCommentId(comment.id, 1, comment.content);
-                    updateComment(comment?.id, 1);
-                    setScore(score + 1);
-                  }}
-                  className="group py-1"
-                >
+                <button onClick={() => {}} className="group py-1">
                   {/* prettier-ignore */}
                   <svg id="icon-plus" className="group-hover:fill-interactive-comments-section-moderate-blue fill-interactive-comments-section-light-grayish-blue" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z"/></svg>
                 </button>
@@ -207,7 +182,6 @@ export default function SelfComment({
                 <div className="ml-auto flex gap-3">
                   <button
                     onClick={() => {
-                      setUpdatedContent(comment?.content);
                       setIsEditing(false);
                     }}
                     className="rounded-md bg-interactive-comments-section-grayish-blue px-4 py-3 hover:opacity-50"
@@ -218,8 +192,7 @@ export default function SelfComment({
                   </button>
                   <button
                     onClick={() => {
-                      updateComment(comment?.id, 0);
-                      editCommentId(comment?.id, updatedContent);
+                      editCommentContent(comment?.id, updatedContent);
                       setIsEditing(false);
                     }}
                     className="rounded-md bg-interactive-comments-section-moderate-blue px-4 py-3 hover:opacity-50"
@@ -299,14 +272,12 @@ export default function SelfComment({
               currentUsername === reply?.username ? (
                 <SelfComment
                   deleteComment={deleteReply}
-                  editCommentId={editReplyId}
+                  editCommentContent={editReplyContent}
                   currentUsername={currentUsername}
                   comment={reply}
                 />
               ) : (
                 <OtherComment
-                  deleteComment={deleteReply}
-                  editCommentId={editReplyId}
                   currentUsername={currentUsername}
                   comment={reply}
                 />
