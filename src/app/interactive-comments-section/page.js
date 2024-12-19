@@ -33,25 +33,68 @@ export default function InteractiveCommentsSection() {
   const [topLevelComments, setTopLevelComments] = useState([]);
   const [commentContent, setCommentContent] = useState("");
 
-  const deleteCommentId = (commentId) =>
-    setTopLevelComments(
-      topLevelComments.filter((comment) => comment.id !== commentId),
-    );
+  useEffect(() => {
+    fetch("http://localhost:5000/top-level-comments")
+      .then((response) => response.json())
+      .then((data) => setTopLevelComments(data));
+  }, []);
 
-  const editCommentId = (commentId, scoreChange, updatedContent) =>
-    setTopLevelComments((prevTopLevelComments) =>
-      prevTopLevelComments.map((comment) => {
-        if (comment.id !== commentId) {
-          return comment;
+  const deleteComment = (commentId) => {
+    fetch(`http://localhost:5000/comments/${commentId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+            throw new Error(errorData.error);
+          });
         }
+        setTopLevelComments(
+          topLevelComments.filter((comment) => comment.id !== commentId),
+        );
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Failed to delete comment:", error);
+        alert("Error deleting comment: " + error.message);
+      });
+  };
 
-        return {
-          ...comment,
-          score: comment.score + scoreChange,
-          content: updatedContent,
-        };
+  const editCommentContent = (commentId, updatedContent) =>
+    fetch(`http://localhost:5000/comments/${commentId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        content: updatedContent,
+        username: currentUsername,
+        voteValue,
       }),
-    );
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+            throw new Error(errorData.error);
+          });
+        }
+        setTopLevelComments((prevTopLevelComments) =>
+          prevTopLevelComments.map((comment) =>
+            comment.id === commentId
+              ? {
+                  ...comment,
+                  content: updatedContent,
+                }
+              : comment,
+          ),
+        );
+      })
+      .catch((error) => {
+        console.error;
+      });
 
   const postComment = (content, username) => {
     const payload = {
@@ -112,12 +155,6 @@ export default function InteractiveCommentsSection() {
     setCurrentUserImage(selectedUser.image);
   };
 
-  useEffect(() => {
-    fetch("http://localhost:5000/top-level-comments")
-      .then((response) => response.json())
-      .then((data) => setTopLevelComments(data));
-  }, []);
-
   return (
     <div
       className={`flex min-h-screen flex-col items-center gap-3 bg-interactive-comments-section-very-light-gray px-4 py-8 ${rubik.className}`}
@@ -146,15 +183,15 @@ export default function InteractiveCommentsSection() {
       {topLevelComments?.map((comment) =>
         currentUsername === comment?.username ? (
           <SelfComment
-            deleteCommentId={deleteCommentId}
-            editCommentId={editCommentId}
+            deleteComment={deleteComment}
+            editCommentId={editCommentContent}
             currentUsername={currentUsername}
             comment={comment}
           />
         ) : (
           <OtherComment
-            deleteCommentId={deleteCommentId}
-            editCommentId={editCommentId}
+            deleteComment={deleteComment}
+            editCommentId={editCommentContent}
             currentUsername={currentUsername}
             comment={comment}
           />

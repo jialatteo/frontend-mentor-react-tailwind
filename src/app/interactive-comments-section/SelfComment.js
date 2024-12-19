@@ -3,7 +3,7 @@ import OtherComment from "./OtherComment";
 import { getTimeAgoString } from "./helper";
 
 export default function SelfComment({
-  deleteCommentId,
+  deleteComment,
   currentUsername,
   comment,
   editCommentId,
@@ -14,9 +14,11 @@ export default function SelfComment({
   const [replies, setReplies] = useState([]);
   const [score, setScore] = useState(comment?.score);
 
-  const deleteReplyId = (replyId) => {
-    setReplies(replies.filter((reply) => reply.id !== replyId));
-  };
+  useEffect(() => {
+    fetch(`http://localhost:5000/replies/${comment.id}`)
+      .then((response) => response.json())
+      .then((data) => setReplies(data));
+  }, []);
 
   const editReplyId = (commentId, scoreChange, updatedContent) =>
     setReplies((prevReplies) =>
@@ -33,13 +35,7 @@ export default function SelfComment({
       }),
     );
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/replies/${comment.id}`)
-      .then((response) => response.json())
-      .then((data) => setReplies(data));
-  }, []);
-
-  const deleteComment = (commentId) => {
+  const deleteReply = (commentId) => {
     fetch(`http://localhost:5000/comments/${commentId}`, {
       method: "DELETE",
       headers: {
@@ -52,9 +48,9 @@ export default function SelfComment({
             throw new Error(errorData.error);
           });
         }
+        setReplies(replies.filter((reply) => reply.id !== commentId));
         return response.json();
       })
-      .then(() => deleteCommentId(commentId))
       .catch((error) => {
         console.error("Failed to delete comment:", error);
         alert("Error deleting comment: " + error.message);
@@ -302,14 +298,14 @@ export default function SelfComment({
             {replies?.map((reply) =>
               currentUsername === reply?.username ? (
                 <SelfComment
-                  deleteCommentId={deleteReplyId}
+                  deleteComment={deleteReply}
                   editCommentId={editReplyId}
                   currentUsername={currentUsername}
                   comment={reply}
                 />
               ) : (
                 <OtherComment
-                  deleteCommentId={deleteReplyId}
+                  deleteComment={deleteReply}
                   editCommentId={editReplyId}
                   currentUsername={currentUsername}
                   comment={reply}

@@ -12,8 +12,32 @@ export default function OtherComment({
   const [replies, setReplies] = useState([]);
   const [score, setScore] = useState(comment?.score);
 
-  const deleteReplyId = (replyId) => {
-    setReplies(replies.filter((reply) => reply.id !== replyId));
+  useEffect(() => {
+    fetch(`http://localhost:5000/replies/${comment.id}`)
+      .then((response) => response.json())
+      .then((data) => setReplies(data));
+  }, []);
+
+  const deleteReply = (commentId) => {
+    fetch(`http://localhost:5000/comments/${commentId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+            throw new Error(errorData.error);
+          });
+        }
+        setReplies(replies.filter((reply) => reply.id !== commentId));
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("Failed to delete comment:", error);
+        alert("Error deleting comment: " + error.message);
+      });
   };
 
   const editReplyId = (commentId, scoreChange, updatedContent) =>
@@ -30,12 +54,6 @@ export default function OtherComment({
         };
       }),
     );
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/replies/${comment.id}`)
-      .then((response) => response.json())
-      .then((data) => setReplies(data));
-  }, []);
 
   const postReply = (replying_to, content, username) => {
     const payload = {
@@ -216,7 +234,7 @@ export default function OtherComment({
             {replies?.map((reply) =>
               currentUsername === reply?.username ? (
                 <SelfComment
-                  deleteCommentId={deleteReplyId}
+                  deleteComment={deleteReply}
                   editCommentId={editReplyId}
                   currentUsername={currentUsername}
                   comment={reply}
