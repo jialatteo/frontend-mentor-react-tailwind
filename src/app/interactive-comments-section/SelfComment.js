@@ -12,13 +12,50 @@ export default function SelfComment({
   const [isEditing, setIsEditing] = useState(false);
   const [updatedContent, setUpdatedContent] = useState(comment?.content);
   const [replies, setReplies] = useState([]);
-  console.log("rendering", comment.username);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/replies/${comment.id}`)
+    fetch(`http://localhost:5000/replies/${comment.id}/${currentUsername}`)
       .then((response) => response.json())
       .then((data) => setReplies(data));
   }, []);
+
+  const voteReply = (commentId, currentUsername, voteValue) => {
+    const payload = {
+      commentId,
+      currentUsername,
+      voteValue,
+    };
+
+    fetch(`http://localhost:5000/votes`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to upvote");
+        }
+        return response.json();
+      })
+      .then((reponseJson) => {
+        setReplies((prevReplies) =>
+          prevReplies.map((reply) => {
+            if (reply.id === commentId) {
+              prevVoteVal = reply.current_user_vote_value;
+              return {
+                ...reply,
+                score: score - prevVoteVal + voteValue,
+                current_user_vote_value: voteValue,
+              };
+            } else {
+              return reply;
+            }
+          }),
+        );
+      });
+  };
 
   const deleteReply = (commentId) => {
     fetch(`http://localhost:5000/comments/${commentId}`, {
@@ -274,11 +311,13 @@ export default function SelfComment({
                   deleteComment={deleteReply}
                   editCommentContent={editReplyContent}
                   currentUsername={currentUsername}
+                  voteComment={voteReply}
                   comment={reply}
                 />
               ) : (
                 <OtherComment
                   currentUsername={currentUsername}
+                  voteComment={voteReply}
                   comment={reply}
                 />
               ),

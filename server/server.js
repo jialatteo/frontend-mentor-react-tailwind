@@ -12,7 +12,8 @@ const db = new Database("prod.db");
 app.use(cors());
 app.use(express.json());
 
-app.get("/top-level-comments", (req, res) => {
+app.get("/top-level-comments/:currentUsername", (req, res) => {
+  const { currentUsername } = req.params;
   try {
     const rows = db
       .prepare(
@@ -37,7 +38,8 @@ app.get("/top-level-comments", (req, res) => {
       u.image_png,
       u.image_webp,
       c.replying_to,
-      r.username AS replying_to_username
+      r.username AS replying_to_username,
+      COALESCE(v.vote_value, 0) AS current_user_vote_value
   FROM
       comments c
   JOIN
@@ -46,11 +48,13 @@ app.get("/top-level-comments", (req, res) => {
       comments r ON r.id = c.replying_to
   LEFT JOIN
       comment_scores cs ON c.id = cs.comment_id
+  LEFT JOIN
+      votes v on v.comment_id = c.id AND v.username = ?
   WHERE 
       c.replying_to IS NULL;
 `,
       )
-      .all();
+      .all(currentUsername);
     res.json(rows);
   } catch (error) {
     console.error("Database error:", error);
@@ -58,9 +62,9 @@ app.get("/top-level-comments", (req, res) => {
   }
 });
 
-app.get("/replies/:commentId", (req, res) => {
+app.get("/replies/:commentId/:currentUsername", (req, res) => {
   try {
-    const commentId = req.params.commentId;
+    const { commentId, currentUsername } = req.params;
 
     const rows = db
       .prepare(
@@ -85,7 +89,8 @@ app.get("/replies/:commentId", (req, res) => {
       u.image_png,
       u.image_webp,
       c.replying_to,
-      r.username AS replying_to_username
+      r.username AS replying_to_username,
+      COALESCE(v.vote_value, 0) as current_user_vote_value
   FROM
       comments c
   JOIN
@@ -94,11 +99,13 @@ app.get("/replies/:commentId", (req, res) => {
       comments r ON r.id = c.replying_to
   LEFT JOIN
       comment_scores cs ON c.id = cs.comment_id
+  LEFT JOIN
+      votes v on v.comment_id = c.id AND v.username = ?
   WHERE 
       c.replying_to = ?;
       `,
       )
-      .all(commentId);
+      .all(currentUsername, commentId);
 
     res.json(rows);
   } catch (error) {
@@ -139,7 +146,8 @@ app.post("/comments", (req, res) => {
           u.image_png,
           u.image_webp,
           c.replying_to,
-          r.username AS replying_to_username
+          r.username AS replying_to_username,
+          0 as current_user_vote_value
       FROM
           comments c
       JOIN
@@ -198,32 +206,25 @@ app.put("/comments/:commentId", (req, res) => {
       commentId,
     );
 
-    //   const hasExistingVote = db
-    //     .prepare(
-    //       `
-    //   SELECT 1 FROM votes
-    //   WHERE username = ? AND comment_id = ?
-    // `,
-    //     )
-    //     .get(username, commentId);
-
-    //   if (hasExistingVote) {
-    //     db.prepare(
-    //       `UPDATE votes SET vote_value = ? WHERE comment_id = ? AND username = ?`,
-    //     ).run(voteValue, commentId, username);
-    //   } else {
-    //     db.prepare(
-    //       `
-    //     INSERT INTO votes (username, comment_id, vote_value)
-    //     VALUES (?, ?, ?)
-    //     `,
-    //     ).run(username, commentId, voteValue);
-    //   }
-
     res.status(200).json({ message: "Comment updated successfully" });
   } catch (error) {
     console.error("Database error:", error);
-    res.status(500).json({ error: "Failed to delete comment" });
+    res.status(500).json({ error: "Failed to update comment" });
+  }
+});
+
+app.put("/votes", (req, res) => {
+  try {
+    const { commentId, currentUsername, voteValue } = req.body;
+
+    db.prepare(
+      `INSERT OR REPLACE INTO votes (username, comment_id, vote_value)`,
+    ).run(commentId, currentUsername, voteValue);
+
+    res.status(200).json({ message: "Comment vote updated successfully" });
+  } catch (error) {
+    console.error("Database error:", error);
+    res.status(500).json({ error: "Failed to vote comment" });
   }
 });
 

@@ -34,7 +34,7 @@ export default function InteractiveCommentsSection() {
   const [commentContent, setCommentContent] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/top-level-comments")
+    fetch(`http://localhost:5000/top-level-comments/${currentUsername}`)
       .then((response) => response.json())
       .then((data) => setTopLevelComments(data));
   }, []);
@@ -126,6 +126,44 @@ export default function InteractiveCommentsSection() {
       });
   };
 
+  const voteComment = (commentId, currentUsername, voteValue) => {
+    const payload = {
+      commentId,
+      currentUsername,
+      voteValue,
+    };
+
+    fetch(`http://localhost:5000/votes`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to upvote");
+        }
+        return response.json();
+      })
+      .then((reponseJson) => {
+        setTopLevelComments((prevTopLevelComments) =>
+          prevTopLevelComments.map((comment) => {
+            if (comment.id === commentId) {
+              prevVoteVal = comment.current_user_vote_value;
+              return {
+                ...comment,
+                score: score - prevVoteVal + voteValue,
+                current_user_vote_value: voteValue,
+              };
+            } else {
+              return comment;
+            }
+          }),
+        );
+      });
+  };
+
   const resetDatabase = () => {
     fetch("http://localhost:5000/comments/reset", {
       method: "POST",
@@ -184,11 +222,16 @@ export default function InteractiveCommentsSection() {
           <SelfComment
             deleteComment={deleteComment}
             editCommentContent={editCommentContent}
+            voteComment={voteComment}
             currentUsername={currentUsername}
             comment={comment}
           />
         ) : (
-          <OtherComment currentUsername={currentUsername} comment={comment} />
+          <OtherComment
+            currentUsername={currentUsername}
+            voteComment={voteComment}
+            comment={comment}
+          />
         ),
       )}
       <div className="w-full max-w-[1600px] rounded-lg bg-white p-4">
