@@ -41,10 +41,13 @@ export default function OtherComment({
         setReplies((prevReplies) =>
           prevReplies.map((reply) => {
             if (reply.id === commentId) {
+              console.log(
+                "current_user_vote_value",
+                reply.current_user_vote_value,
+              );
               return {
                 ...reply,
-                score:
-                  comment.score - reply.current_user_vote_value + voteValue,
+                score: reply.score - reply.current_user_vote_value + voteValue,
                 current_user_vote_value: voteValue,
               };
             } else {
@@ -146,7 +149,9 @@ export default function OtherComment({
             <div className="mr-4 flex min-w-12 flex-col items-center justify-center gap-4 rounded-md bg-interactive-comments-section-very-light-gray py-4 pb-2 pt-4">
               <button
                 onClick={() => {
-                  voteComment(comment?.id, currentUsername, 1);
+                  comment?.current_user_vote_value === 1
+                    ? voteComment(comment?.id, currentUsername, 0)
+                    : voteComment(comment?.id, currentUsername, 1);
                 }}
                 className="group"
               >
@@ -158,7 +163,9 @@ export default function OtherComment({
               </p>
               <button
                 onClick={() => {
-                  voteComment(comment?.id, currentUsername, -1);
+                  comment?.current_user_vote_value === -1
+                    ? voteComment(comment?.id, currentUsername, 0)
+                    : voteComment(comment?.id, currentUsername, -1);
                 }}
                 className="group pb-3"
               >
@@ -208,7 +215,9 @@ export default function OtherComment({
               <div className="flex items-center gap-3 rounded-md bg-interactive-comments-section-very-light-gray px-3 py-[6px]">
                 <button
                   onClick={() => {
-                    voteComment(comment?.id, currentUsername, -1);
+                    comment?.current_user_vote_value === -1
+                      ? voteComment(comment?.id, currentUsername, 0)
+                      : voteComment(comment?.id, currentUsername, -1);
                   }}
                   className="group py-2"
                 >
@@ -220,7 +229,9 @@ export default function OtherComment({
                 </p>
                 <button
                   onClick={() => {
-                    voteComment(comment?.id, currentUsername, 1);
+                    comment?.current_user_vote_value === 1
+                      ? voteComment(comment?.id, currentUsername, 0)
+                      : voteComment(comment?.id, currentUsername, 1);
                   }}
                   className="group py-1"
                 >

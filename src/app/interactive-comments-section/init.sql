@@ -19,7 +19,7 @@ CREATE TABLE comments (
 CREATE TABLE votes (
     username TEXT NOT NULL,
     comment_id INTEGER NOT NULL,
-    vote_value INTEGER NOT NULL CHECK (vote_value IN (-1, 1)),
+    vote_value INTEGER NOT NULL CHECK (vote_value IN (-1, 0, 1)),
     PRIMARY KEY (username, comment_id),
     FOREIGN KEY (username) REFERENCES users(username) ON DELETE CASCADE,
     FOREIGN KEY (comment_id) REFERENCES comments(id) ON DELETE CASCADE
