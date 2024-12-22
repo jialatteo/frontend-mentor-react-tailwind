@@ -218,8 +218,8 @@ app.put("/votes", (req, res) => {
     const { commentId, currentUsername, voteValue } = req.body;
 
     db.prepare(
-      `INSERT OR REPLACE INTO votes (username, comment_id, vote_value)`,
-    ).run(commentId, currentUsername, voteValue);
+      `INSERT OR REPLACE INTO votes (username, comment_id, vote_value) VALUES (?, ?, ?)`,
+    ).run(currentUsername, commentId, voteValue);
 
     res.status(200).json({ message: "Comment vote updated successfully" });
   } catch (error) {

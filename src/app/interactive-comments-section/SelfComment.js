@@ -4,6 +4,7 @@ import { getTimeAgoString } from "./helper";
 
 export default function SelfComment({
   deleteComment,
+  voteComment,
   currentUsername,
   comment,
   editCommentContent,
@@ -43,10 +44,10 @@ export default function SelfComment({
         setReplies((prevReplies) =>
           prevReplies.map((reply) => {
             if (reply.id === commentId) {
-              prevVoteVal = reply.current_user_vote_value;
               return {
                 ...reply,
-                score: score - prevVoteVal + voteValue,
+                score:
+                  comment.score - reply.current_user_vote_value + voteValue,
                 current_user_vote_value: voteValue,
               };
             } else {
@@ -119,7 +120,7 @@ export default function SelfComment({
             <div className="mr-4 flex min-w-12 flex-col items-center justify-center gap-4 rounded-md bg-interactive-comments-section-very-light-gray py-4 pb-2 pt-4">
               <button
                 onClick={() => {
-                  // editCommentContent(comment.id, comment.content);
+                  voteComment(comment?.id, currentUsername, 1);
                 }}
                 className="group"
               >
@@ -131,7 +132,7 @@ export default function SelfComment({
               </p>
               <button
                 onClick={() => {
-                  // editCommentContent(comment.id, updatedContent);
+                  voteComment(comment?.id, currentUsername, -1);
                 }}
                 className="group pb-3"
               >
@@ -203,14 +204,24 @@ export default function SelfComment({
             )}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3 rounded-md bg-interactive-comments-section-very-light-gray px-3 py-[6px] sm:hidden">
-                <button onClick={() => {}} className="group py-2">
+                <button
+                  onClick={() => {
+                    voteComment(comment?.id, currentUsername, -1);
+                  }}
+                  className="group py-2"
+                >
                   {/* prettier-ignore */}
                   <svg id="icon-minus" className="group-hover:fill-interactive-comments-section-moderate-blue fill-interactive-comments-section-light-grayish-blue" width="11" height="3" xmlns="http://www.w3.org/2000/svg"><path d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"/></svg>
                 </button>
                 <p className="font-medium text-interactive-comments-section-moderate-blue">
                   0
                 </p>
-                <button onClick={() => {}} className="group py-1">
+                <button
+                  onClick={() => {
+                    voteComment(comment?.id, currentUsername, 1);
+                  }}
+                  className="group py-1"
+                >
                   {/* prettier-ignore */}
                   <svg id="icon-plus" className="group-hover:fill-interactive-comments-section-moderate-blue fill-interactive-comments-section-light-grayish-blue" width="11" height="11" xmlns="http://www.w3.org/2000/svg"><path d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z"/></svg>
                 </button>
