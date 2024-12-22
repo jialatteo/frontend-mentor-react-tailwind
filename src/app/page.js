@@ -66,7 +66,18 @@ export default function Home() {
             src="/interactive-comments-section/active-states.jpg"
             alt="interactive-comments-section"
           />
-          Interactive comments section
+          Interactive Comments Section
+        </a>
+        <a
+          className="w-40 border border-blue-200 text-center text-xl hover:border-blue-600 hover:text-blue-600 hover:underline"
+          href="/multi-step-form"
+        >
+          <img
+            className="h-40 w-40"
+            src="/multi-step-form/active-states-step-1.jpg"
+            alt="multi-step-form"
+          />
+          Multi Step Form
         </a>
       </div>
     </div>
