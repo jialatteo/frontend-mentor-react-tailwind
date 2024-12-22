@@ -211,7 +211,7 @@ export default function InteractiveCommentsSection() {
         <select
           value={currentUsername}
           onChange={handleUserChange}
-          className="rounded-md border p-2"
+          className="cursor-pointer rounded-md border bg-interactive-comments-section-moderate-blue p-2 text-white hover:opacity-50"
         >
           {users.map((user) => (
             <option key={user.username} value={user.username}>
