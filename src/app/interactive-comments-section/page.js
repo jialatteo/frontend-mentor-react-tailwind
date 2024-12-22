@@ -150,10 +150,6 @@ export default function InteractiveCommentsSection() {
         setTopLevelComments((prevTopLevelComments) =>
           prevTopLevelComments.map((comment) => {
             if (comment.id === commentId) {
-              console.log(
-                "current_user_vote_value",
-                comment.current_user_vote_value,
-              );
               return {
                 ...comment,
                 score:

@@ -41,10 +41,6 @@ export default function OtherComment({
         setReplies((prevReplies) =>
           prevReplies.map((reply) => {
             if (reply.id === commentId) {
-              console.log(
-                "current_user_vote_value",
-                reply.current_user_vote_value,
-              );
               return {
                 ...reply,
                 score: reply.score - reply.current_user_vote_value + voteValue,
