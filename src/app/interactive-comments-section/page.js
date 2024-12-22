@@ -37,7 +37,7 @@ export default function InteractiveCommentsSection() {
     fetch(`http://localhost:5000/top-level-comments/${currentUsername}`)
       .then((response) => response.json())
       .then((data) => setTopLevelComments(data));
-  }, []);
+  }, [currentUsername]);
 
   const deleteComment = (commentId) => {
     fetch(`http://localhost:5000/comments/${commentId}`, {
