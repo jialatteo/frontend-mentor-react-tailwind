@@ -290,6 +290,7 @@ export default function OtherComment({
             {replies?.map((reply) =>
               currentUsername === reply?.username ? (
                 <SelfComment
+                  key={reply.id}
                   deleteComment={deleteReply}
                   editCommentContent={editReplyContent}
                   currentUsername={currentUsername}
@@ -298,6 +299,7 @@ export default function OtherComment({
                 />
               ) : (
                 <OtherComment
+                  key={reply.id}
                   currentUsername={currentUsername}
                   voteComment={voteReply}
                   comment={reply}

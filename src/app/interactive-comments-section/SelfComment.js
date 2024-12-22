@@ -326,6 +326,7 @@ export default function SelfComment({
             {replies?.map((reply) =>
               currentUsername === reply?.username ? (
                 <SelfComment
+                  key={reply?.id}
                   deleteComment={deleteReply}
                   editCommentContent={editReplyContent}
                   currentUsername={currentUsername}
@@ -334,6 +335,7 @@ export default function SelfComment({
                 />
               ) : (
                 <OtherComment
+                  key={reply?.id}
                   currentUsername={currentUsername}
                   voteComment={voteReply}
                   comment={reply}

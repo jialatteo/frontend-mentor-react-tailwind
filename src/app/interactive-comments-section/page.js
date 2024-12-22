@@ -220,6 +220,7 @@ export default function InteractiveCommentsSection() {
       {topLevelComments?.map((comment) =>
         currentUsername === comment?.username ? (
           <SelfComment
+            key={comment?.id}
             deleteComment={deleteComment}
             editCommentContent={editCommentContent}
             voteComment={voteComment}
@@ -228,6 +229,7 @@ export default function InteractiveCommentsSection() {
           />
         ) : (
           <OtherComment
+            key={comment?.id}
             currentUsername={currentUsername}
             voteComment={voteComment}
             comment={comment}
