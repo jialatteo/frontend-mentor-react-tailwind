@@ -3,7 +3,13 @@ import { Ubuntu } from "next/font/google";
 import { useState } from "react";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+import { get, useForm } from "react-hook-form";
+
+// fix the error message supposed to not take up space and be right top hand corner of text input
+// create thank you for last page. see if there is a isSubmitted in react hook form?
+// change the go next for step 4 to submit. create submit function
+// fix the stupid ecommerce 2 image carousel shit
+// start of the stupid calculator
 
 const ubuntu = Ubuntu({
   weight: ["400", "500", "700"],
@@ -36,11 +42,26 @@ const validationSchemas = [
     isMonthlyBilling: Yup.boolean().required("Billing cycle is required"),
   }),
   Yup.object({
-    hasOnlineService: Yup.boolean(),
-    hasLargerStorage: Yup.boolean(),
-    hasCustomizableProfile: Yup.boolean(),
+    addOns: Yup.array().of(
+      Yup.string().oneOf(
+        ["onlineService", "largerStorage", "customizableProfile"],
+        "Invalid add-on",
+      ),
+    ),
   }),
+  Yup.object({}),
 ];
+
+const pricing = {
+  plan: {
+    arcade: { monthly: 9, yearly: 90 },
+    advanced: { monthly: 12, yearly: 120 },
+    pro: { monthly: 15, yearly: 150 },
+  },
+  onlineService: { monthly: 1, yearly: 10 },
+  largerStorage: { monthly: 2, yearly: 20 },
+  customizableProfile: { monthly: 2, yearly: 20 },
+};
 
 export default function MultiStepForm() {
   const [activeStep, setActiveStep] = useState(0);
@@ -53,9 +74,7 @@ export default function MultiStepForm() {
       phoneNumber: null,
       plan: "arcade",
       isMonthlyBilling: true,
-      hasOnlineService: false,
-      hasLargerStorage: false,
-      hasCustomizableProfile: false,
+      addOns: [],
     },
     mode: "all",
   });
@@ -66,8 +85,26 @@ export default function MultiStepForm() {
     reset,
     getValues,
     watch,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitted },
   } = methods;
+
+  const calculateYearlyTotal = () => {
+    const plan = pricing.plan[getValues("plan")].yearly;
+    const addOns = getValues("addOns").reduce(
+      (total, currAddOn) => total + pricing[currAddOn].yearly,
+      0,
+    );
+    return plan + addOns;
+  };
+
+  const calculateMonthlyTotal = () => {
+    const plan = pricing.plan[getValues("plan")].monthly;
+    const addOns = getValues("addOns").reduce(
+      (total, currPlan) => total + pricing[currPlan].monthly,
+      0,
+    );
+    return plan + addOns;
+  };
 
   const handleBack = () => {
     if (activeStep === 0) {
@@ -85,8 +122,13 @@ export default function MultiStepForm() {
     reset({ ...getValues() });
   };
 
+  const onSubmit = (data) => {
+    console.log("data", data);
+  };
+
+  console.log("isSubmitted", isSubmitted);
+
   const isMonthlyBilling = watch("isMonthlyBilling");
-  console.log("getValues()", getValues());
 
   return (
     <div
@@ -239,7 +281,9 @@ export default function MultiStepForm() {
                           Arcade
                         </p>
                         <p className="text-sm font-medium leading-none text-multi-step-form-cool-gray">
-                          {isMonthlyBilling ? "$9/mo" : "$90/yr"}
+                          {isMonthlyBilling
+                            ? `$${pricing.plan.arcade.monthly}/mo`
+                            : `$${pricing.plan.arcade.yearly}/yr`}
                         </p>
                         {!isMonthlyBilling && (
                           <p className="mt-1 text-xs leading-none text-multi-step-form-marine-blue">
@@ -268,7 +312,9 @@ export default function MultiStepForm() {
                           Advanced
                         </p>
                         <p className="text-sm font-medium leading-none text-multi-step-form-cool-gray">
-                          {isMonthlyBilling ? "$12/mo" : "$120/yr"}
+                          {isMonthlyBilling
+                            ? `$${pricing.plan.advanced.monthly}/mo`
+                            : `$${pricing.plan.advanced.yearly}/yr`}
                         </p>
                         {!isMonthlyBilling && (
                           <p className="mt-1 text-xs leading-none text-multi-step-form-marine-blue">
@@ -297,7 +343,9 @@ export default function MultiStepForm() {
                           Pro
                         </p>
                         <p className="text-sm font-medium leading-none text-multi-step-form-cool-gray">
-                          {isMonthlyBilling ? "$15/mo" : "$150/yr"}
+                          {isMonthlyBilling
+                            ? `$${pricing.plan.pro.monthly}/mo`
+                            : `$${pricing.plan.pro.yearly}/yr`}
                         </p>
                         {!isMonthlyBilling && (
                           <p className="mt-1 text-xs leading-none text-multi-step-form-marine-blue">
@@ -350,7 +398,8 @@ export default function MultiStepForm() {
                     id="onlineService"
                     type="checkbox"
                     className="appearance-none"
-                    {...register("hasOnlineService")}
+                    value="onlineService"
+                    {...register("addOns")}
                   />
                   <div className="flex flex-1 items-center justify-between rounded-md border border-multi-step-form-light-gray p-4 group-hover:border-multi-step-form-purplish-blue group-has-[:checked]:border-multi-step-form-purplish-blue group-has-[:checked]:bg-multi-step-form-alabaster">
                     <div className="flex items-center gap-6">
@@ -366,12 +415,16 @@ export default function MultiStepForm() {
                           Access to multiplayer games
                         </p>
                         <p className="hidden text-multi-step-form-purplish-blue sm:block md:hidden">
-                          {isMonthlyBilling ? "+$1/mo" : "+$10/yr"}
+                          {isMonthlyBilling
+                            ? `+$${pricing.onlineService.monthly}/mo`
+                            : `+$${pricing.onlineService.yearly}/yr`}
                         </p>
                       </div>
                     </div>
                     <p className="text-multi-step-form-purplish-blue sm:hidden md:block">
-                      {isMonthlyBilling ? "+$1/mo" : "+$10/yr"}
+                      {isMonthlyBilling
+                        ? `+$${pricing.onlineService.monthly}/mo`
+                        : `+$${pricing.onlineService.yearly}/yr`}
                     </p>
                   </div>
                 </label>
@@ -382,8 +435,9 @@ export default function MultiStepForm() {
                   <input
                     id="largerStorage"
                     type="checkbox"
+                    value="largerStorage"
                     className="appearance-none"
-                    {...register("hasLargerStorage")}
+                    {...register("addOns")}
                   />
                   <div className="flex flex-1 items-center justify-between rounded-md border border-multi-step-form-light-gray p-4 group-hover:border-multi-step-form-purplish-blue group-has-[:checked]:border-multi-step-form-purplish-blue group-has-[:checked]:bg-multi-step-form-alabaster">
                     <div className="flex items-center gap-6">
@@ -399,12 +453,16 @@ export default function MultiStepForm() {
                           Extra 1TB of cloud save
                         </p>
                         <p className="hidden text-multi-step-form-purplish-blue sm:block md:hidden">
-                          {isMonthlyBilling ? "+$2/mo" : "+$20/yr"}
+                          {isMonthlyBilling
+                            ? `+$${pricing.largerStorage.monthly}/mo`
+                            : `+$${pricing.largerStorage.yearly}/yr`}
                         </p>
                       </div>
                     </div>
                     <p className="text-multi-step-form-purplish-blue sm:hidden md:block">
-                      {isMonthlyBilling ? "+$2/mo" : "+$20/yr"}
+                      {isMonthlyBilling
+                        ? `+$${pricing.largerStorage.monthly}/mo`
+                        : `+$${pricing.largerStorage.yearly}/yr`}
                     </p>
                   </div>
                 </label>
@@ -416,7 +474,8 @@ export default function MultiStepForm() {
                     id="customizableProfile"
                     type="checkbox"
                     className="appearance-none"
-                    {...register("hasCustomizableProfile")}
+                    value="customizableProfile"
+                    {...register("addOns")}
                   />
                   <div className="flex flex-1 items-center justify-between rounded-md border border-multi-step-form-light-gray p-4 group-hover:border-multi-step-form-purplish-blue group-has-[:checked]:border-multi-step-form-purplish-blue group-has-[:checked]:bg-multi-step-form-alabaster">
                     <div className="flex items-center gap-6">
@@ -432,15 +491,102 @@ export default function MultiStepForm() {
                           Custom theme on your profile
                         </p>
                         <p className="hidden text-multi-step-form-purplish-blue sm:block md:hidden">
-                          {isMonthlyBilling ? "+$2/mo" : "+$20/yr"}
+                          {isMonthlyBilling
+                            ? `+$${pricing.customizableProfile.monthly}/mo`
+                            : `+$${pricing.customizableProfile.yearly}/yr`}
                         </p>
                       </div>
                     </div>
                     <p className="text-multi-step-form-purplish-blue sm:hidden md:block">
-                      {isMonthlyBilling ? "+$2/mo" : "+$20/yr"}
+                      {isMonthlyBilling
+                        ? `+$${pricing.customizableProfile.monthly}/mo`
+                        : `+$${pricing.customizableProfile.yearly}/yr`}
                     </p>
                   </div>
                 </label>
+              </div>
+            </div>
+          )}
+
+          {activeStep === 3 && (
+            <div>
+              <h1 className="mb-1 text-2xl font-bold text-multi-step-form-marine-blue sm:text-3xl">
+                Finishing up
+              </h1>
+              <h2 className="mb-4 text-multi-step-form-cool-gray sm:mb-6">
+                Double-check everything looks OK before confirming.
+              </h2>
+              <div className="divide-y-2 bg-multi-step-form-alabaster p-5">
+                <div className="mb-4 flex items-center justify-between">
+                  <div>
+                    <p className="font-medium capitalize text-multi-step-form-marine-blue">
+                      {getValues("plan")}
+                      <span className="ml-1">
+                        {isMonthlyBilling ? "(Monthly)" : "(Yearly)"}
+                      </span>
+                    </p>
+                    <button
+                      onClick={() => setActiveStep(1)}
+                      className="text-sm text-multi-step-form-cool-gray underline hover:text-multi-step-form-purplish-blue"
+                    >
+                      Change
+                    </button>
+                  </div>
+                  <p className="font-bold text-multi-step-form-marine-blue">
+                    {isMonthlyBilling
+                      ? `$${pricing.plan[getValues("plan")].monthly}/mo`
+                      : `$${pricing.plan[getValues("plan")].yearly}/yr`}
+                  </p>
+                </div>
+                <div className="flex flex-col gap-3 pt-5 text-sm">
+                  {getValues("addOns").includes("onlineService") && (
+                    <div className="flex items-center justify-between">
+                      <p className="text-multi-step-form-cool-gray">
+                        Online service
+                      </p>
+                      <p className="text-multi-step-form-marine-blue">
+                        {isMonthlyBilling
+                          ? `+$${pricing.onlineService.monthly}/mo`
+                          : `+$${pricing.onlineService.yearly}/yr`}
+                      </p>
+                    </div>
+                  )}
+                  {getValues("addOns").includes("largerStorage") && (
+                    <div className="flex items-center justify-between">
+                      <p className="text-multi-step-form-cool-gray">
+                        Larger storage
+                      </p>
+                      <p className="text-multi-step-form-marine-blue">
+                        {isMonthlyBilling
+                          ? `+$${pricing.largerStorage.monthly}/mo`
+                          : `+$${pricing.largerStorage.yearly}/yr`}
+                      </p>
+                    </div>
+                  )}
+                  {getValues("addOns").includes("customizableProfile") && (
+                    <div className="flex items-center justify-between">
+                      <p className="text-multi-step-form-cool-gray">
+                        Customizable profile
+                      </p>
+                      <p className="text-multi-step-form-marine-blue">
+                        {isMonthlyBilling
+                          ? `+$${pricing.customizableProfile.monthly}/mo`
+                          : `+$${pricing.customizableProfile.yearly}/yr`}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between p-5">
+                <p className="text-sm text-multi-step-form-cool-gray">
+                  {`Total (per ${isMonthlyBilling ? "month" : "year"})`}
+                </p>
+                <p className="text-xl font-bold text-multi-step-form-purplish-blue">
+                  {isMonthlyBilling
+                    ? `+$${calculateMonthlyTotal()}/mo`
+                    : `+$${calculateYearlyTotal()}/yr`}
+                </p>
               </div>
             </div>
           )}
@@ -453,13 +599,23 @@ export default function MultiStepForm() {
             >
               Go Back
             </button>
-            <button
-              onClick={handleNext}
-              className="m-2 ml-auto rounded bg-multi-step-form-marine-blue px-3 py-2 text-sm text-white hover:bg-opacity-80 disabled:cursor-not-allowed disabled:bg-opacity-15"
-              disabled={!isValid || activeStep === 3}
-            >
-              Next step
-            </button>
+            {activeStep === 3 ? (
+              <button
+                onClick={handleSubmit(onSubmit)}
+                className="m-2 ml-auto rounded bg-multi-step-form-purplish-blue px-6 py-2 text-sm text-white hover:bg-opacity-80 disabled:cursor-not-allowed disabled:bg-opacity-15"
+                disabled={!isValid}
+              >
+                Submit
+              </button>
+            ) : (
+              <button
+                onClick={handleNext}
+                className="m-2 ml-auto rounded bg-multi-step-form-marine-blue px-3 py-2 text-sm text-white hover:bg-opacity-80 disabled:cursor-not-allowed disabled:bg-opacity-15"
+                disabled={!isValid || activeStep === 3}
+              >
+                Next step
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -471,13 +627,23 @@ export default function MultiStepForm() {
         >
           Go Back
         </button>
-        <button
-          onClick={handleNext}
-          className="m-2 ml-auto rounded bg-multi-step-form-marine-blue px-3 py-2 text-sm text-white hover:bg-opacity-80 disabled:cursor-not-allowed disabled:bg-opacity-15"
-          disabled={!isValid || activeStep === 3}
-        >
-          Next step
-        </button>
+        {activeStep === 3 ? (
+          <button
+            onClick={handleSubmit(onSubmit)}
+            className="m-2 ml-auto rounded bg-multi-step-form-purplish-blue px-6 py-2 text-sm text-white hover:bg-opacity-80 disabled:cursor-not-allowed disabled:bg-opacity-15"
+            disabled={!isValid}
+          >
+            Submit
+          </button>
+        ) : (
+          <button
+            onClick={handleNext}
+            className="m-2 ml-auto rounded bg-multi-step-form-marine-blue px-3 py-2 text-sm text-white hover:bg-opacity-80 disabled:cursor-not-allowed disabled:bg-opacity-15"
+            disabled={!isValid || activeStep === 3}
+          >
+            Next step
+          </button>
+        )}
       </div>
     </div>
   );
