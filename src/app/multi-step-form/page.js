@@ -35,6 +35,11 @@ const validationSchemas = [
       .required("Plan is required"),
     isMonthlyBilling: Yup.boolean().required("Billing cycle is required"),
   }),
+  Yup.object({
+    hasOnlineService: Yup.boolean(),
+    hasLargerStorage: Yup.boolean(),
+    hasCustomizableProfile: Yup.boolean(),
+  }),
 ];
 
 export default function MultiStepForm() {
@@ -48,6 +53,9 @@ export default function MultiStepForm() {
       phoneNumber: null,
       plan: "arcade",
       isMonthlyBilling: true,
+      hasOnlineService: false,
+      hasLargerStorage: false,
+      hasCustomizableProfile: false,
     },
     mode: "all",
   });
@@ -323,6 +331,48 @@ export default function MultiStepForm() {
                 >
                   Yearly
                 </p>
+              </div>
+            </div>
+          )}
+
+          {activeStep === 2 && (
+            <div>
+              <h1 className="mb-1 text-2xl font-bold text-multi-step-form-marine-blue sm:text-3xl">
+                Pick add-ons
+              </h1>
+              <h2 className="mb-4 text-multi-step-form-cool-gray sm:mb-6">
+                Add-ons help enhance your gaming experience.
+              </h2>
+              <div className="flex flex-col gap-3">
+                <label
+                  className="group flex cursor-pointer"
+                  htmlFor="onlineService"
+                >
+                  <input
+                    id="onlineService"
+                    type="checkbox"
+                    className="appearance-none"
+                  />
+                  <div className="flex flex-1 items-center justify-between rounded-md border border-multi-step-form-light-gray p-4 group-hover:border-multi-step-form-purplish-blue group-has-[:checked]:border-multi-step-form-purplish-blue group-has-[:checked]:bg-multi-step-form-alabaster">
+                    <div className="flex items-center gap-6">
+                      <div className="rounded border border-multi-step-form-light-gray px-[4px] py-[6px] group-has-[:checked]:border-multi-step-form-purplish-blue group-has-[:checked]:bg-multi-step-form-purplish-blue">
+                        {/* prettier-ignore */}
+                        <svg className="group-has-[:checked]:visible invisible" id="icon-checkmark" xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9"><path fill="none" stroke="#FFF" stroke-width="2" d="m1 4 3.433 3.433L10.866 1"/></svg>
+                      </div>
+                      <div>
+                        <p className="font-medium text-multi-step-form-marine-blue">
+                          Online service
+                        </p>
+                        <p className="text-multi-step-form-cool-gray">
+                          Access to multiplayer games
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-multi-step-form-purplish-blue">
+                      +$10/yr
+                    </p>
+                  </div>
+                </label>
               </div>
             </div>
           )}
