@@ -86,9 +86,7 @@ export default function MultiStepForm() {
   };
 
   const isMonthlyBilling = watch("isMonthlyBilling");
-
-  console.log("activeStep", activeStep);
-  console.log("activeStep === 0", activeStep === 0);
+  console.log("getValues()", getValues());
 
   return (
     <div
@@ -352,6 +350,7 @@ export default function MultiStepForm() {
                     id="onlineService"
                     type="checkbox"
                     className="appearance-none"
+                    {...register("hasOnlineService")}
                   />
                   <div className="flex flex-1 items-center justify-between rounded-md border border-multi-step-form-light-gray p-4 group-hover:border-multi-step-form-purplish-blue group-has-[:checked]:border-multi-step-form-purplish-blue group-has-[:checked]:bg-multi-step-form-alabaster">
                     <div className="flex items-center gap-6">
@@ -366,10 +365,79 @@ export default function MultiStepForm() {
                         <p className="text-multi-step-form-cool-gray">
                           Access to multiplayer games
                         </p>
+                        <p className="hidden text-multi-step-form-purplish-blue sm:block md:hidden">
+                          {isMonthlyBilling ? "+$1/mo" : "+$10/yr"}
+                        </p>
                       </div>
                     </div>
-                    <p className="text-multi-step-form-purplish-blue">
-                      +$10/yr
+                    <p className="text-multi-step-form-purplish-blue sm:hidden md:block">
+                      {isMonthlyBilling ? "+$1/mo" : "+$10/yr"}
+                    </p>
+                  </div>
+                </label>
+                <label
+                  className="group flex cursor-pointer"
+                  htmlFor="largerStorage"
+                >
+                  <input
+                    id="largerStorage"
+                    type="checkbox"
+                    className="appearance-none"
+                    {...register("hasLargerStorage")}
+                  />
+                  <div className="flex flex-1 items-center justify-between rounded-md border border-multi-step-form-light-gray p-4 group-hover:border-multi-step-form-purplish-blue group-has-[:checked]:border-multi-step-form-purplish-blue group-has-[:checked]:bg-multi-step-form-alabaster">
+                    <div className="flex items-center gap-6">
+                      <div className="rounded border border-multi-step-form-light-gray px-[4px] py-[6px] group-has-[:checked]:border-multi-step-form-purplish-blue group-has-[:checked]:bg-multi-step-form-purplish-blue">
+                        {/* prettier-ignore */}
+                        <svg className="group-has-[:checked]:visible invisible" id="icon-checkmark" xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9"><path fill="none" stroke="#FFF" stroke-width="2" d="m1 4 3.433 3.433L10.866 1"/></svg>
+                      </div>
+                      <div>
+                        <p className="font-medium text-multi-step-form-marine-blue">
+                          Larger storage
+                        </p>
+                        <p className="text-multi-step-form-cool-gray">
+                          Extra 1TB of cloud save
+                        </p>
+                        <p className="hidden text-multi-step-form-purplish-blue sm:block md:hidden">
+                          {isMonthlyBilling ? "+$2/mo" : "+$20/yr"}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-multi-step-form-purplish-blue sm:hidden md:block">
+                      {isMonthlyBilling ? "+$2/mo" : "+$20/yr"}
+                    </p>
+                  </div>
+                </label>
+                <label
+                  className="group flex cursor-pointer"
+                  htmlFor="customizableProfile"
+                >
+                  <input
+                    id="customizableProfile"
+                    type="checkbox"
+                    className="appearance-none"
+                    {...register("hasCustomizableProfile")}
+                  />
+                  <div className="flex flex-1 items-center justify-between rounded-md border border-multi-step-form-light-gray p-4 group-hover:border-multi-step-form-purplish-blue group-has-[:checked]:border-multi-step-form-purplish-blue group-has-[:checked]:bg-multi-step-form-alabaster">
+                    <div className="flex items-center gap-6">
+                      <div className="rounded border border-multi-step-form-light-gray px-[4px] py-[6px] group-has-[:checked]:border-multi-step-form-purplish-blue group-has-[:checked]:bg-multi-step-form-purplish-blue">
+                        {/* prettier-ignore */}
+                        <svg className="group-has-[:checked]:visible invisible" id="icon-checkmark" xmlns="http://www.w3.org/2000/svg" width="12" height="9" viewBox="0 0 12 9"><path fill="none" stroke="#FFF" stroke-width="2" d="m1 4 3.433 3.433L10.866 1"/></svg>
+                      </div>
+                      <div>
+                        <p className="font-medium text-multi-step-form-marine-blue">
+                          Customizable profile
+                        </p>
+                        <p className="text-multi-step-form-cool-gray">
+                          Custom theme on your profile
+                        </p>
+                        <p className="hidden text-multi-step-form-purplish-blue sm:block md:hidden">
+                          {isMonthlyBilling ? "+$2/mo" : "+$20/yr"}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="text-multi-step-form-purplish-blue sm:hidden md:block">
+                      {isMonthlyBilling ? "+$2/mo" : "+$20/yr"}
                     </p>
                   </div>
                 </label>
