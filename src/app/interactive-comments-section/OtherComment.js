@@ -15,7 +15,7 @@ export default function OtherComment({
     fetch(`http://localhost:5000/replies/${comment?.id}/${currentUsername}`)
       .then((response) => response.json())
       .then((data) => setReplies(data));
-  }, []);
+  }, [currentUsername]);
 
   const voteReply = (commentId, currentUsername, voteValue) => {
     const payload = {
