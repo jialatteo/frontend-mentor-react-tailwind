@@ -81,6 +81,18 @@ export default function Home() {
         </a>
         <a
           className="w-40 border border-blue-200 text-center text-xl hover:border-blue-600 hover:text-blue-600 hover:underline"
+          href="/calculator-app"
+        >
+          <img
+            className="h-40 w-40"
+            src="/calculator-app/active-states-theme-1.jpg"
+            alt="calculator-app"
+          />
+          Calculator App
+        </a>
+
+        <a
+          className="w-40 border border-blue-200 text-center text-xl hover:border-blue-600 hover:text-blue-600 hover:underline"
           href="/launch-countdown-timer"
         >
           <img
