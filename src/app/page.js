@@ -79,6 +79,17 @@ export default function Home() {
           />
           Multi Step Form
         </a>
+        <a
+          className="w-40 border border-blue-200 text-center text-xl hover:border-blue-600 hover:text-blue-600 hover:underline"
+          href="/launch-countdown-timer"
+        >
+          <img
+            className="h-40 w-40"
+            src="/launch-countdown-timer/active-states.jpg"
+            alt="launch-countdown-timer"
+          />
+          Launch Countdown Timer
+        </a>
       </div>
     </div>
   );
