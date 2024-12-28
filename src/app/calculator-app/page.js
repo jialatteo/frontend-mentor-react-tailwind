@@ -111,7 +111,7 @@ export default function CalculatorApp() {
 
   return (
     <div
-      className={`${leagueSpartan.className} bg-calculator-main-background flex min-h-screen items-center justify-center text-white`}
+      className={`${leagueSpartan.className} theme-two bg-calculator-main-background flex min-h-screen items-center justify-center text-white`}
     >
       <div className="flex max-w-[450px] flex-1 flex-col gap-4 p-4">
         <div className="mt-4 flex items-center justify-between">

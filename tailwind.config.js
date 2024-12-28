@@ -66,19 +66,27 @@ module.exports = {
         "launch-countdown-timer-dark-desaturated-blue": "hsl(236, 21%, 26%)",
         "launch-countdown-timer-very-dark-blue": "hsl(235, 16%, 14%)",
         "launch-countdown-timer-very-dark-blue": "hsl(234, 17%, 12%)",
-        "calculator-main-background": "hsl(222, 26%, 31%)",
-        "calculator-toggle-and-keypad-background": "hsl(223, 31%, 20%)",
-        "calculator-result-background": "hsl(224, 36%, 15%)",
-        "calculator-function-key-background": "hsl(225, 21%, 49%)",
-        "calculator-function-key-background-hover": "hsl(225, 21%, 70%)",
-        "calculator-function-key-shadow": "hsl(224, 28%, 35%)",
-        "calculator-toggle-and-equals-key-background": "hsl(6, 63%, 50%)",
-        "calculator-toggle-and-equals-key-background-hover": "hsl(6, 63%, 70%)",
-        "calculator-equals-key-shadow": "hsl(6, 70%, 34%)",
-        "calculator-regular-key-background": "hsl(30, 25%, 89%)",
-        "calculator-regular-key-background-hover": "hsl(30, 25%, 99%)",
-        "calculator-regular-key-shadow": "hsl(28, 16%, 65%)",
-        "calculator-primary-text": "hsl(221, 14%, 31%)",
+        "calculator-main-background": "var(--calculator-main-background)",
+        "calculator-toggle-and-keypad-background":
+          "var(--calculator-toggle-and-keypad-background)",
+        "calculator-result-background": "var(--calculator-result-background)",
+        "calculator-function-key-background":
+          "var(--calculator-function-key-background)",
+        "calculator-function-key-background-hover":
+          "var(--calculator-function-key-background-hover)",
+        "calculator-function-key-shadow":
+          "var(--calculator-function-key-shadow)",
+        "calculator-toggle-and-equals-key-background":
+          "var(--calculator-toggle-and-equals-key-background)",
+        "calculator-toggle-and-equals-key-background-hover":
+          "var(--calculator-toggle-and-equals-key-background-hover)",
+        "calculator-equals-key-shadow": "var(--calculator-equals-key-shadow)",
+        "calculator-regular-key-background":
+          "var(--calculator-regular-key-background)",
+        "calculator-regular-key-background-hover":
+          "var(--calculator-regular-key-background-hover)",
+        "calculator-regular-key-shadow": "var(--calculator-regular-key-shadow)",
+        "calculator-primary-text": "var(--calculator-primary-text)",
       },
     },
   },
