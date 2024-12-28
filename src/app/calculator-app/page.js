@@ -13,7 +13,24 @@ export default function CalculatorApp() {
     setTheme(e.target.value);
   };
 
-  console.log("theme", theme);
+  function formatNumberWithThousandSeparators(str) {
+    if (str === "INVALID") {
+      return str;
+    }
+    const [integerPart, decimalPart] = str.split(".");
+
+    const formattedIntegerPart = integerPart.replace(
+      /\B(?=(\d{3})+(?!\d))/g,
+      ",",
+    );
+
+    if (!decimalPart) {
+      return formattedIntegerPart;
+    }
+
+    return `${formattedIntegerPart}.${decimalPart}`;
+  }
+
   const handleReset = () => {
     setDisplayString("0");
     setResultString("");
@@ -50,11 +67,11 @@ export default function CalculatorApp() {
     }
 
     if (resultString.includes(".")) {
-      setDisplayString(result.toFixed(2));
-      setResultString(result.toFixed(2));
+      setDisplayString(`${result.toFixed(2)}`);
+      setResultString(`${result.toFixed(2)}`);
     } else {
-      setDisplayString(result);
-      setResultString(result);
+      setDisplayString(`${result}`);
+      setResultString(`${result}`);
     }
   };
 
@@ -169,7 +186,9 @@ export default function CalculatorApp() {
           </div>
         </div>
         <div className="bg-calculator-result-background rounded-md p-5">
-          <p className="text-end text-4xl">{displayString}</p>
+          <p className="text-end text-4xl">
+            {formatNumberWithThousandSeparators(displayString)}
+          </p>
         </div>
         <div className="bg-calculator-toggle-and-keypad-background flex flex-col gap-4 rounded-md p-6 text-4xl">
           <div className="flex gap-4">
