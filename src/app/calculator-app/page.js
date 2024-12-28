@@ -7,7 +7,13 @@ const leagueSpartan = League_Spartan({ weight: "700" });
 export default function CalculatorApp() {
   const [resultString, setResultString] = useState("");
   const [displayString, setDisplayString] = useState("0");
+  const [theme, setTheme] = useState("");
 
+  const handleThemeChange = (e) => {
+    setTheme(e.target.value);
+  };
+
+  console.log("theme", theme);
   const handleReset = () => {
     setDisplayString("0");
     setResultString("");
@@ -111,7 +117,7 @@ export default function CalculatorApp() {
 
   return (
     <div
-      className={`${leagueSpartan.className} bg-calculator-main-background theme-two text-calculator-result-and-toggle-text flex min-h-screen items-center justify-center`}
+      className={`${leagueSpartan.className} bg-calculator-main-background ${theme} text-calculator-result-and-toggle-text flex min-h-screen items-center justify-center`}
     >
       <div className="flex max-w-[450px] flex-1 flex-col gap-4 p-4">
         <div className="mt-4 flex items-center justify-between">
@@ -124,8 +130,9 @@ export default function CalculatorApp() {
                   id="theme-one"
                   name="theme-switcher"
                   type="radio"
-                  value={0}
+                  value=""
                   className="peer appearance-none"
+                  onChange={handleThemeChange}
                   defaultChecked
                 />
                 <div className="peer-checked:bg-calculator-toggle-and-equals-key-background peer-checked:hover:bg-calculator-toggle-and-equals-key-background hover:bg-calculator-toggle-and-equals-key-background-hover relative h-4 w-4 rounded-full">
@@ -137,7 +144,8 @@ export default function CalculatorApp() {
                   id="theme-two"
                   name="theme-switcher"
                   type="radio"
-                  value={1}
+                  value="theme-two"
+                  onChange={handleThemeChange}
                   className="peer appearance-none"
                 />
                 <div className="peer-checked:bg-calculator-toggle-and-equals-key-background peer-checked:hover:bg-calculator-toggle-and-equals-key-background hover:bg-calculator-toggle-and-equals-key-background-hover relative h-4 w-4 rounded-full">
@@ -149,7 +157,8 @@ export default function CalculatorApp() {
                   id="theme-three"
                   name="theme-switcher"
                   type="radio"
-                  value={2}
+                  value="theme-three"
+                  onChange={handleThemeChange}
                   className="peer appearance-none"
                 />
                 <div className="peer-checked:bg-calculator-toggle-and-equals-key-background peer-checked:hover:bg-calculator-toggle-and-equals-key-background hover:bg-calculator-toggle-and-equals-key-background-hover relative h-4 w-4 rounded-full">
@@ -276,7 +285,7 @@ export default function CalculatorApp() {
             </button>
             <button
               onClick={handleEquals}
-              className="bg-calculator-toggle-and-equals-key-background shadow-calculator-equals-key-shadow hover:bg-calculator-toggle-and-equals-key-background-hover text-calculator-function-key-text flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="bg-calculator-toggle-and-equals-key-background shadow-calculator-equals-key-shadow hover:bg-calculator-toggle-and-equals-key-background-hover text-calculator-equals-key-text flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
             >
               =
             </button>

@@ -90,6 +90,7 @@ module.exports = {
           "var(--calculator-result-and-toggle-text)",
         "calculator-function-key-text": "var(--calculator-function-key-text)",
         "calculator-regular-key-text": "var(--calculator-regular-key-text)",
+        "calculator-equals-key-text": "var(--calculator-equals-key-text)",
       },
     },
   },
