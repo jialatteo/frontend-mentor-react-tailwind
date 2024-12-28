@@ -86,7 +86,10 @@ module.exports = {
         "calculator-regular-key-background-hover":
           "var(--calculator-regular-key-background-hover)",
         "calculator-regular-key-shadow": "var(--calculator-regular-key-shadow)",
-        "calculator-primary-text": "var(--calculator-primary-text)",
+        "calculator-result-and-toggle-text":
+          "var(--calculator-result-and-toggle-text)",
+        "calculator-function-key-text": "var(--calculator-function-key-text)",
+        "calculator-regular-key-text": "var(--calculator-regular-key-text)",
       },
     },
   },

@@ -16,7 +16,9 @@
     --calculator-regular-key-background: hsl(30, 25%, 89%);
     --calculator-regular-key-background-hover: hsl(30, 25%, 99%);
     --calculator-regular-key-shadow: hsl(28, 16%, 65%);
-    --calculator-primary-text: hsl(221, 14%, 31%);
+    --calculator-result-and-toggle-text: hsl(0, 0%, 100%);
+    --calculator-function-key-text: hsl(0, 0%, 100%);
+    --calculator-regular-key-text: hsl(221, 14%, 31%);
   }
   .theme-two {
     --calculator-main-background: hsl(0, 0%, 90%);
@@ -31,6 +33,26 @@
     --calculator-regular-key-background: hsl(45, 7%, 89%);
     --calculator-regular-key-background-hover: hsl(45, 7%, 99%);
     --calculator-regular-key-shadow: hsl(35, 11%, 61%);
-    --calculator-primary-text: hsl(60, 10%, 19%);
+    --calculator-result-and-toggle-text: hsl(221, 14%, 31%);
+    --calculator-function-key-text: hsl(0, 0%, 100%);
+    --calculator-regular-key-text: hsl(221, 14%, 31%);
+  }
+
+  .theme-three {
+    --calculator-main-background: hsl(0, 0%, 90%);
+    --calculator-toggle-and-keypad-background: hsl(0, 5%, 81%);
+    --calculator-result-background: hsl(0, 0%, 93%);
+    --calculator-function-key-background: hsl(185, 42%, 37%);
+    --calculator-function-key-background-hover: hsl(185, 42%, 70%);
+    --calculator-function-key-shadow: hsl(185, 58%, 25%);
+    --calculator-toggle-and-equals-key-background: hsl(25, 98%, 40%);
+    --calculator-toggle-and-equals-key-background-hover: hsl(25, 98%, 70%);
+    --calculator-equals-key-shadow: hsl(25, 99%, 27%);
+    --calculator-regular-key-background: hsl(45, 7%, 89%);
+    --calculator-regular-key-background-hover: hsl(45, 7%, 99%);
+    --calculator-regular-key-shadow: hsl(35, 11%, 61%);
+    --calculator-result-and-toggle-text: hsl(221, 14%, 31%);
+    --calculator-function-key-text: hsl(0, 0%, 100%);
+    --calculator-regular-key-text: hsl(221, 14%, 31%);
   }
 }
