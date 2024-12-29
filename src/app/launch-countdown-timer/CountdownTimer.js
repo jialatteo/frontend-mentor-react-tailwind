@@ -71,7 +71,7 @@ const CountdownTimer = ({ targetDate }) => {
       <div className="text-launch-countdown-timer-soft-red flex justify-center gap-10">
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-500 ${rotateDays && "[transform:rotateX(180deg)]"} `}
+            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-500 ${rotateDays && "[transform:rotateX(360deg)]"} `}
           >
             <p className="text-9xl">
               {formatTimeWithLeadingZero(timeLeft.days)}
@@ -83,7 +83,7 @@ const CountdownTimer = ({ targetDate }) => {
         </div>
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-500 ${rotateHours && "[transform:rotateX(180deg)]"} `}
+            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-500 ${rotateHours && "[transform:rotateX(360deg)]"} `}
           >
             <p className="text-9xl">
               {formatTimeWithLeadingZero(timeLeft.hours)}
@@ -95,7 +95,7 @@ const CountdownTimer = ({ targetDate }) => {
         </div>
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-500 ${rotateMinutes && "[transform:rotateX(180deg)]"} `}
+            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-500 ${rotateMinutes && "[transform:rotateX(360deg)]"} `}
           >
             <p className="text-9xl">
               {formatTimeWithLeadingZero(timeLeft.minutes)}
@@ -107,7 +107,7 @@ const CountdownTimer = ({ targetDate }) => {
         </div>
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-500 ${rotateSeconds && "[transform:rotateX(180deg)]"} `}
+            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-1000 ${rotateSeconds && "[transform:rotateX(360deg)]"} `}
           >
             <p className="text-9xl">
               {formatTimeWithLeadingZero(timeLeft.seconds)}
