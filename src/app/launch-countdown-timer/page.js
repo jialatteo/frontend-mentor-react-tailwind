@@ -11,17 +11,16 @@ export default function LaunchCountdownTimer() {
 
   return (
     <div
-      className={`${redHadText.className} bg-launch-countdown-timer-very-dark-blue flex min-h-screen justify-center bg-[url('/launch-countdown-timer/bg-stars.svg')]`}
+      className={`${redHadText.className} bg-launch-countdown-timer-very-dark-blue flex min-h-screen flex-col items-center justify-center bg-[url('/launch-countdown-timer/bg-stars.svg')]`}
     >
       <div className="absolute z-0 min-h-screen w-full bg-[url('/launch-countdown-timer/pattern-hills.svg')] bg-bottom bg-repeat-x" />
       <div className="z-10">
-        <p className="mt-80 text-center text-xl tracking-[0.5em] text-white">
+        <p className="text-center text-3xl tracking-[0.5em] text-white">
           WE'RE LAUNCHING SOON
         </p>
-
-        <div className="mx-4 mt-16 bg-pink-500 text-white">
-          <CountdownTimer targetDate={targetDate} />
-        </div>
+      </div>
+      <div className="z-10 mx-4 mt-28">
+        <CountdownTimer targetDate={targetDate} />
       </div>
       <div className="absolute bottom-14 z-10 flex items-center justify-center gap-6">
         <button className="group">
