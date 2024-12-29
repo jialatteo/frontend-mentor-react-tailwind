@@ -30,6 +30,7 @@ const getTimeLeft = (targetDate) => {
 
 const CountdownTimer = ({ targetDate }) => {
   const [timeLeft, setTimeLeft] = useState(getTimeLeft(targetDate));
+  const [rotate, setRotate] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,11 +40,21 @@ const CountdownTimer = ({ targetDate }) => {
     return () => clearInterval(interval);
   }, [targetDate]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setRotate((prev) => !prev);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
       <div className="text-launch-countdown-timer-soft-red flex justify-center gap-10">
         <div>
-          <div className="bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] justify-center rounded-xl p-12">
+          <div
+            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] justify-center rounded-xl p-12 duration-500 ${rotate && "[transform:rotateY(180deg)]"} `}
+          >
             <p className="text-9xl">
               {formatTimeWithLeadingZero(timeLeft.days)}
             </p>
@@ -73,7 +84,9 @@ const CountdownTimer = ({ targetDate }) => {
           </p>
         </div>
         <div>
-          <div className="bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] justify-center rounded-xl p-12">
+          <div
+            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] justify-center rounded-xl p-12 duration-500 ${rotate && "[transform:rotateY(180deg)]"} `}
+          >
             <p className="text-9xl">
               {formatTimeWithLeadingZero(timeLeft.seconds)}
             </p>
