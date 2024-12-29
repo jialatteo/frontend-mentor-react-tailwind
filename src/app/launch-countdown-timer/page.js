@@ -1,10 +1,14 @@
 import { Red_Hat_Text } from "next/font/google";
+import CountdownTimer from "./CountdownTimer";
 
 const redHadText = Red_Hat_Text({
   weight: "700",
 });
 
 export default function LaunchCountdownTimer() {
+  const targetDate = new Date();
+  targetDate.setDate(targetDate.getDate() + 8);
+
   return (
     <div
       className={`${redHadText.className} bg-launch-countdown-timer-very-dark-blue flex min-h-screen justify-center bg-[url('/launch-countdown-timer/bg-stars.svg')]`}
@@ -16,16 +20,7 @@ export default function LaunchCountdownTimer() {
         </p>
 
         <div className="mx-4 mt-16 bg-pink-500 text-white">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laborum
-          doloremque necessitatibus ab libero animi labore facilis id nulla,
-          voluptates aliquam ducimus eveniet numquam tempore vel ipsa totam
-          inventore. Quidem odio sint tempora repellendus, libero maxime eveniet
-          asperiores numquam ratione possimus dignissimos laboriosam reiciendis
-          quas, alias laborum dolorem ut laudantium aperiam, sapiente quam
-          aspernatur? Quidem ex reprehenderit maiores beatae perferendis facilis
-          mollitia aliquam eligendi fugit, cum quo, necessitatibus, veritatis
-          iure animi dolores deserunt? Voluptatibus alias cumque optio ratione
-          hic? Inventore, enim.
+          <CountdownTimer targetDate={targetDate} />
         </div>
       </div>
       <div className="absolute bottom-14 z-10 flex items-center justify-center gap-6">
