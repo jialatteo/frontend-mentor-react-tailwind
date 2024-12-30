@@ -39,9 +39,6 @@ const CountdownTimer = ({ targetDate }) => {
   useEffect(() => {
     const interval = setInterval(() => {
       const newTimeLeft = getTimeLeft(targetDate);
-      console.log("newTimeLeft", newTimeLeft);
-      console.log("prevTimeLeft", prevTimeLeft);
-      console.log("wait one second", "\n");
 
       if (newTimeLeft.days !== prevTimeLeft.days) {
         setRotateDays((prev) => !prev);
