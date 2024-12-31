@@ -1,25 +1,6 @@
 import { useState } from "react";
 
-const images = [
-  {
-    thumbnail: "ecommerce-product-page/image-product-1-thumbnail.jpg",
-    full: "ecommerce-product-page/image-product-1.jpg",
-  },
-  {
-    thumbnail: "ecommerce-product-page/image-product-2-thumbnail.jpg",
-    full: "ecommerce-product-page/image-product-2.jpg",
-  },
-  {
-    thumbnail: "ecommerce-product-page/image-product-3-thumbnail.jpg",
-    full: "ecommerce-product-page/image-product-3.jpg",
-  },
-  {
-    thumbnail: "ecommerce-product-page/image-product-4-thumbnail.jpg",
-    full: "ecommerce-product-page/image-product-4.jpg",
-  },
-];
-
-export default function ImageCarouselWithPreview() {
+export default function ImageCarouselWithPreview({ images }) {
   const [imageIndex, setImageIndex] = useState(0);
   const [viewMode, setViewMode] = useState(false);
 

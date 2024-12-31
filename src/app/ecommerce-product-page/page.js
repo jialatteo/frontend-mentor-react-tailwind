@@ -173,7 +173,26 @@ export default function EcommerceProductPage() {
       </div>
       <div className="my-2 mb-16 hidden h-[1px] w-full bg-ecommerce-product-page-light-grayish-blue sm:block" />
       <div className="sm:flex sm:gap-6 sm:pb-32 md:gap-14">
-        <ImageCarouselWithPreview />
+        <ImageCarouselWithPreview
+          images={[
+            {
+              thumbnail: "ecommerce-product-page/image-product-1-thumbnail.jpg",
+              full: "ecommerce-product-page/image-product-1.jpg",
+            },
+            {
+              thumbnail: "ecommerce-product-page/image-product-2-thumbnail.jpg",
+              full: "ecommerce-product-page/image-product-2.jpg",
+            },
+            {
+              thumbnail: "ecommerce-product-page/image-product-3-thumbnail.jpg",
+              full: "ecommerce-product-page/image-product-3.jpg",
+            },
+            {
+              thumbnail: "ecommerce-product-page/image-product-4-thumbnail.jpg",
+              full: "ecommerce-product-page/image-product-4.jpg",
+            },
+          ]}
+        />
         <div className="p-4 pb-14">
           <p className="mb-2 text-xs font-bold tracking-widest text-ecommerce-product-page-dark-grayish-blue sm:mb-4">
             SNEAKER COMPANY
