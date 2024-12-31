@@ -4,7 +4,40 @@ import Card from "./components/Card";
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center text-black">
-      <Card title={"hello"} techStack={["css", "html", "react"]} />
+      <Card
+        title={"Product List with Cart"}
+        techStack={["css", "html", "react"]}
+        images={[
+          {
+            url: "product-list-with-cart/active-states.jpg",
+            label: "Active States",
+          },
+          {
+            url: "product-list-with-cart/desktop-design-empty.jpg",
+            label: "Empty Cart (Desktop)",
+          },
+          {
+            url: "product-list-with-cart/mobile-design-empty.jpg",
+            label: "Empty Cart (Mobile)",
+          },
+          {
+            url: "product-list-with-cart/desktop-design-order-confirmation.jpg",
+            label: "Confirmed Order (Desktop)",
+          },
+          {
+            url: "product-list-with-cart/mobile-design-order-confirmation.jpg",
+            label: "Confirmed Order (Mobile)",
+          },
+          {
+            url: "product-list-with-cart/desktop-design-selected.jpg",
+            label: "Selected (Desktop)",
+          },
+          {
+            url: "product-list-with-cart/mobile-design-selected.jpg",
+            label: "Selected (Mobile)",
+          },
+        ]}
+      />
       <div className="grid grid-cols-3 gap-8">
         <a
           className="w-40 rounded-xl p-4 text-center text-xl shadow hover:bg-blue-600 hover:text-blue-600 hover:underline"
