@@ -6,52 +6,6 @@ export default function Home() {
     <div className="flex min-h-screen items-center justify-center bg-slate-100 text-black">
       <div className="grid grid-cols-1 gap-8 py-8 lg:grid-cols-2 2xl:grid-cols-3">
         <Card
-          title="Launch Countdown Timer"
-          techStack={["tailwind", "react"]}
-          projectUrl="/launch-countdown-timer"
-          githubUrl="https://github.com/jialatteo/frontend-mentor-react-tailwind/tree/main/src/app/launch-countdown-timer"
-          images={[
-            {
-              url: "launch-countdown-timer/active-states.jpg",
-              label: "Design (Desktop)",
-              isPortrait: false,
-            },
-            {
-              url: "launch-countdown-timer/mobile-design.jpg",
-              label: "Design (Mobile)",
-              isPortrait: true,
-            },
-          ]}
-        />
-        <Card
-          title="Ecommerce Product Page"
-          techStack={["tailwind", "react"]}
-          projectUrl="/ecommerce-product-page"
-          githubUrl="https://github.com/jialatteo/frontend-mentor-react-tailwind/tree/main/src/app/ecommerce-product-page"
-          images={[
-            {
-              url: "ecommerce-product-page/active-states-basket-filled.jpg",
-              label: "Design (Desktop)",
-              isPortrait: false,
-            },
-            {
-              url: "ecommerce-product-page/mobile-design-basket-filled.jpg",
-              label: "Design (Mobile)",
-              isPortrait: true,
-            },
-            {
-              url: "ecommerce-product-page/mobile-menu.jpg",
-              label: "Dropdown (Mobile)",
-              isPortrait: true,
-            },
-            {
-              url: "ecommerce-product-page/active-states-lightbox.jpg",
-              label: "Lightbox",
-              isPortrait: false,
-            },
-          ]}
-        />
-        <Card
           title="Interactive Comments Section"
           techStack={["tailwind", "react", "sqlite", "node", "express"]}
           projectUrl="/interactive-comments-section"
@@ -138,24 +92,39 @@ export default function Home() {
           ]}
         />
         <Card
-          title="Calculator App"
+          title="Product List with Cart"
           techStack={["tailwind", "react"]}
-          projectUrl="/calculator-app"
-          githubUrl="https://github.com/jialatteo/frontend-mentor-react-tailwind/tree/main/src/app/calculator-app"
+          projectUrl="/product-list-with-cart"
+          githubUrl="https://github.com/jialatteo/frontend-mentor-react-tailwind/tree/main/src/app/product-list-with-cart"
           images={[
             {
-              url: "calculator-app/mobile-design-theme-1.jpg",
-              label: "Design Theme 1",
+              url: "product-list-with-cart/active-states.jpg",
+              label: "Filled Cart (Desktop",
+              isPortrait: false,
+            },
+            {
+              url: "product-list-with-cart/mobile-design-selected.jpg",
+              label: "Filled Cart (Mobile)",
               isPortrait: true,
             },
             {
-              url: "calculator-app/mobile-design-theme-2.jpg",
-              label: "Design Theme 2",
+              url: "product-list-with-cart/desktop-design-empty.jpg",
+              label: "Empty Cart (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "product-list-with-cart/mobile-design-empty.jpg",
+              label: "Empty Cart (Mobile)",
               isPortrait: true,
             },
             {
-              url: "calculator-app/mobile-design-theme-3.jpg",
-              label: "Design Theme 3",
+              url: "product-list-with-cart/desktop-design-order-confirmation.jpg",
+              label: "Confirmed Order (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "product-list-with-cart/mobile-design-order-confirmation.jpg",
+              label: "Confirmed Order (Mobile)",
               isPortrait: true,
             },
           ]}
@@ -189,6 +158,57 @@ export default function Home() {
             {
               url: "url-shortener/mobile-navigation.jpg",
               label: "Dropdown (Mobile)",
+              isPortrait: true,
+            },
+          ]}
+        />
+        <Card
+          title="Ecommerce Product Page"
+          techStack={["tailwind", "react"]}
+          projectUrl="/ecommerce-product-page"
+          githubUrl="https://github.com/jialatteo/frontend-mentor-react-tailwind/tree/main/src/app/ecommerce-product-page"
+          images={[
+            {
+              url: "ecommerce-product-page/active-states-basket-filled.jpg",
+              label: "Design (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "ecommerce-product-page/mobile-design-basket-filled.jpg",
+              label: "Design (Mobile)",
+              isPortrait: true,
+            },
+            {
+              url: "ecommerce-product-page/mobile-menu.jpg",
+              label: "Dropdown (Mobile)",
+              isPortrait: true,
+            },
+            {
+              url: "ecommerce-product-page/active-states-lightbox.jpg",
+              label: "Lightbox",
+              isPortrait: false,
+            },
+          ]}
+        />
+        <Card
+          title="Calculator App"
+          techStack={["tailwind", "react"]}
+          projectUrl="/calculator-app"
+          githubUrl="https://github.com/jialatteo/frontend-mentor-react-tailwind/tree/main/src/app/calculator-app"
+          images={[
+            {
+              url: "calculator-app/mobile-design-theme-1.jpg",
+              label: "Design Theme 1",
+              isPortrait: true,
+            },
+            {
+              url: "calculator-app/mobile-design-theme-2.jpg",
+              label: "Design Theme 2",
+              isPortrait: true,
+            },
+            {
+              url: "calculator-app/mobile-design-theme-3.jpg",
+              label: "Design Theme 3",
               isPortrait: true,
             },
           ]}
@@ -255,39 +275,19 @@ export default function Home() {
           ]}
         />
         <Card
-          title="Product List with Cart"
+          title="Launch Countdown Timer"
           techStack={["tailwind", "react"]}
-          projectUrl="/product-list-with-cart"
-          githubUrl="https://github.com/jialatteo/frontend-mentor-react-tailwind/tree/main/src/app/product-list-with-cart"
+          projectUrl="/launch-countdown-timer"
+          githubUrl="https://github.com/jialatteo/frontend-mentor-react-tailwind/tree/main/src/app/launch-countdown-timer"
           images={[
             {
-              url: "product-list-with-cart/active-states.jpg",
-              label: "Filled Cart (Desktop",
+              url: "launch-countdown-timer/active-states.jpg",
+              label: "Design (Desktop)",
               isPortrait: false,
             },
             {
-              url: "product-list-with-cart/mobile-design-selected.jpg",
-              label: "Filled Cart (Mobile)",
-              isPortrait: true,
-            },
-            {
-              url: "product-list-with-cart/desktop-design-empty.jpg",
-              label: "Empty Cart (Desktop)",
-              isPortrait: false,
-            },
-            {
-              url: "product-list-with-cart/mobile-design-empty.jpg",
-              label: "Empty Cart (Mobile)",
-              isPortrait: true,
-            },
-            {
-              url: "product-list-with-cart/desktop-design-order-confirmation.jpg",
-              label: "Confirmed Order (Desktop)",
-              isPortrait: false,
-            },
-            {
-              url: "product-list-with-cart/mobile-design-order-confirmation.jpg",
-              label: "Confirmed Order (Mobile)",
+              url: "launch-countdown-timer/mobile-design.jpg",
+              label: "Design (Mobile)",
               isPortrait: true,
             },
           ]}
