@@ -65,52 +65,52 @@ const CountdownTimer = ({ targetDate }) => {
 
   return (
     <div>
-      <div className="text-launch-countdown-timer-soft-red flex justify-center gap-10">
+      <div className="text-launch-countdown-timer-soft-red flex justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-10">
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-500 ${rotateDays && "[transform:rotateX(360deg)]"} `}
+            className={`bg-launch-countdown-timer-dark-desaturated-blue flex w-[90px] origin-center justify-center rounded-xl p-6 duration-500 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateDays && "[transform:rotateX(360deg)]"} `}
           >
-            <p className="text-9xl">
+            <p className="text-3xl sm:text-5xl md:text-7xl xl:text-9xl">
               {formatTimeWithLeadingZero(timeLeft.days)}
             </p>
           </div>
-          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xl tracking-[0.4rem]">
+          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xs tracking-[0.4rem] sm:text-sm md:text-xl">
             DAYS
           </p>
         </div>
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-500 ${rotateHours && "[transform:rotateX(360deg)]"} `}
+            className={`bg-launch-countdown-timer-dark-desaturated-blue flex w-[90px] origin-center justify-center rounded-xl p-6 duration-500 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateHours && "[transform:rotateX(360deg)]"} `}
           >
-            <p className="text-9xl">
+            <p className="text-3xl sm:text-5xl md:text-7xl xl:text-9xl">
               {formatTimeWithLeadingZero(timeLeft.hours)}
             </p>
           </div>
-          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xl tracking-[0.4rem]">
+          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xs tracking-[0.4rem] sm:text-sm md:text-xl">
             HOURS
           </p>
         </div>
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-500 ${rotateMinutes && "[transform:rotateX(360deg)]"} `}
+            className={`bg-launch-countdown-timer-dark-desaturated-blue flex w-[90px] origin-center justify-center rounded-xl p-6 duration-500 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateMinutes && "[transform:rotateX(360deg)]"} `}
           >
-            <p className="text-9xl">
+            <p className="text-3xl sm:text-5xl md:text-7xl xl:text-9xl">
               {formatTimeWithLeadingZero(timeLeft.minutes)}
             </p>
           </div>
-          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xl tracking-[0.4rem]">
+          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xs tracking-[0.4rem] sm:text-sm md:text-xl">
             MINUTES
           </p>
         </div>
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex min-w-[280px] origin-center justify-center rounded-xl p-12 duration-1000 ${rotateSeconds && "[transform:rotateX(360deg)]"} `}
+            className={`bg-launch-countdown-timer-dark-desaturated-blue flex w-[90px] origin-center justify-center rounded-xl p-6 duration-1000 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateSeconds && "[transform:rotateX(360deg)]"} `}
           >
-            <p className="text-9xl">
+            <p className="text-3xl sm:text-5xl md:text-7xl xl:text-9xl">
               {formatTimeWithLeadingZero(timeLeft.seconds)}
             </p>
           </div>
-          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xl tracking-[0.4rem]">
+          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xs tracking-[0.4rem] sm:text-sm md:text-xl">
             SECONDS
           </p>
         </div>

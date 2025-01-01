@@ -15,11 +15,11 @@ export default function LaunchCountdownTimer() {
     >
       <div className="absolute z-0 min-h-screen w-full bg-[url('/launch-countdown-timer/pattern-hills.svg')] bg-bottom bg-repeat-x" />
       <div className="z-10">
-        <p className="text-center text-3xl tracking-[0.5em] text-white">
+        <p className="text-center text-lg tracking-[0.5em] text-white sm:text-2xl md:text-3xl">
           WE'RE LAUNCHING SOON
         </p>
       </div>
-      <div className="z-10 mx-4 mt-28">
+      <div className="z-10 mx-4 mt-8 sm:mt-16 md:mt-28">
         <CountdownTimer targetDate={targetDate} />
       </div>
       <div className="absolute bottom-14 z-10 flex items-center justify-center gap-6">
