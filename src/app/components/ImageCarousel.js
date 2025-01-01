@@ -14,7 +14,7 @@ const isPortrait = (image) => {
 export default function ImageCarousel({ images }) {
   const [imageIndex, setImageIndex] = useState(0);
   return (
-    <div className="relative flex items-center justify-center bg-black">
+    <div className="relative z-10 flex items-center justify-center bg-black">
       <button
         onClick={() => {
           if (imageIndex - 1 >= 0) setImageIndex(imageIndex - 1);
