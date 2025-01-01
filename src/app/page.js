@@ -14,14 +14,17 @@ export default function Home() {
             {
               url: "launch-countdown-timer/active-states.jpg",
               label: "Active States",
+              isPortrait: false,
             },
             {
               url: "launch-countdown-timer/desktop-design.jpg",
               label: "Design (Desktop)",
+              isPortrait: false,
             },
             {
               url: "launch-countdown-timer/mobile-design.jpg",
               label: "Design (Mobile)",
+              isPortrait: true,
             },
           ]}
         />
@@ -34,34 +37,42 @@ export default function Home() {
             {
               url: "ecommerce-product-page/active-states-basket-empty.jpg",
               label: "Design (Desktop)",
+              isPortrait: false,
             },
             {
               url: "ecommerce-product-page/active-states-basket-filled.jpg",
               label: "Design (Desktop)",
+              isPortrait: false,
             },
             {
               url: "ecommerce-product-page/active-states-lightbox.jpg",
               label: "Design (Desktop)",
+              isPortrait: false,
             },
             {
               url: "ecommerce-product-page/desktop-design.jpg",
               label: "Design (Desktop)",
+              isPortrait: false,
             },
             {
               url: "ecommerce-product-page/desktop-design-lightbox.jpg",
               label: "Lightbox (Desktop)",
+              isPortrait: false,
             },
             {
               url: "ecommerce-product-page/mobile-design.jpg",
               label: "Design (Mobile)",
+              isPortrait: true,
             },
             {
               url: "ecommerce-product-page/mobile-design-basket-empty.jpg",
               label: "Design (Mobile)",
+              isPortrait: true,
             },
             {
               url: "ecommerce-product-page/mobile-design-basket-filled.jpg",
               label: "Design (Mobile)",
+              isPortrait: true,
             },
           ]}
         />
@@ -74,23 +85,27 @@ export default function Home() {
             {
               url: "interactive-comments-section/active-states.jpg",
               label: "Active States",
+              isPortrait: false,
             },
             {
               url: "interactive-comments-section/desktop-design.jpg",
               label: "Design (Desktop)",
+              isPortrait: false,
             },
             {
               url: "interactive-comments-section/mobile-design.jpg",
               label: "Design (Mobile)",
+              isPortrait: true,
+            },
+            {
+              url: "interactive-comments-section/desktop-modal.jpg",
+              label: "Modal (Desktop)",
+              isPortrait: false,
             },
             {
               url: "interactive-comments-section/mobile-modal.jpg",
               label: "Modal (Mobile)",
-            },
-
-            {
-              url: "interactive-comments-section/desktop-modal.jpg",
-              label: "Modal (Desktop)",
+              isPortrait: true,
             },
           ]}
         />
@@ -103,6 +118,7 @@ export default function Home() {
             {
               url: "multi-step-form/active-states-step-1.jpg",
               label: "Active State Step 1 (Desktop)",
+              isPortrait: false,
             },
           ]}
         />
@@ -115,6 +131,7 @@ export default function Home() {
             {
               url: "calculator-app/mobile-design-theme-1.jpg",
               label: "Design Theme 1 (Desktop)",
+              isPortrait: true,
             },
           ]}
         />
@@ -127,22 +144,27 @@ export default function Home() {
             {
               url: "url-shortener/desktop-design.jpg",
               label: "Design (Desktop)",
+              isPortrait: true,
             },
             {
               url: "url-shortener/mobile-design.jpg",
               label: "Design (Mobile)",
+              isPortrait: true,
             },
             {
               url: "url-shortener/desktop-active-states.jpg",
               label: "Active States (Desktop)",
+              isPortrait: true,
             },
             {
               url: "url-shortener/mobile-active-states.jpg",
               label: "Active States (Mobile)",
+              isPortrait: true,
             },
             {
               url: "url-shortener/mobile-navigation.jpg",
               label: "Navigation (Mobile)",
+              isPortrait: true,
             },
           ]}
         />
@@ -155,30 +177,37 @@ export default function Home() {
             {
               url: "mortgage-repayment-calculator/active-states.jpg",
               label: "Active States",
+              isPortrait: false,
             },
             {
               url: "mortgage-repayment-calculator/error-states.jpg",
               label: "Error States",
+              isPortrait: false,
             },
             {
               url: "mortgage-repayment-calculator/hover-states.jpg",
               label: "Hover States",
+              isPortrait: false,
             },
             {
               url: "mortgage-repayment-calculator/desktop-design-completed.jpg",
               label: "Empty Cart (Desktop)",
+              isPortrait: false,
             },
             {
               url: "mortgage-repayment-calculator/mobile-design-completed.jpg",
               label: "Empty Cart (Mobile)",
+              isPortrait: true,
             },
             {
               url: "mortgage-repayment-calculator/desktop-design-empty.jpg",
               label: "Confirmed Order (Desktop)",
+              isPortrait: false,
             },
             {
               url: "mortgage-repayment-calculator/mobile-design-empty.jpg",
               label: "Confirmed Order (Mobile)",
+              isPortrait: true,
             },
           ]}
         />
@@ -191,10 +220,12 @@ export default function Home() {
             {
               url: "job-listings/desktop-design.jpg",
               label: "Design (Desktop)",
+              isPortrait: true,
             },
             {
               url: "job-listings/mobile-design.jpg",
               label: "Design (Mobile)",
+              isPortrait: true,
             },
           ]}
         />
@@ -207,30 +238,37 @@ export default function Home() {
             {
               url: "product-list-with-cart/active-states.jpg",
               label: "Active States",
+              isPortrait: false,
             },
             {
               url: "product-list-with-cart/desktop-design-empty.jpg",
               label: "Empty Cart (Desktop)",
+              isPortrait: false,
             },
             {
               url: "product-list-with-cart/mobile-design-empty.jpg",
               label: "Empty Cart (Mobile)",
+              isPortrait: true,
             },
             {
               url: "product-list-with-cart/desktop-design-order-confirmation.jpg",
               label: "Confirmed Order (Desktop)",
+              isPortrait: false,
             },
             {
               url: "product-list-with-cart/mobile-design-order-confirmation.jpg",
               label: "Confirmed Order (Mobile)",
+              isPortrait: true,
             },
             {
               url: "product-list-with-cart/desktop-design-selected.jpg",
               label: "Selected (Desktop)",
+              isPortrait: false,
             },
             {
               url: "product-list-with-cart/mobile-design-selected.jpg",
               label: "Selected (Mobile)",
+              isPortrait: true,
             },
           ]}
         />

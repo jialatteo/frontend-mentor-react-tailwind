@@ -1,5 +1,16 @@
 import { useState } from "react";
 
+const isPortrait = (image) => {
+  console.log(`run is portrait function for ${image.url} `);
+  const img = new Image();
+  img.src = image.url;
+  // console.log("source", img.src);
+  console.log("width", img.width);
+  console.log("height", img.height);
+  console.log("\n");
+  return img.width < img.height;
+};
+
 export default function ImageCarousel({ images }) {
   const [imageIndex, setImageIndex] = useState(0);
   return (
@@ -36,7 +47,9 @@ export default function ImageCarousel({ images }) {
         </div>
         <img
           src={images[imageIndex].url}
-          className="w-full"
+          className={
+            images[imageIndex].isPortrait ? "w-full" : "h-[380px] object-cover"
+          }
           alt="product-image"
         />
       </div>
