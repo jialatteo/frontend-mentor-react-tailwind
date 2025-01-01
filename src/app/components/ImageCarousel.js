@@ -10,13 +10,11 @@ export default function ImageCarousel({ images }) {
         }}
         disabled={imageIndex === 0}
         className={`group absolute ${
-          imageIndex === 0
-            ? "opacity-50"
-            : "hover:border-ecommerce-product-page-orange"
+          imageIndex === 0 ? "opacity-50" : "hover:border-cyan-500"
         } left-4 rounded-full border bg-white py-3 pl-3 pr-4`}
       >
         {/* prettier-ignore */}
-        <svg id="icon-previous" className={`stroke-[#1D2026] ${ imageIndex <= 0 ? "stroke-gray-400" : "group-hover:stroke-ecommerce-product-page-orange" }`}  width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
+        <svg id="icon-previous" className={`stroke-[#1D2026] ${ imageIndex <= 0 ? "stroke-gray-400" : "group-hover:stroke-cyan-500" }`}  width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
       </button>
       <button
         onClick={() => {
@@ -25,12 +23,12 @@ export default function ImageCarousel({ images }) {
         className={`group absolute ${
           imageIndex >= images.length - 1
             ? "opacity-50"
-            : "hover:border-ecommerce-product-page-orange"
+            : "hover:border-cyan-500"
         } right-4 rounded-full border bg-white py-3 pl-4 pr-3`}
         disabled={imageIndex >= images.length - 1}
       >
         {/* prettier-ignore */}
-        <svg id="icon-next" className={`stroke-[#1D2026] ${ imageIndex >= images.length - 1 ? "stroke-gray-400" : "group-hover:stroke-ecommerce-product-page-orange" }`} width="13" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8"  stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
+        <svg id="icon-next" className={`stroke-[#1D2026] ${ imageIndex >= images.length - 1 ? "stroke-gray-400" : "group-hover:stroke-cyan-500" }`} width="13" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8"  stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
       </button>
       <div className="h-[380px] w-[380px] overflow-auto">
         <div className="absolute left-0 right-0 bg-slate-800 bg-opacity-70 text-center font-bold text-white text-opacity-80">

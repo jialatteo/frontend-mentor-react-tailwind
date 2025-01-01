@@ -5,8 +5,10 @@ export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center text-black">
       <Card
-        title={"Product List with Cart"}
-        techStack={["css", "html", "react"]}
+        title="Product List with Cart"
+        techStack={["tailwind", "react"]}
+        projectUrl="/product-list-with-cart"
+        githubUrl="https://github.com/jialatteo/frontend-mentor-react-tailwind/tree/main/src/app/product-list-with-cart"
         images={[
           {
             url: "product-list-with-cart/active-states.jpg",
