@@ -13,11 +13,6 @@ export default function Home() {
           images={[
             {
               url: "launch-countdown-timer/active-states.jpg",
-              label: "Active States",
-              isPortrait: false,
-            },
-            {
-              url: "launch-countdown-timer/desktop-design.jpg",
               label: "Design (Desktop)",
               isPortrait: false,
             },
@@ -35,44 +30,24 @@ export default function Home() {
           githubUrl="https://github.com/jialatteo/frontend-mentor-react-tailwind/tree/main/src/app/ecommerce-product-page"
           images={[
             {
-              url: "ecommerce-product-page/active-states-basket-empty.jpg",
-              label: "Design (Desktop)",
-              isPortrait: false,
-            },
-            {
               url: "ecommerce-product-page/active-states-basket-filled.jpg",
               label: "Design (Desktop)",
               isPortrait: false,
             },
             {
-              url: "ecommerce-product-page/active-states-lightbox.jpg",
-              label: "Design (Desktop)",
-              isPortrait: false,
-            },
-            {
-              url: "ecommerce-product-page/desktop-design.jpg",
-              label: "Design (Desktop)",
-              isPortrait: false,
-            },
-            {
-              url: "ecommerce-product-page/desktop-design-lightbox.jpg",
-              label: "Lightbox (Desktop)",
-              isPortrait: false,
-            },
-            {
-              url: "ecommerce-product-page/mobile-design.jpg",
-              label: "Design (Mobile)",
-              isPortrait: true,
-            },
-            {
-              url: "ecommerce-product-page/mobile-design-basket-empty.jpg",
-              label: "Design (Mobile)",
-              isPortrait: true,
-            },
-            {
               url: "ecommerce-product-page/mobile-design-basket-filled.jpg",
               label: "Design (Mobile)",
               isPortrait: true,
+            },
+            {
+              url: "ecommerce-product-page/mobile-menu.jpg",
+              label: "Dropdown (Mobile)",
+              isPortrait: true,
+            },
+            {
+              url: "ecommerce-product-page/active-states-lightbox.jpg",
+              label: "Lightbox",
+              isPortrait: false,
             },
           ]}
         />
@@ -82,11 +57,6 @@ export default function Home() {
           projectUrl="/interactive-comments-section"
           githubUrl="https://github.com/jialatteo/frontend-mentor-react-tailwind/tree/main/src/app/interactive-comments-section"
           images={[
-            {
-              url: "interactive-comments-section/active-states.jpg",
-              label: "Active States",
-              isPortrait: false,
-            },
             {
               url: "interactive-comments-section/desktop-design.jpg",
               label: "Design (Desktop)",
@@ -117,8 +87,53 @@ export default function Home() {
           images={[
             {
               url: "multi-step-form/active-states-step-1.jpg",
-              label: "Active State Step 1 (Desktop)",
+              label: "Step 1 (Desktop)",
               isPortrait: false,
+            },
+            {
+              url: "multi-step-form/mobile-design-step-1.jpg",
+              label: "Step 1 (Mobile)",
+              isPortrait: true,
+            },
+            {
+              url: "multi-step-form/active-states-step-2.jpg",
+              label: "Step 2 (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "multi-step-form/mobile-design-step-2-monthly.jpg",
+              label: "Step 2 (Mobile)",
+              isPortrait: true,
+            },
+            {
+              url: "multi-step-form/active-states-step-3.jpg",
+              label: "Step 3 (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "multi-step-form/mobile-design-step-3-monthly.jpg",
+              label: "Step 3 (Mobile)",
+              isPortrait: true,
+            },
+            {
+              url: "multi-step-form/active-states-step-4.jpg",
+              label: "Step 4 (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "multi-step-form/mobile-design-step-4-monthly.jpg",
+              label: "Step 4 (Mobile)",
+              isPortrait: true,
+            },
+            {
+              url: "multi-step-form/desktop-design-step-5.jpg",
+              label: "Step 5 (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "multi-step-form/mobile-design-step-5.jpg",
+              label: "Step 5 (Mobile)",
+              isPortrait: true,
             },
           ]}
         />
@@ -130,7 +145,17 @@ export default function Home() {
           images={[
             {
               url: "calculator-app/mobile-design-theme-1.jpg",
-              label: "Design Theme 1 (Desktop)",
+              label: "Design Theme 1",
+              isPortrait: true,
+            },
+            {
+              url: "calculator-app/mobile-design-theme-2.jpg",
+              label: "Design Theme 2",
+              isPortrait: true,
+            },
+            {
+              url: "calculator-app/mobile-design-theme-3.jpg",
+              label: "Design Theme 3",
               isPortrait: true,
             },
           ]}
@@ -163,7 +188,7 @@ export default function Home() {
             },
             {
               url: "url-shortener/mobile-navigation.jpg",
-              label: "Navigation (Mobile)",
+              label: "Dropdown (Mobile)",
               isPortrait: true,
             },
           ]}
@@ -191,22 +216,22 @@ export default function Home() {
             },
             {
               url: "mortgage-repayment-calculator/desktop-design-completed.jpg",
-              label: "Empty Cart (Desktop)",
+              label: "Completed Result (Desktop)",
               isPortrait: false,
             },
             {
               url: "mortgage-repayment-calculator/mobile-design-completed.jpg",
-              label: "Empty Cart (Mobile)",
+              label: "Completed Result (Mobile)",
               isPortrait: true,
             },
             {
               url: "mortgage-repayment-calculator/desktop-design-empty.jpg",
-              label: "Confirmed Order (Desktop)",
+              label: "Empty Result (Desktop)",
               isPortrait: false,
             },
             {
               url: "mortgage-repayment-calculator/mobile-design-empty.jpg",
-              label: "Confirmed Order (Mobile)",
+              label: "Empty Result (Mobile)",
               isPortrait: true,
             },
           ]}
@@ -237,8 +262,13 @@ export default function Home() {
           images={[
             {
               url: "product-list-with-cart/active-states.jpg",
-              label: "Active States",
+              label: "Filled Cart (Desktop",
               isPortrait: false,
+            },
+            {
+              url: "product-list-with-cart/mobile-design-selected.jpg",
+              label: "Filled Cart (Mobile)",
+              isPortrait: true,
             },
             {
               url: "product-list-with-cart/desktop-design-empty.jpg",
@@ -258,16 +288,6 @@ export default function Home() {
             {
               url: "product-list-with-cart/mobile-design-order-confirmation.jpg",
               label: "Confirmed Order (Mobile)",
-              isPortrait: true,
-            },
-            {
-              url: "product-list-with-cart/desktop-design-selected.jpg",
-              label: "Selected (Desktop)",
-              isPortrait: false,
-            },
-            {
-              url: "product-list-with-cart/mobile-design-selected.jpg",
-              label: "Selected (Mobile)",
               isPortrait: true,
             },
           ]}
