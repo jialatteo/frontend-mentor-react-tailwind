@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Dropdown from "./Dropdown";
 import { Poppins } from "next/font/google";
+import BASE_URL from "../../../server/server";
 
 const poppins = Poppins({
   weight: ["500", "700"],
