@@ -6,6 +6,7 @@ import OtherComment from "./OtherComment";
 
 const rubik = Rubik({
   weight: ["400", "500", "700"],
+  subsets: ["latin"],
 });
 
 export default function InteractiveCommentsSection() {

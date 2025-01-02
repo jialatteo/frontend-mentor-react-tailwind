@@ -8,6 +8,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ["500", "700"],
+  subsets: ["latin"],
 });
 
 const validationSchema = yup.object().shape({
@@ -246,7 +247,7 @@ export default function MortgageRepaymentCalculator() {
             <p className="text-sm text-mortgage-repayment-calculator-slate-300">
               Your results are shown below based on the information you
               provided. To adjust the results, edit the form and click
-              "calculate repayments again".
+              &apos;calculate repayments again&apos;.
             </p>
             <div className="mt-10 divide-y divide-gray-700 rounded-t-md border-t-[3px] border-mortgage-repayment-calculator-lime bg-[#0E2431] p-6">
               <div>
@@ -259,7 +260,7 @@ export default function MortgageRepaymentCalculator() {
               </div>
               <div>
                 <p className="mt-6 text-sm text-mortgage-repayment-calculator-slate-300">
-                  Total you'll repay over the term
+                  Total you&apos;ll repay over the term
                 </p>
                 <p className="mt-2 text-xl font-bold text-white">
                   £{addCommasThousandSeparator(totalRepayment)}
@@ -275,8 +276,8 @@ export default function MortgageRepaymentCalculator() {
               Results shown here
             </p>
             <p className="text-center text-sm text-mortgage-repayment-calculator-slate-300">
-              Complete the form and click "calculate repayments" to see what
-              your monthly repayments would be.
+              Complete the form and click &quot;calculate repayments&quot; to
+              see what your monthly repayments would be.
             </p>
           </div>
         )}

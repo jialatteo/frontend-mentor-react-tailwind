@@ -294,7 +294,7 @@ export default function SelfComment({
                   </p>
                   <p className="mb-3 text-interactive-comments-section-grayish-blue">
                     Are you sure you want to delete this comment? This will
-                    remove the comment and can't be undone.
+                    remove the comment and can&apos;t be undone.
                   </p>
                   <div className="flex justify-center gap-3 text-white">
                     <button

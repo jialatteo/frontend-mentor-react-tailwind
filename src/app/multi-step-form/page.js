@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 
 const ubuntu = Ubuntu({
   weight: ["400", "500", "700"],
+  subsets: ["latin"],
 });
 
 const validationSchemas = [

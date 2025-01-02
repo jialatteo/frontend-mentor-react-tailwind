@@ -3,6 +3,7 @@ import CountdownTimer from "./CountdownTimer";
 
 const redHadText = Red_Hat_Text({
   weight: "700",
+  subsets: ["latin"],
 });
 
 export default function LaunchCountdownTimer() {
@@ -16,7 +17,7 @@ export default function LaunchCountdownTimer() {
       <div className="absolute z-0 min-h-screen w-full bg-[url('/launch-countdown-timer/pattern-hills.svg')] bg-bottom bg-repeat-x" />
       <div className="z-10">
         <p className="text-center text-lg tracking-[0.5em] text-white sm:text-2xl md:text-3xl">
-          WE'RE LAUNCHING SOON
+          WE&apos;RE LAUNCHING SOON
         </p>
       </div>
       <div className="z-10 mx-4 mt-8 sm:mt-16 md:mt-28">

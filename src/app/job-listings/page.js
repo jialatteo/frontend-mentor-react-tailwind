@@ -7,6 +7,7 @@ import { useState } from "react";
 
 const leagueSpartan = League_Spartan({
   weight: ["500", "700"],
+  subsets: ["latin"],
 });
 
 export default function JobListings() {
@@ -21,6 +22,7 @@ export default function JobListings() {
             <div className="flex flex-wrap gap-4">
               {jobFilters.map((jobFilter) => (
                 <div
+                  key={jobFilter}
                   className="group flex cursor-pointer items-center"
                   onClick={() =>
                     setJobFilters(

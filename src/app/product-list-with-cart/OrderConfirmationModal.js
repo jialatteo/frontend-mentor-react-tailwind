@@ -31,7 +31,7 @@ export default function OrderConfirmationModal({
             ?.filter((product) => product.quantity != 0)
             ?.map((product) => {
               return (
-                <div>
+                <div key={product.name}>
                   <ConfirmedOrder
                     name={product.name}
                     quantity={product.quantity}

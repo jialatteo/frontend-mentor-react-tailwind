@@ -8,7 +8,7 @@ export default function JobListing({ jobData, setJobFilters }) {
   return (
     <div
       key={jobData.id}
-      className={`border-job-listings-desaturated-dark-cyan flex flex-col justify-between divide-y-2 rounded md:flex-row md:items-center md:divide-y-0 ${jobData.featured ? "border-l-4" : ""} bg-white p-6 px-8 shadow-xl`}
+      className={`flex flex-col justify-between divide-y-2 rounded border-job-listings-desaturated-dark-cyan md:flex-row md:items-center md:divide-y-0 ${jobData.featured ? "border-l-4" : ""} bg-white p-6 px-8 shadow-xl`}
     >
       <div className="relative flex flex-col pb-4 md:flex-row md:gap-4 md:pb-0">
         <img
@@ -18,22 +18,22 @@ export default function JobListing({ jobData, setJobFilters }) {
         />
         <div className="mt-6 flex flex-col justify-between gap-2 md:mt-0 md:gap-0">
           <div className="flex">
-            <p className="text-job-listings-desaturated-dark-cyan mr-4 text-lg font-bold">
+            <p className="mr-4 text-lg font-bold text-job-listings-desaturated-dark-cyan">
               {jobData.company}
             </p>
             {jobData.new && (
-              <div className="bg-job-listings-desaturated-dark-cyan mr-2 flex items-center rounded-2xl px-2 pt-[2px] text-xs text-white">
+              <div className="mr-2 flex items-center rounded-2xl bg-job-listings-desaturated-dark-cyan px-2 pt-[2px] text-xs text-white">
                 NEW!
               </div>
             )}
             {jobData.featured && (
-              <div className="bg-job-listings-very-dark-grayish-cyan flex items-center rounded-2xl px-2 pt-[2px] text-xs text-white">
+              <div className="flex items-center rounded-2xl bg-job-listings-very-dark-grayish-cyan px-2 pt-[2px] text-xs text-white">
                 FEATURED
               </div>
             )}
           </div>
           <p className="text-xl font-bold">{jobData.position}</p>
-          <div className="text-job-listings-dark-grayish-cyan flex gap-4">
+          <div className="flex gap-4 text-job-listings-dark-grayish-cyan">
             <p> {jobData.postedAt} </p>
             <p> • </p>
             <p> {jobData.contract} </p>
@@ -46,7 +46,7 @@ export default function JobListing({ jobData, setJobFilters }) {
         {filterTablets.map((filterTablet) => (
           <div
             key={filterTablet}
-            className="bg-job-listings-light-grayish-cyan-background hover:bg-job-listings-desaturated-dark-cyan text-job-listings-desaturated-dark-cyan cursor-pointer rounded p-1 font-bold hover:text-white"
+            className="cursor-pointer rounded bg-job-listings-light-grayish-cyan-background p-1 font-bold text-job-listings-desaturated-dark-cyan hover:bg-job-listings-desaturated-dark-cyan hover:text-white"
             onClick={() =>
               setJobFilters((prevJobFilters) =>
                 prevJobFilters.includes(filterTablet)

@@ -2,7 +2,7 @@
 import { League_Spartan } from "next/font/google";
 import { useState } from "react";
 
-const leagueSpartan = League_Spartan({ weight: "700" });
+const leagueSpartan = League_Spartan({ weight: "700", subsets: ["latin"] });
 
 export default function CalculatorApp() {
   const [resultString, setResultString] = useState("");

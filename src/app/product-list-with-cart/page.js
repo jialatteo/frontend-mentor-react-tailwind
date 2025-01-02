@@ -9,6 +9,7 @@ import { Red_Hat_Text } from "next/font/google";
 
 const redHatText = Red_Hat_Text({
   weight: ["400", "600", "700"],
+  subsets: ["latin"],
 });
 
 export default function ProductListWithCart() {
@@ -56,7 +57,10 @@ export default function ProductListWithCart() {
           </h2>
           {cartItemCount == 0 ? (
             <div className="flex flex-col items-center justify-center">
-              <img src="product-list-with-cart/illustration-empty-cart.svg" />
+              <img
+                src="product-list-with-cart/illustration-empty-cart.svg"
+                alt="empty-cart"
+              />
               <p className="mt-2 text-sm font-semibold text-product-list-with-cart-rose-500">
                 Your added items will appear here
               </p>
@@ -67,6 +71,7 @@ export default function ProductListWithCart() {
                 .filter((product) => product.quantity != 0)
                 .map((product) => (
                   <CartOrder
+                    key={product.name}
                     name={product.name}
                     quantity={product.quantity}
                     price={
@@ -97,7 +102,10 @@ export default function ProductListWithCart() {
             </div>
           )}
           <div className="my-6 flex items-center justify-center gap-2 bg-product-list-with-cart-rose-50 px-6 py-4 lg:px-12">
-            <img src="product-list-with-cart/icon-carbon-neutral.svg" />
+            <img
+              src="product-list-with-cart/icon-carbon-neutral.svg"
+              alt="icon-carbon-netural"
+            />
             <p className="text-sm">
               This is a <span className="font-semibold">carbon-neutral</span>{" "}
               delivery

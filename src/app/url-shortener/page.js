@@ -9,6 +9,7 @@ import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
   weight: ["500", "700"],
+  subsets: ["latin"],
 });
 
 const schema = Yup.object({
@@ -111,8 +112,8 @@ export default function UrlShortener() {
             More than just shorter links
           </p>
           <p className="mb-6 text-center text-xl font-medium leading-relaxed text-url-shortener-grayish-violet sm:text-start">
-            Build your brand's recognition and get detailed insights on how your
-            links are performing.
+            Build your brand&apos;s recognition and get detailed insights on how
+            your links are performing.
           </p>
           <button className="rounded-[40px] bg-url-shortener-cyan px-12 py-5 text-2xl font-semibold text-white hover:bg-opacity-50 hover:text-opacity-95 sm:rounded-3xl sm:px-8 sm:py-3 sm:text-xl">
             Get Started
@@ -158,8 +159,11 @@ export default function UrlShortener() {
         </div>
 
         <div className="mt-40 sm:mt-20"></div>
-        {shortenedLinks.map((link) => (
-          <div className="mb-8 flex w-[calc(100%-3rem)] flex-col justify-between rounded-lg bg-white sm:mb-3 sm:flex-row sm:items-center sm:p-4 sm:pl-8 lg:w-[calc(100%-16rem)]">
+        {shortenedLinks.map((link, index) => (
+          <div
+            key={index}
+            className="mb-8 flex w-[calc(100%-3rem)] flex-col justify-between rounded-lg bg-white sm:mb-3 sm:flex-row sm:items-center sm:p-4 sm:pl-8 lg:w-[calc(100%-16rem)]"
+          >
             <p className="items-start overflow-hidden text-ellipsis whitespace-nowrap p-4 text-xl font-medium sm:items-center sm:p-0">
               {link.original}
             </p>
@@ -198,9 +202,9 @@ export default function UrlShortener() {
               Brand Recognition
             </p>
             <p className="text-center text-sm leading-relaxed text-url-shortener-grayish-violet sm:text-start">
-              Boost your brand recognition with each click. Generic links don't
-              mean a thing. Branded links help instil confidence in your
-              content.
+              Boost your brand recognition with each click. Generic links
+              don&apos;t mean a thing. Branded links help instil confidence in
+              your content.
             </p>
           </div>
           <div className="relative max-w-80 bg-white p-8">

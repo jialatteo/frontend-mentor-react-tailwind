@@ -6,6 +6,7 @@ import ImageCarouselWithPreview from "./ImageCarouselWithPreview";
 
 const KumbhSans = Kumbh_Sans({
   weight: ["400", "700"],
+  subsets: ["latin"],
 });
 
 const SNEAKER_PRICE = 125;
@@ -202,8 +203,8 @@ export default function EcommerceProductPage() {
           </p>
           <p className="text-sm leading-relaxed text-ecommerce-product-page-dark-grayish-blue">
             These low-profile sneakers are your perfect casual wear companion.
-            Featuring a durable rubber outer sole, they'll withstand everything
-            the weather can offer.
+            Featuring a durable rubber outer sole, they&apos;ll withstand
+            everything the weather can offer.
           </p>
           <div className="my-4 flex items-center justify-between sm:flex-col sm:items-start">
             <div className="flex items-center gap-3">

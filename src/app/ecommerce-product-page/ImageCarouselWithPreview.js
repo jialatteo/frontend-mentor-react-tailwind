@@ -52,6 +52,7 @@ export default function ImageCarouselWithPreview({ images }) {
       <div className="hidden justify-between sm:flex">
         {images.map((image, index) => (
           <button
+            key={image.thumbnail}
             onClick={() => setImageIndex(index)}
             className={`group w-1/5 overflow-hidden rounded-lg border-4 ${imageIndex === index ? "border-ecommerce-product-page-orange" : ""}`}
           >
@@ -119,6 +120,7 @@ export default function ImageCarouselWithPreview({ images }) {
             <div className="hidden justify-center gap-4 sm:flex">
               {images.map((image, index) => (
                 <button
+                  key={image.thumbnail}
                   onClick={() => setImageIndex(index)}
                   className={`group w-1/6 overflow-hidden rounded-lg border-4 border-transparent ${imageIndex === index ? "border-ecommerce-product-page-orange" : ""}`}
                 >
