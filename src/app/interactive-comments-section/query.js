@@ -1,6 +1,4 @@
-const Database = require("better-sqlite3");
-
-// Connect to the database (the init.db file)
+const { default: Database } = await import("better-sqlite3");
 const db = new Database("init.db");
 
 // Execute the query to get all rows from the 'comments' table
