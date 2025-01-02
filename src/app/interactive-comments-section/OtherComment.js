@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import SelfComment from "./SelfComment";
 import { getTimeAgoString } from "./helper";
-import BASE_URL from "../../../server/server";
 
 export default function OtherComment({
   currentUsername,
@@ -13,7 +12,7 @@ export default function OtherComment({
   const [replies, setReplies] = useState([]);
 
   useEffect(() => {
-    fetch(`${BASE_URL}/replies/${comment?.id}/${currentUsername}`)
+    fetch(`replies/${comment?.id}/${currentUsername}`)
       .then((response) => response.json())
       .then((data) => setReplies(data));
   }, [currentUsername]);
@@ -25,7 +24,7 @@ export default function OtherComment({
       voteValue,
     };
 
-    fetch(`${BASE_URL}/votes`, {
+    fetch(`votes`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +55,7 @@ export default function OtherComment({
   };
 
   const deleteReply = (commentId) => {
-    fetch(`${BASE_URL}/comments/${commentId}`, {
+    fetch(`comments/${commentId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +77,7 @@ export default function OtherComment({
   };
 
   const editReplyContent = (commentId, updatedContent) => {
-    fetch(`${BASE_URL}/comments/${commentId}`, {
+    fetch(`comments/${commentId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -116,7 +115,7 @@ export default function OtherComment({
       replying_to,
     };
 
-    fetch(`${BASE_URL}/comments`, {
+    fetch(`comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

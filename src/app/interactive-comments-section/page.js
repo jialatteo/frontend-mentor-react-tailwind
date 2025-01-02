@@ -2,7 +2,6 @@
 import { Rubik } from "next/font/google";
 import { useState, useEffect } from "react";
 import SelfComment from "./SelfComment";
-import BASE_URL from "../../../server/server";
 import OtherComment from "./OtherComment";
 
 const rubik = Rubik({

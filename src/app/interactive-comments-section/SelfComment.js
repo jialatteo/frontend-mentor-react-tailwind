@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import OtherComment from "./OtherComment";
 import { getTimeAgoString } from "./helper";
-import BASE_URL from "../../../server/server";
 
 export default function SelfComment({
   deleteComment,
