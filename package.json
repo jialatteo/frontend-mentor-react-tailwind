@@ -7,7 +7,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "node server/server.js",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "next build",
     "lint": "next lint"
   },
   "dependencies": {
