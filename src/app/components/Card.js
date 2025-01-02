@@ -78,7 +78,7 @@ export default function Card({
       <ImageCarousel images={images} />
 
       <a
-        className="group/github absolute right-4 top-[400px] z-10 flex cursor-pointer"
+        className="group/github absolute right-4 top-[400px] z-20 flex cursor-pointer"
         href={githubUrl}
         rel="noopener noreferrer"
         target="_blank"
@@ -89,7 +89,7 @@ export default function Card({
 
       <div className="group/card p-4">
         <a
-          className="absolute inset-0 cursor-pointer"
+          className="absolute inset-0 z-10 cursor-pointer"
           href={projectUrl}
           rel="noopener noreferrer"
           target="_blank"
