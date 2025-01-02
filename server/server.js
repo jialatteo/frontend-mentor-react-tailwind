@@ -1,12 +1,13 @@
-// /server/server.js
 import express from "express";
-import fetch from "node-fetch"; // Use import here
-import cors from "cors"; // Import cors
+import fetch from "node-fetch";
+import cors from "cors";
+import path from "path";
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 const { default: Database } = await import("better-sqlite3");
-const db = new Database("prod.db");
+const dbPath = "tmp/prod.db";
+const db = new Database(dbPath);
 
 // Middleware to parse JSON bodies
 app.use(cors());
