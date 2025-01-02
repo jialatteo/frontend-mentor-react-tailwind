@@ -14,7 +14,7 @@ const server = express();
 // Initialize SQLite database
 const dbPath = "tmp/prod.db";
 const db = new Database(dbPath);
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // Middleware to parse JSON bodies
 server.use(cors());
