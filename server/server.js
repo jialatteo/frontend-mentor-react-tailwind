@@ -13,6 +13,10 @@ const db = new Database(dbPath);
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("Hello, this is your Express server running on Heroku!");
+});
+
 app.get("/top-level-comments/:currentUsername", (req, res) => {
   const { currentUsername } = req.params;
   try {
