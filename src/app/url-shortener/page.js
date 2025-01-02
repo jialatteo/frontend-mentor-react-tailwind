@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import Dropdown from "./Dropdown";
 import { Poppins } from "next/font/google";
+import BASE_URL from "../../../server/server";
 
 const poppins = Poppins({
   weight: ["500", "700"],
@@ -35,7 +36,7 @@ export default function UrlShortener() {
     const { inputLink } = data;
 
     try {
-      const response = await fetch("http://localhost:5000/shorten-url", {
+      const response = await fetch("${BASE_URL}/shorten-url", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: inputLink }),

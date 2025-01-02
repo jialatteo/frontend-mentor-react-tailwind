@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import OtherComment from "./OtherComment";
 import { getTimeAgoString } from "./helper";
+import BASE_URL from "../../../server/server";
 
 export default function SelfComment({
   deleteComment,
@@ -15,7 +16,7 @@ export default function SelfComment({
   const [replies, setReplies] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/replies/${comment.id}/${currentUsername}`)
+    fetch(`${BASE_URL}/replies/${comment.id}/${currentUsername}`)
       .then((response) => response.json())
       .then((data) => setReplies(data));
   }, [currentUsername]);
@@ -27,7 +28,7 @@ export default function SelfComment({
       voteValue,
     };
 
-    fetch(`http://localhost:5000/votes`, {
+    fetch(`${BASE_URL}/votes`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -58,7 +59,7 @@ export default function SelfComment({
   };
 
   const deleteReply = (commentId) => {
-    fetch(`http://localhost:5000/comments/${commentId}`, {
+    fetch(`${BASE_URL}/comments/${commentId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +81,7 @@ export default function SelfComment({
   };
 
   const editReplyContent = (commentId, updatedContent) => {
-    fetch(`http://localhost:5000/comments/${commentId}`, {
+    fetch(`${BASE_URL}/comments/${commentId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
