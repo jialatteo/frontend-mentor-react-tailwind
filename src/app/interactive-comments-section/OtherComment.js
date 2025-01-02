@@ -12,7 +12,7 @@ export default function OtherComment({
   const [replies, setReplies] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/replies/${comment?.id}/${currentUsername}`)
+    fetch(`${BASE_URL}/replies/${comment?.id}/${currentUsername}`)
       .then((response) => response.json())
       .then((data) => setReplies(data));
   }, [currentUsername]);
@@ -24,7 +24,7 @@ export default function OtherComment({
       voteValue,
     };
 
-    fetch(`http://localhost:5000/votes`, {
+    fetch(`${BASE_URL}/votes`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -55,7 +55,7 @@ export default function OtherComment({
   };
 
   const deleteReply = (commentId) => {
-    fetch(`http://localhost:5000/comments/${commentId}`, {
+    fetch(`${BASE_URL}/comments/${commentId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ export default function OtherComment({
   };
 
   const editReplyContent = (commentId, updatedContent) => {
-    fetch(`http://localhost:5000/comments/${commentId}`, {
+    fetch(`${BASE_URL}/comments/${commentId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -115,7 +115,7 @@ export default function OtherComment({
       replying_to,
     };
 
-    fetch(`http://localhost:5000/comments`, {
+    fetch(`${BASE_URL}/comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

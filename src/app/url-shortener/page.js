@@ -35,7 +35,7 @@ export default function UrlShortener() {
     const { inputLink } = data;
 
     try {
-      const response = await fetch("http://localhost:5000/shorten-url", {
+      const response = await fetch(`shorten-url`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: inputLink }),

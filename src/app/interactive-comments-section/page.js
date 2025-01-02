@@ -35,13 +35,13 @@ export default function InteractiveCommentsSection() {
   const [commentContent, setCommentContent] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/top-level-comments/${currentUsername}`)
+    fetch(`top-level-comments/${currentUsername}`)
       .then((response) => response.json())
       .then((data) => setTopLevelComments(data));
   }, [currentUsername]);
 
   const deleteComment = (commentId) => {
-    fetch(`http://localhost:5000/comments/${commentId}`, {
+    fetch(`comments/${commentId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -65,7 +65,7 @@ export default function InteractiveCommentsSection() {
   };
 
   const editCommentContent = (commentId, updatedContent) =>
-    fetch(`http://localhost:5000/comments/${commentId}`, {
+    fetch(`comments/${commentId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export default function InteractiveCommentsSection() {
       username,
     };
 
-    fetch(`http://localhost:5000/comments`, {
+    fetch(`comments`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -134,7 +134,7 @@ export default function InteractiveCommentsSection() {
       voteValue,
     };
 
-    fetch(`http://localhost:5000/votes`, {
+    fetch(`votes`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -166,7 +166,7 @@ export default function InteractiveCommentsSection() {
   };
 
   const resetDatabase = () => {
-    fetch("http://localhost:5000/comments/reset", {
+    fetch("comments/reset", {
       method: "POST",
     })
       .then((response) => {
