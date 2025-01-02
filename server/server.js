@@ -14,10 +14,11 @@ const server = express();
 // Initialize SQLite database
 const dbPath = "tmp/prod.db";
 const db = new Database(dbPath);
+const port = 5000;
 
 // Middleware to parse JSON bodies
-app.use(cors());
-app.use(express.json());
+server.use(cors());
+server.use(express.json());
 
 app.prepare().then(() => {
   server.get("/top-level-comments/:currentUsername", (req, res) => {
