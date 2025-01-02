@@ -4,8 +4,6 @@ import cors from "cors";
 import next from "next";
 import Database from "better-sqlite3";
 
-const BASE_URL = "https://frontend-mentor-challenges.herokuapp.com";
-export default BASE_URL;
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
 const handle = app.getRequestHandler(); // Get Next.js request handler
