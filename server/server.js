@@ -1,27 +1,31 @@
 import express from "express";
 import fetch from "node-fetch";
 import cors from "cors";
-import path from "path";
+import next from "next";
 import Database from "better-sqlite3";
 
-const app = express();
-const port = process.env.PORT || 5000;
-const db = new Database("tmp/prod.db");
+const dev = process.env.NODE_ENV !== "production";
+const app = next({ dev });
+const handle = app.getRequestHandler(); // Get Next.js request handler
+
+// Custom server setup
+const server = express();
+
+// Initialize SQLite database
+const dbPath = "tmp/prod.db";
+const db = new Database(dbPath);
 
 // Middleware to parse JSON bodies
 app.use(cors());
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello, this is your Express server running on Heroku!");
-});
-
-app.get("/top-level-comments/:currentUsername", (req, res) => {
-  const { currentUsername } = req.params;
-  try {
-    const rows = db
-      .prepare(
-        ` 
+app.prepare().then(() => {
+  server.get("/top-level-comments/:currentUsername", (req, res) => {
+    const { currentUsername } = req.params;
+    try {
+      const rows = db
+        .prepare(
+          ` 
   WITH comment_scores AS (
       SELECT
           comments.id AS comment_id,
@@ -57,22 +61,22 @@ app.get("/top-level-comments/:currentUsername", (req, res) => {
   WHERE 
       c.replying_to IS NULL;
 `,
-      )
-      .all(currentUsername);
-    res.json(rows);
-  } catch (error) {
-    console.error("Database error:", error);
-    res.status(500).json({ error: "Failed to fetch comments" });
-  }
-});
+        )
+        .all(currentUsername);
+      res.json(rows);
+    } catch (error) {
+      console.error("Database error:", error);
+      res.status(500).json({ error: "Failed to fetch comments" });
+    }
+  });
 
-app.get("/replies/:commentId/:currentUsername", (req, res) => {
-  try {
-    const { commentId, currentUsername } = req.params;
+  server.get("/replies/:commentId/:currentUsername", (req, res) => {
+    try {
+      const { commentId, currentUsername } = req.params;
 
-    const rows = db
-      .prepare(
-        ` 
+      const rows = db
+        .prepare(
+          ` 
   WITH comment_scores AS (
       SELECT
           comments.id AS comment_id,
@@ -108,39 +112,39 @@ app.get("/replies/:commentId/:currentUsername", (req, res) => {
   WHERE 
       c.replying_to = ?;
       `,
-      )
-      .all(currentUsername, commentId);
+        )
+        .all(currentUsername, commentId);
 
-    res.json(rows);
-  } catch (error) {
-    console.error("Database error:", error);
-    res.status(500).json({ error: "Failed to fetch replies" });
-  }
-});
-
-app.post("/comments", (req, res) => {
-  try {
-    const { content, username, replying_to } = req.body;
-
-    if (!content || !username) {
-      return res
-        .status(400)
-        .json({ error: "Content and username are required" });
+      res.json(rows);
+    } catch (error) {
+      console.error("Database error:", error);
+      res.status(500).json({ error: "Failed to fetch replies" });
     }
+  });
 
-    const result = db
-      .prepare(
-        `
+  server.post("/comments", (req, res) => {
+    try {
+      const { content, username, replying_to } = req.body;
+
+      if (!content || !username) {
+        return res
+          .status(400)
+          .json({ error: "Content and username are required" });
+      }
+
+      const result = db
+        .prepare(
+          `
         INSERT INTO comments (content, created_at, username, replying_to)
         VALUES (?, datetime('now', '+8 hours'), ?, ?);
       `,
-      )
-      .run(content, username, replying_to || null);
+        )
+        .run(content, username, replying_to || null);
 
-    // Retrieve the full comment including user details
-    const newComment = db
-      .prepare(
-        `
+      // Retrieve the full comment including user details
+      const newComment = db
+        .prepare(
+          `
       SELECT
           c.id,
           c.content,
@@ -161,80 +165,80 @@ app.post("/comments", (req, res) => {
       WHERE 
           c.id = ?;
       `,
-      )
-      .get(result.lastInsertRowid);
+        )
+        .get(result.lastInsertRowid);
 
-    res.status(201).json(newComment);
-  } catch (error) {
-    console.error("Database error:", error);
-    res.status(500).json({ error: "Failed to add comment" });
-  }
-});
-
-app.delete("/comments/:commentId", (req, res) => {
-  try {
-    const { commentId } = req.params;
-
-    const comment = db
-      .prepare(`SELECT * FROM comments WHERE id = ?`)
-      .get(commentId);
-
-    if (!comment) {
-      return res.status(404).json({ error: "Comment not found" });
+      res.status(201).json(newComment);
+    } catch (error) {
+      console.error("Database error:", error);
+      res.status(500).json({ error: "Failed to add comment" });
     }
+  });
 
-    db.prepare(`DELETE FROM comments WHERE id = ?`).run(commentId);
+  server.delete("/comments/:commentId", (req, res) => {
+    try {
+      const { commentId } = req.params;
 
-    res.status(200).json({ message: "Comment deleted successfully" });
-  } catch (error) {
-    console.error("Database error:", error);
-    res.status(500).json({ error: "Failed to delete comment" });
-  }
-});
+      const comment = db
+        .prepare(`SELECT * FROM comments WHERE id = ?`)
+        .get(commentId);
 
-app.put("/comments/:commentId", (req, res) => {
-  try {
-    const { commentId } = req.params;
-    const { content } = req.body;
+      if (!comment) {
+        return res.status(404).json({ error: "Comment not found" });
+      }
 
-    const comment = db
-      .prepare(`SELECT * FROM comments WHERE id = ?`)
-      .get(commentId);
+      db.prepare(`DELETE FROM comments WHERE id = ?`).run(commentId);
 
-    if (!comment) {
-      return res.status(404).json({ error: "Comment not found" });
+      res.status(200).json({ message: "Comment deleted successfully" });
+    } catch (error) {
+      console.error("Database error:", error);
+      res.status(500).json({ error: "Failed to delete comment" });
     }
+  });
 
-    db.prepare(`UPDATE comments SET content = ? WHERE id = ?`).run(
-      content,
-      commentId,
-    );
+  server.put("/comments/:commentId", (req, res) => {
+    try {
+      const { commentId } = req.params;
+      const { content } = req.body;
 
-    res.status(200).json({ message: "Comment updated successfully" });
-  } catch (error) {
-    console.error("Database error:", error);
-    res.status(500).json({ error: "Failed to update comment" });
-  }
-});
+      const comment = db
+        .prepare(`SELECT * FROM comments WHERE id = ?`)
+        .get(commentId);
 
-app.put("/votes", (req, res) => {
-  try {
-    const { commentId, currentUsername, voteValue } = req.body;
+      if (!comment) {
+        return res.status(404).json({ error: "Comment not found" });
+      }
 
-    db.prepare(
-      `INSERT OR REPLACE INTO votes (username, comment_id, vote_value) VALUES (?, ?, ?)`,
-    ).run(currentUsername, commentId, voteValue);
+      db.prepare(`UPDATE comments SET content = ? WHERE id = ?`).run(
+        content,
+        commentId,
+      );
 
-    res.status(200).json({ message: "Comment vote updated successfully" });
-  } catch (error) {
-    console.error("Database error:", error);
-    res.status(500).json({ error: "Failed to vote comment" });
-  }
-});
+      res.status(200).json({ message: "Comment updated successfully" });
+    } catch (error) {
+      console.error("Database error:", error);
+      res.status(500).json({ error: "Failed to update comment" });
+    }
+  });
 
-app.post("/comments/reset", (req, res) => {
-  try {
-    db.exec(`
+  server.put("/votes", (req, res) => {
+    try {
+      const { commentId, currentUsername, voteValue } = req.body;
+
+      db.prepare(
+        `INSERT OR REPLACE INTO votes (username, comment_id, vote_value) VALUES (?, ?, ?)`,
+      ).run(currentUsername, commentId, voteValue);
+
+      res.status(200).json({ message: "Comment vote updated successfully" });
+    } catch (error) {
+      console.error("Database error:", error);
+      res.status(500).json({ error: "Failed to vote comment" });
+    }
+  });
+
+  server.post("/comments/reset", (req, res) => {
+    try {
+      db.exec(`
   BEGIN TRANSACTION;
   DELETE FROM comments;
   DELETE FROM votes;
@@ -255,39 +259,46 @@ app.post("/comments/reset", (req, res) => {
   COMMIT;
 `);
 
-    res.status(200).json({ message: "Comments table reset successfully" });
-  } catch (error) {
-    db.exec("ROLLBACK");
-    console.error("Database error: ", error);
-    res.status(500).json({ error: "Failed to reset comments table" });
-  }
-});
-
-app.post("/shorten-url", async (req, res) => {
-  const { url } = req.body;
-
-  const apiUrl = "https://cleanuri.com/api/v1/shorten";
-
-  try {
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      body: new URLSearchParams({ url }),
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    });
-
-    if (!response.ok) {
-      return res
-        .status(response.status)
-        .json({ error: "Failed to shorten URL" });
+      res.status(200).json({ message: "Comments table reset successfully" });
+    } catch (error) {
+      db.exec("ROLLBACK");
+      console.error("Database error: ", error);
+      res.status(500).json({ error: "Failed to reset comments table" });
     }
+  });
 
-    const json = await response.json();
-    res.json({ result_url: json.result_url });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
+  server.post("/shorten-url", async (req, res) => {
+    const { url } = req.body;
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+    const apiUrl = "https://cleanuri.com/api/v1/shorten";
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        body: new URLSearchParams({ url }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      });
+
+      if (!response.ok) {
+        return res
+          .status(response.status)
+          .json({ error: "Failed to shorten URL" });
+      }
+
+      const json = await response.json();
+      res.json({ result_url: json.result_url });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  // Handle all other routes with Next.js
+  server.all("*", (req, res) => {
+    return handle(req, res); // Let Next.js handle all other routes
+  });
+
+  // Start the server
+  server.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+  });
 });
