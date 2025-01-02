@@ -3,8 +3,19 @@ import Card from "./components/Card";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-100 text-black">
-      <div className="grid grid-cols-1 gap-8 py-8 lg:grid-cols-2 2xl:grid-cols-3">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 py-16 text-black">
+      <p className="mb-8 text-center text-6xl font-bold">
+        Frontend Mentor Challenges attempted by{" "}
+        <a
+          href="https://github.com/jialatteo"
+          className="underline hover:text-cyan-500"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          Gerald Teo
+        </a>
+      </p>
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3">
         <Card
           title="Interactive Comments Section"
           techStack={["tailwind", "react", "sqlite", "node", "express"]}
@@ -378,6 +389,16 @@ export default function Home() {
             {
               url: "section-with-dropdown/mobile-design.jpg",
               label: "Design (Mobile)",
+              isPortrait: true,
+            },
+            {
+              url: "section-with-dropdown/mobile-menu-collapsed.jpg",
+              label: "Menu Collapsed (Mobile)",
+              isPortrait: true,
+            },
+            {
+              url: "section-with-dropdown/mobile-menu-expanded.jpg",
+              label: "Menu Expanded (Mobile)",
               isPortrait: true,
             },
           ]}
