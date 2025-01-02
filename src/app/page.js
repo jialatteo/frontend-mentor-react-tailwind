@@ -292,6 +292,114 @@ export default function Home() {
             },
           ]}
         />
+        <Card
+          title="Tip calculator"
+          techStack={["html", "css", "javascript"]}
+          projectUrl="https://jialatteo.github.io/Frontend-Mentor-Challenges/2-tip-calculator-app/"
+          githubUrl="https://github.com/jialatteo/Frontend-Mentor-Challenges/tree/main/2-tip-calculator-app"
+          images={[
+            {
+              url: "tip-calculator/desktop-design.jpg",
+              label: "Design (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "tip-calculator/mobile-design.jpg",
+              label: "Design (Mobile)",
+              isPortrait: true,
+            },
+          ]}
+        />
+        <Card
+          title="Advice Generator"
+          techStack={["html", "css", "javascript"]}
+          projectUrl="https://jialatteo.github.io/Frontend-Mentor-Challenges/2-advice-generator-app/"
+          githubUrl="https://github.com/jialatteo/Frontend-Mentor-Challenges/tree/main/2-advice-generator-app"
+          images={[
+            {
+              url: "advice-generator/desktop-design.jpg",
+              label: "Design (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "advice-generator/mobile-design.jpg",
+              label: "Design (Mobile)",
+              isPortrait: true,
+            },
+          ]}
+        />
+        <Card
+          title="Age calculator"
+          techStack={["html", "css", "javascript"]}
+          projectUrl="https://jialatteo.github.io/Frontend-Mentor-Challenges/2-age-calculator-app/"
+          githubUrl="https://github.com/jialatteo/Frontend-Mentor-Challenges/tree/main/2-age-calculator-app"
+          images={[
+            {
+              url: "age-calculator/desktop-design.jpg",
+              label: "Design (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "age-calculator/mobile-design.jpg",
+              label: "Design (Mobile)",
+              isPortrait: true,
+            },
+          ]}
+        />
+        <Card
+          title="Interactive Pricing Component"
+          techStack={["html", "css", "javascript"]}
+          projectUrl="https://jialatteo.github.io/Frontend-Mentor-Challenges/2-interactive-pricing-component/"
+          githubUrl="https://github.com/jialatteo/Frontend-Mentor-Challenges/tree/main/2-interactive-pricing-component"
+          images={[
+            {
+              url: "interactive-pricing-component/desktop-design.jpg",
+              label: "Design (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "interactive-pricing-component/mobile-design.jpg",
+              label: "Design (Mobile)",
+              isPortrait: true,
+            },
+          ]}
+        />
+        <Card
+          title="Section with dropdown"
+          techStack={["html", "css", "javascript"]}
+          projectUrl="https://jialatteo.github.io/Frontend-Mentor-Challenges/2-intro-section-with-dropdown-navigation/"
+          githubUrl="https://github.com/jialatteo/Frontend-Mentor-Challenges/tree/main/2-intro-section-with-dropdown-navigation"
+          images={[
+            {
+              url: "section-with-dropdown/desktop-design.jpg",
+              label: "Design (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "section-with-dropdown/mobile-design.jpg",
+              label: "Design (Mobile)",
+              isPortrait: true,
+            },
+          ]}
+        />
+        <Card
+          title="Expenses Chart Component"
+          techStack={["html", "css", "javascript"]}
+          projectUrl="https://jialatteo.github.io/Frontend-Mentor-Challenges/2-expenses-chart-component/"
+          githubUrl="https://github.com/jialatteo/Frontend-Mentor-Challenges/tree/main/2-expenses-chart-component"
+          images={[
+            {
+              url: "expenses-chart/desktop-design.jpg",
+              label: "Design (Desktop)",
+              isPortrait: false,
+            },
+            {
+              url: "expenses-chart/mobile-design.jpg",
+              label: "Design (Mobile)",
+              isPortrait: true,
+            },
+          ]}
+        />
       </div>
     </div>
   );
