@@ -1,5 +1,7 @@
+"use client";
 import { Red_Hat_Text } from "next/font/google";
 import CountdownTimer from "./CountdownTimer";
+import { useState, useEffect } from "react";
 
 const redHadText = Red_Hat_Text({
   weight: "700",
@@ -7,8 +9,25 @@ const redHadText = Red_Hat_Text({
 });
 
 export default function LaunchCountdownTimer() {
-  const targetDate = new Date();
-  targetDate.setDate(targetDate.getDate() + 8);
+  const [targetDate, setTargetDate] = useState(null);
+
+  useEffect(() => {
+    const calculateTargetDate = () => {
+      const newTargetDate = new Date();
+      newTargetDate.setDate(newTargetDate.getDate() + 8);
+      return newTargetDate;
+    };
+
+    setTargetDate(calculateTargetDate());
+    const interval = setInterval(
+      () => {
+        setTargetDate(calculateTargetDate());
+      },
+      8 * 24 * 60 * 60 * 1000,
+    );
+
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div
