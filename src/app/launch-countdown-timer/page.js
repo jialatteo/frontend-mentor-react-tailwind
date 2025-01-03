@@ -15,10 +15,10 @@ export default function LaunchCountdownTimer() {
       className={`${redHadText.className} justify-bet flex min-h-screen flex-col items-center justify-between bg-launch-countdown-timer-very-dark-blue bg-[url('/launch-countdown-timer/bg-stars.svg')]`}
     >
       <div className="absolute z-0 min-h-screen w-full bg-[url('/launch-countdown-timer/pattern-hills.svg')] bg-bottom bg-repeat-x" />
-      <div></div>
+      <div />
       <div className="z-10">
         <div>
-          <p className="text-center text-lg tracking-[0.5em] text-white sm:text-2xl md:text-3xl">
+          <p className="texl-xl min-w-[400px]:text-lg text-center tracking-widest text-white sm:text-2xl sm:tracking-[0.5em] md:text-3xl">
             WE&apos;RE LAUNCHING SOON
           </p>
         </div>

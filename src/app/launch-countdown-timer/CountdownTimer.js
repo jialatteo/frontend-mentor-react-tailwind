@@ -65,52 +65,52 @@ const CountdownTimer = ({ targetDate }) => {
 
   return (
     <div>
-      <div className="text-launch-countdown-timer-soft-red flex justify-center gap-2 sm:gap-4 md:gap-6 lg:gap-10">
+      <div className="flex justify-center gap-2 text-launch-countdown-timer-soft-red sm:gap-4 md:gap-6 lg:gap-10">
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex w-[90px] origin-center justify-center rounded-xl p-6 duration-500 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateDays && "[transform:rotateX(360deg)]"} `}
+            className={`flex w-[60px] origin-center justify-center rounded-xl bg-launch-countdown-timer-dark-desaturated-blue p-2 duration-1000 min-[400px]:p-6 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateDays && "[transform:rotateX(360deg)]"} `}
           >
             <p className="text-3xl sm:text-5xl md:text-7xl xl:text-9xl">
               {formatTimeWithLeadingZero(timeLeft.days)}
             </p>
           </div>
-          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xs tracking-[0.4rem] sm:text-sm md:text-xl">
+          <p className="mt-6 text-center text-xs text-launch-countdown-timer-grayish-blue sm:text-sm sm:tracking-[0.4rem] md:text-xl">
             DAYS
           </p>
         </div>
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex w-[90px] origin-center justify-center rounded-xl p-6 duration-500 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateHours && "[transform:rotateX(360deg)]"} `}
+            className={`flex w-[60px] origin-center justify-center rounded-xl bg-launch-countdown-timer-dark-desaturated-blue p-2 duration-1000 min-[400px]:p-6 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateHours && "[transform:rotateX(360deg)]"} `}
           >
             <p className="text-3xl sm:text-5xl md:text-7xl xl:text-9xl">
               {formatTimeWithLeadingZero(timeLeft.hours)}
             </p>
           </div>
-          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xs tracking-[0.4rem] sm:text-sm md:text-xl">
+          <p className="mt-6 text-center text-xs text-launch-countdown-timer-grayish-blue sm:text-sm sm:tracking-[0.4rem] md:text-xl">
             HOURS
           </p>
         </div>
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex w-[90px] origin-center justify-center rounded-xl p-6 duration-500 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateMinutes && "[transform:rotateX(360deg)]"} `}
+            className={`flex w-[60px] origin-center justify-center rounded-xl bg-launch-countdown-timer-dark-desaturated-blue p-2 duration-1000 min-[400px]:p-6 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateMinutes && "[transform:rotateX(360deg)]"} `}
           >
             <p className="text-3xl sm:text-5xl md:text-7xl xl:text-9xl">
               {formatTimeWithLeadingZero(timeLeft.minutes)}
             </p>
           </div>
-          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xs tracking-[0.4rem] sm:text-sm md:text-xl">
+          <p className="mt-6 text-center text-xs text-launch-countdown-timer-grayish-blue sm:text-sm sm:tracking-[0.4rem] md:text-xl">
             MINUTES
           </p>
         </div>
         <div>
           <div
-            className={`bg-launch-countdown-timer-dark-desaturated-blue flex w-[90px] origin-center justify-center rounded-xl p-6 duration-1000 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateSeconds && "[transform:rotateX(360deg)]"} `}
+            className={`flex w-[60px] origin-center justify-center rounded-xl bg-launch-countdown-timer-dark-desaturated-blue p-2 duration-1000 min-[400px]:p-6 sm:w-[130px] sm:p-12 md:w-[160px] lg:w-[200px] xl:w-[280px] ${rotateSeconds && "[transform:rotateX(360deg)]"} `}
           >
             <p className="text-3xl sm:text-5xl md:text-7xl xl:text-9xl">
               {formatTimeWithLeadingZero(timeLeft.seconds)}
             </p>
           </div>
-          <p className="text-launch-countdown-timer-grayish-blue mt-6 text-center text-xs tracking-[0.4rem] sm:text-sm md:text-xl">
+          <p className="mt-6 text-center text-xs text-launch-countdown-timer-grayish-blue sm:text-sm sm:tracking-[0.4rem] md:text-xl">
             SECONDS
           </p>
         </div>
