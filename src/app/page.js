@@ -4,7 +4,7 @@ import Card from "./components/Card";
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 py-16 text-black">
-      <p className="mb-8 text-center text-6xl font-bold">
+      <p className="mb-8 text-center text-4xl font-bold sm:text-6xl">
         Frontend Mentor Challenges attempted by{" "}
         <a
           href="https://github.com/jialatteo"

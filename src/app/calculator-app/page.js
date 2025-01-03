@@ -134,14 +134,14 @@ export default function CalculatorApp() {
 
   return (
     <div
-      className={`${leagueSpartan.className} bg-calculator-main-background ${theme} text-calculator-result-and-toggle-text flex min-h-screen items-center justify-center`}
+      className={`${leagueSpartan.className} bg-calculator-main-background ${theme} flex min-h-screen items-center justify-center text-calculator-result-and-toggle-text`}
     >
-      <div className="flex max-w-[450px] flex-1 flex-col gap-4 p-4">
+      <div className="flex max-w-[450px] flex-1 flex-col gap-4 sm:p-4">
         <div className="mt-4 flex items-center justify-between">
           <p className="text-4xl">calc</p>
           <div className="flex items-center gap-4">
             <p className="text-xs">THEME</p>
-            <div className="bg-calculator-toggle-and-keypad-background w-18 flex h-6 items-center justify-center gap-2 rounded-full p-1">
+            <div className="w-18 flex h-6 items-center justify-center gap-2 rounded-full bg-calculator-toggle-and-keypad-background p-1">
               <label className="flex cursor-pointer" htmlFor="theme-one">
                 <input
                   id="theme-one"
@@ -152,7 +152,7 @@ export default function CalculatorApp() {
                   onChange={handleThemeChange}
                   defaultChecked
                 />
-                <div className="peer-checked:bg-calculator-toggle-and-equals-key-background peer-checked:hover:bg-calculator-toggle-and-equals-key-background hover:bg-calculator-toggle-and-equals-key-background-hover relative h-4 w-4 rounded-full">
+                <div className="relative h-4 w-4 rounded-full hover:bg-calculator-toggle-and-equals-key-background-hover peer-checked:bg-calculator-toggle-and-equals-key-background peer-checked:hover:bg-calculator-toggle-and-equals-key-background">
                   <span className="absolute -top-6 left-1 text-xs">1</span>
                 </div>
               </label>
@@ -165,7 +165,7 @@ export default function CalculatorApp() {
                   onChange={handleThemeChange}
                   className="peer appearance-none"
                 />
-                <div className="peer-checked:bg-calculator-toggle-and-equals-key-background peer-checked:hover:bg-calculator-toggle-and-equals-key-background hover:bg-calculator-toggle-and-equals-key-background-hover relative h-4 w-4 rounded-full">
+                <div className="relative h-4 w-4 rounded-full hover:bg-calculator-toggle-and-equals-key-background-hover peer-checked:bg-calculator-toggle-and-equals-key-background peer-checked:hover:bg-calculator-toggle-and-equals-key-background">
                   <span className="absolute -top-6 left-1 text-xs">2</span>
                 </div>
               </label>
@@ -178,41 +178,41 @@ export default function CalculatorApp() {
                   onChange={handleThemeChange}
                   className="peer appearance-none"
                 />
-                <div className="peer-checked:bg-calculator-toggle-and-equals-key-background peer-checked:hover:bg-calculator-toggle-and-equals-key-background hover:bg-calculator-toggle-and-equals-key-background-hover relative h-4 w-4 rounded-full">
+                <div className="relative h-4 w-4 rounded-full hover:bg-calculator-toggle-and-equals-key-background-hover peer-checked:bg-calculator-toggle-and-equals-key-background peer-checked:hover:bg-calculator-toggle-and-equals-key-background">
                   <span className="absolute -top-6 left-1 text-xs">3</span>
                 </div>
               </label>
             </div>
           </div>
         </div>
-        <div className="bg-calculator-result-background rounded-md p-5">
+        <div className="rounded-md bg-calculator-result-background p-5">
           <p className="text-end text-4xl">
             {formatNumberWithThousandSeparators(displayString)}
           </p>
         </div>
-        <div className="bg-calculator-toggle-and-keypad-background flex flex-col gap-4 rounded-md p-6 text-4xl">
+        <div className="flex flex-col gap-4 rounded-md bg-calculator-toggle-and-keypad-background p-6 text-4xl">
           <div className="flex gap-4">
             <button
               onClick={() => handleNumber(7)}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               7
             </button>
             <button
               onClick={() => handleNumber(8)}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               8
             </button>
             <button
               onClick={() => handleNumber(9)}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               9
             </button>
             <button
               onClick={() => handleDelete()}
-              className="bg-calculator-function-key-background shadow-calculator-function-key-shadow hover:bg-calculator-function-key-background-hover text-calculator-function-key-text flex-1 rounded-lg px-4 pb-1 pt-2 text-3xl shadow"
+              className="flex-1 rounded-lg bg-calculator-function-key-background pb-1 pt-2 text-2xl text-calculator-function-key-text shadow shadow-calculator-function-key-shadow hover:bg-calculator-function-key-background-hover sm:px-4 sm:text-3xl"
             >
               DEL
             </button>
@@ -220,25 +220,25 @@ export default function CalculatorApp() {
           <div className="flex gap-4">
             <button
               onClick={() => handleNumber(4)}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               4
             </button>
             <button
               onClick={() => handleNumber(5)}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               5
             </button>
             <button
               onClick={() => handleNumber(6)}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               6
             </button>
             <button
               onClick={handlePlus}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               +
             </button>
@@ -246,25 +246,25 @@ export default function CalculatorApp() {
           <div className="flex gap-4">
             <button
               onClick={() => handleNumber(1)}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               1
             </button>
             <button
               onClick={() => handleNumber(2)}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               2
             </button>
             <button
               onClick={() => handleNumber(3)}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               3
             </button>
             <button
               onClick={handleMinus}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               -
             </button>
@@ -272,25 +272,25 @@ export default function CalculatorApp() {
           <div className="flex gap-4">
             <button
               onClick={handleDecimal}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               .
             </button>
             <button
               onClick={() => handleNumber(0)}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               0
             </button>
             <button
               onClick={handleDivide}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               /
             </button>
             <button
               onClick={handleMultiply}
-              className="text-calculator-regular-key-text bg-calculator-regular-key-background shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-regular-key-background pb-1 pt-2 text-calculator-regular-key-text shadow shadow-calculator-regular-key-shadow hover:bg-calculator-regular-key-background-hover sm:px-4"
             >
               x
             </button>
@@ -298,13 +298,13 @@ export default function CalculatorApp() {
           <div className="flex gap-4">
             <button
               onClick={handleReset}
-              className="bg-calculator-function-key-background shadow-calculator-function-key-shadow hover:bg-calculator-function-key-background-hover text-calculator-function-key-text flex-1 rounded-lg px-4 pb-1 pt-2 text-3xl shadow"
+              className="flex-1 rounded-lg bg-calculator-function-key-background pb-1 pt-2 text-3xl text-calculator-function-key-text shadow shadow-calculator-function-key-shadow hover:bg-calculator-function-key-background-hover sm:px-4"
             >
               RESET
             </button>
             <button
               onClick={handleEquals}
-              className="bg-calculator-toggle-and-equals-key-background shadow-calculator-equals-key-shadow hover:bg-calculator-toggle-and-equals-key-background-hover text-calculator-equals-key-text flex-1 rounded-lg px-4 pb-1 pt-2 shadow"
+              className="flex-1 rounded-lg bg-calculator-toggle-and-equals-key-background pb-1 pt-2 text-calculator-equals-key-text shadow shadow-calculator-equals-key-shadow hover:bg-calculator-toggle-and-equals-key-background-hover sm:px-4"
             >
               =
             </button>

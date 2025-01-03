@@ -74,7 +74,7 @@ export default function Card({
   githubUrl,
 }) {
   return (
-    <div className="relative m-4 w-[500px] overflow-hidden rounded-xl border bg-white text-xl">
+    <div className="relative overflow-hidden rounded-xl border bg-white text-xl sm:m-4 sm:w-[500px]">
       <ImageCarousel images={images} />
 
       <a
