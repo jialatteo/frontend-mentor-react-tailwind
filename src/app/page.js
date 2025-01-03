@@ -14,6 +14,9 @@ export default function Home() {
         >
           Gerald Teo
         </a>
+        <span className="mt-2 block text-lg font-normal text-gray-600">
+          Designed to be fully responsive for both mobile and desktop
+        </span>
       </p>
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 2xl:grid-cols-3">
         <Card
