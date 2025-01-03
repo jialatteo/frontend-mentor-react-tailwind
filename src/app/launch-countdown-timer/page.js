@@ -12,18 +12,21 @@ export default function LaunchCountdownTimer() {
 
   return (
     <div
-      className={`${redHadText.className} bg-launch-countdown-timer-very-dark-blue flex min-h-screen flex-col items-center justify-center bg-[url('/launch-countdown-timer/bg-stars.svg')]`}
+      className={`${redHadText.className} justify-bet flex min-h-screen flex-col items-center justify-between bg-launch-countdown-timer-very-dark-blue bg-[url('/launch-countdown-timer/bg-stars.svg')]`}
     >
       <div className="absolute z-0 min-h-screen w-full bg-[url('/launch-countdown-timer/pattern-hills.svg')] bg-bottom bg-repeat-x" />
+      <div></div>
       <div className="z-10">
-        <p className="text-center text-lg tracking-[0.5em] text-white sm:text-2xl md:text-3xl">
-          WE&apos;RE LAUNCHING SOON
-        </p>
+        <div>
+          <p className="text-center text-lg tracking-[0.5em] text-white sm:text-2xl md:text-3xl">
+            WE&apos;RE LAUNCHING SOON
+          </p>
+        </div>
+        <div className="z-10 mx-4 mt-8 sm:mt-16 md:mt-28">
+          <CountdownTimer targetDate={targetDate} />
+        </div>
       </div>
-      <div className="z-10 mx-4 mt-8 sm:mt-16 md:mt-28">
-        <CountdownTimer targetDate={targetDate} />
-      </div>
-      <div className="absolute bottom-14 z-10 flex items-center justify-center gap-6">
+      <div className="z-10 flex items-center justify-center gap-6 py-8">
         <button className="group">
           {/* prettier-ignore */}
           <svg id="icon-facebook" className="fill-launch-countdown-timer-grayish-blue group-hover:fill-launch-countdown-timer-soft-red" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>
