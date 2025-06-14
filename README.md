@@ -1,7 +1,9 @@
 This showcases my attempts at Frontend Mentor Challenges, where I create responsive websites based on provided design images.
 
 # 👇 View Project here 👇  
-## https://frontend-mentor-challenges-435a6170abf4.herokuapp.com/
+
+Deploying on Heroku costs money, so I switched to Vercel. Challenges that require a backend will not work in the link below.
+## https://frontend-mentor-challenges-wine-seven.vercel.app/
 
 ## Run locally
 ```
